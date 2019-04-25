@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "*",
+        "config/@types/*",
+        "screens/App/shared/*",
+        "screens/App/screens/Home/shared/*"
+      ],
+      "App": [
+        "screens/App"
+      ],
+      "App/*": [
+        "screens/App/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "**/templates/**"
+  ],
+  "extends": "../../tsconfig-base",
+  "include": [
+    "src/**/*",
+    "config/**/*"
+  ]
+}

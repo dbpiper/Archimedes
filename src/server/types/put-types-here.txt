@@ -1,0 +1,2 @@
+Types go in this folder with the name of the module as the directory name
+and then an index.d.ts inside of it with `declare module "${moduleName}" {...`.
