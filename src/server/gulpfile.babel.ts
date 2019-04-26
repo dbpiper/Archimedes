@@ -3,7 +3,10 @@ import path from 'path';
 import terminalSpawn from 'terminal-spawn';
 import ServerCommands from './config/server-commands';
 
+import './config/loadDotenv.ts';
+
 const _dotenvPath = path.join(__dirname, '..', '..', '.env');
+const _githubGraphQlApiUrl = 'https://api.github.com/graphql';
 
 const checkTypes = async () =>
   terminalSpawn('npx tsc -p ./tsconfig.json').promise;
@@ -58,6 +61,22 @@ const startProduction = async () => {
   return terminalSpawn(ServerCommands.startProduction(_dotenvPath)).promise;
 };
 
+const downloadGithubApiSchema = () =>
+  terminalSpawn(
+    `npx apollo schema:download \
+      --endpoint=${_githubGraphQlApiUrl} github-schema.json \
+      --header="Authorization: Bearer ${
+        process.env.GITHUB_API_PERSONAL_ACCESS_TOKEN
+      }"`,
+  ).promise;
+
+const generateGraphQlTypes = () =>
+  terminalSpawn(`npx apollo codegen:generate \
+  --localSchemaFile=github-schema.json --target=typescript \
+  --includes=src/**/*.ts --tagName=gql --addTypename \
+  --globalTypesFile=types/graphql-global-types.ts \
+  types`).promise;
+
 const preCommit = series(lint, test);
 
 export {
@@ -70,6 +89,8 @@ export {
   start,
   startProduction,
   downloadData,
+  downloadGithubApiSchema,
+  generateGraphQlTypes,
 };
 
 export default preCommit;

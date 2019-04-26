@@ -1,7 +1,0 @@
-query {
-  stocks(ticker: "AAPL") {
-		price
-    date
-    ticker
-  }
-}

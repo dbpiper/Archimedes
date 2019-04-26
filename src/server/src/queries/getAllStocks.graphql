@@ -1,7 +1,0 @@
-query {
-  allStocks {
-    price
-    date
-    ticker
-  }
-}

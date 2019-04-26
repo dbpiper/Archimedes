@@ -1,9 +1,11 @@
 import cors from 'cors';
 import { GraphQLServer, Options } from 'graphql-yoga';
 import HttpStatus from 'http-status-codes';
+import _ from 'lodash';
 
 import { prisma } from './generated/prisma-client';
 
+import getGithubRelease, { loginToGithub } from './src/getGithubRelease';
 import resolvers from './src/resolvers';
 
 const _firstArg = 2;
@@ -28,6 +30,19 @@ if (_production) {
 } else {
   playgroundUrl = '/';
 }
+
+(async () => {
+  await loginToGithub();
+  const githubResults = await getGithubRelease('facebook', 'react');
+  const numReleaseToGet = 2;
+  if (githubResults.data.repository) {
+    if (githubResults.data.repository.releases.edges) {
+      console.log(
+        _.take(githubResults.data.repository.releases.edges, numReleaseToGet),
+      );
+    }
+  }
+})();
 
 const _server = new GraphQLServer({
   resolvers,

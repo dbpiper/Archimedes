@@ -11,6 +11,7 @@
     "@babel/register": "^7.4.0",
     "@types/dotenv": "^6.1.1",
     "@types/globalize": "0.0.34",
+    "apollo-boost": "^0.3.1",
     "async": "^2.6.2",
     "captcha-solver": "0.0.6",
     "cldr-data": "^34.0.0",
@@ -20,6 +21,7 @@
     "es6-promise": "^4.2.6",
     "globalize": "^1.4.2",
     "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
     "graphql-yoga": "^1.17.4",
     "gulp": "^4.0.1",
     "gulp-run-command": "0.0.9",
@@ -44,6 +46,7 @@
     "@types/cheerio": "^0.22.11",
     "@types/cors": "^2.8.4",
     "@types/fetch-mock": "^7.2.3",
+    "@types/graphql": "^14.2.0",
     "@types/gulp": "^4.0.6",
     "@types/isomorphic-fetch": "0.0.35",
     "@types/jest": "^24.0.11",
@@ -53,6 +56,7 @@
     "@types/ramda": "^0.26.8",
     "@types/request": "^2.48.1",
     "@types/ws": "^6.0.1",
+    "apollo": "^2.9.0",
     "babel-register": "^6.26.0",
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^5.16.0",
@@ -84,7 +88,9 @@
     "start": "npx gulp start",
     "startProduction": "npx gulp startProduction",
     "test": "npx gulp test",
-    "test:watch": "npx gulp testWatch"
+    "test:watch": "npx gulp testWatch",
+    "generate:graphql-types": "npx gulp generateGraphQlTypes",
+    "github:schema:download": "npx gulp downloadGithubApiSchema"
   },
   "version": "0.0.0"
 }
