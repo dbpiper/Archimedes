@@ -16,6 +16,7 @@ export interface GithubRepoReleases_repository_releases_edges_node_author {
    * The username used to login.
    */
   login: string;
+  id: string;
 }
 
 export interface GithubRepoReleases_repository_releases_edges_node {
@@ -29,6 +30,18 @@ export interface GithubRepoReleases_repository_releases_edges_node {
    */
   publishedAt: any | null;
   /**
+   * Identifies the date and time when the object was created.
+   */
+  createdAt: any;
+  /**
+   * Identifies the date and time when the object was last updated.
+   */
+  updatedAt: any;
+  /**
+   * Whether or not the release is a prerelease
+   */
+  isPrerelease: boolean;
+  /**
    * The name of the release's Git tag
    */
   tagName: string;
@@ -36,6 +49,7 @@ export interface GithubRepoReleases_repository_releases_edges_node {
    * The HTTP URL for this issue
    */
   url: any;
+  id: string;
   /**
    * Identifies the description of the release.
    */
@@ -80,4 +94,5 @@ export interface GithubRepoReleases {
 export interface GithubRepoReleasesVariables {
   owner: string;
   name: string;
+  last: number;
 }

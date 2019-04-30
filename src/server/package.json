@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.4.0",
+    "@okgrow/graphql-scalars": "^0.4.5",
     "@types/dotenv": "^6.1.1",
     "@types/globalize": "0.0.34",
     "apollo-boost": "^0.3.1",
