@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "baseUrl": "../node_modules",
+    "target": "esnext",
+    "types": ["cypress", "node"],
+    "noEmit": false
+  },
+  "include": [
+    "**/*.ts",
+    "config/types/*.d.ts"
+  ],
+  "exclude": [
+    "**/templates/**"
+  ]
+}

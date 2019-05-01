@@ -1,0 +1,48 @@
+os: linux
+dist: xenial
+language: node_js
+node_js:
+  - lts/*
+notifications:
+  slack:
+    rooms:
+      - secure: "zzn/UpaMFbc5xVQbkoDQy87sT003A4DlvpiT6FTajUNQkBglXzJS3SrdQ/HbIrpbiylHc05bDz4X0TpVzrQuHC1Y2uqt+x4n/7Ds8LSK9FkUaMrGQBfIatqIv/JkvTKs1jbWgUjXprD5JqbR0/UKyr6ZI/4GQ0S1p0oClEV7eBDmUdWzVxWrN8TpW6rE0SAaJ+vh5mFH8nshPolJFTtgkN5T3qSnjsrljUEIZfkSkM62qRao+78gtZEDW5r9wmnW4oVvHNbfTttsiOvZzH5M/9FEMhXhY27ifRBlBu0djdlfAnfh0WueQuDvJCV5Gt+ok369KDSU9t3IYnG54usYr5w+4vRqNMCWIX2AyijgXCRH0CZJRn2yL341iC2tb9fttCu9YKUCPrO6TL+1v0dZFtK9VMnKMB2XOvDum7q1i+vVLb0pzkytC4ceZjHlCDBCcuI3jezBxgZX2jNzZq3huHnjcyTb7VjOVMCT916Ns/3m9vwilsuOnRu2m+QnF9Yj+2thSTC3ChUXu0EftW/p+dlABSV2+S+r19vW/q/asnUXranJ3rKCK2J44akAGfDrdrlhKa6pmo+JEcwCM341f45t7QBhdorX1CWVTXDS8TZ0NubmHWSVT7Ycv3jHUrdAOZIbzpTb/EnMYwevwTwa/IhqLUZEj/KxMRf4S/6wvos="
+    on_success: always
+    on_failure: always
+    on_pull_requests: true
+cache:
+  directories:
+    - "$HOME/.npm"
+addons:
+  apt:
+    sources:
+      - deadsnakes
+services:
+  - docker
+before_install:
+  - openssl aes-256-cbc -K $encrypted_ac5c83939e6d_key -iv $encrypted_ac5c83939e6d_iv
+    -in travis.key.enc -out travis.key -d
+  - sudo apt-get update
+  - sudo apt-get install python3.7 python3-pip
+  - sudo apt-get install git-crypt
+  - git-crypt unlock travis.key
+  - sudo pip3 install setuptools
+  - sudo -H pip3 install docker-compose-wait --ignore-installed PyYAML
+  - sudo cp ./config/dotenvs/CI/.env .env
+  - sudo ./config/replace-env-vars.sh
+install:
+  - cd src/server && docker-compose up -d && cd ../../
+  - sudo apt-get install libgconf-2-4
+  - npm run installFromLock
+before_script:
+  - cd src/server
+  - docker-compose-wait
+  - npx prisma deploy
+  - npm run download-data
+  - cd ../../
+script: npm run verifyCi
+after_failure:
+  - '[ -f ./config/ci/dropbox_uploader ] && ./config/ci/dropbox_uploader.sh \
+  upload src/client/cypress/snapshots travis-artifacts/$TRAVIS_JOB_NUMBER/'
+  - '[ -f ./config/ci/dropbox_uploader ] && ./config/ci/dropbox_uploader.sh \
+  upload src/client/cypress/videos travis-artifacts/$TRAVIS_JOB_NUMBER/'

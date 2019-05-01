@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "./tsconfig-base",
+  "include": [
+    "src/client",
+    "src/server",
+    "config/loadDotenv.ts",
+    "config/types/**/*.ts",
+    "config/gulp-tasks/**/*.ts",
+    "src/client/config/client-commands.ts"
+  ],
+}
