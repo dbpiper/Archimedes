@@ -5,8 +5,7 @@ import _ from 'lodash';
 
 import { prisma } from './generated/prisma-client';
 
-// import getGithubRelease, { loginToGithub } from './src/getGithubRelease';
-import resolvers from './src/resolvers';
+import { resolvers } from './src/resolvers';
 
 const _firstArg = 2;
 const _notFound = -1;

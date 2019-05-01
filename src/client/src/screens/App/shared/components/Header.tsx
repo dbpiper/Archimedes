@@ -5,7 +5,7 @@ import textColor from 'App/shared/styles/text-color';
 
 const Head = styled.section`
   text-align: center;
-  background: #000000;
+  background: #dee5da;
   padding-bottom: 1rem;
   ${textColor}
 `;

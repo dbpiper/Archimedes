@@ -6,25 +6,11 @@ import { createStore } from 'redux';
 
 import { rootReducer } from 'App/reducer';
 import Header from 'App/shared/components/Header';
-import getTickersQuery from 'App/shared/queries/getTickersQuery';
 
 const store = createStore(rootReducer);
 
-const apolloMocks = [
-  {
-    request: {
-      query: getTickersQuery,
-    },
-    result: {
-      data: {
-        tickers: ['AAPL', 'SPY', 'AMZN', 'GOOG', 'YELP', 'MSFT'],
-      },
-    },
-  },
-];
-
 storiesOf('App/shared/components/Header', module).addWithJSX('Header', () => (
-  <MockedProvider mocks={apolloMocks}>
+  <MockedProvider>
     <Provider store={store}>
       <Header />
     </Provider>

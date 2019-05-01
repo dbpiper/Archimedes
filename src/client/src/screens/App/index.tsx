@@ -45,7 +45,7 @@ const client = new ApolloClient({
 });
 
 const AppStyles = styled.section`
-  background-color: #262a30;
+  background-color: #fffffb;
   ${textColor};
 
   width: 100%;
@@ -54,7 +54,7 @@ const AppStyles = styled.section`
   position: fixed;
 
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
 `;
 
 const App = () => (

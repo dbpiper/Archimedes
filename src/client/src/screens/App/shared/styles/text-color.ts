@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const textColorHex = '#ffffff';
+const textColorHex = '#000000';
 
 const textColor = css`
   color: ${textColorHex};

@@ -10,6 +10,6 @@ const serverUrl = `${process.env.SERVER_PROTOCOL}://${
 (async () => {
   await terminalSpawn(
     `npx apollo schema:download \
-      --endpoint=${serverUrl} graphql-schema.json`
+      --endpoint=${serverUrl} schema.json`
   ).promise;
 })();
