@@ -11,8 +11,8 @@
 
 ## General Overview
 
-The [CI script](https://github.com/dbpiper/Euclid/.travis.yml) is a great
-introduction to everything that is needed to build and run Euclid.
+The [CI script](https://github.com/dbpiper/Archimedes/.travis.yml) is a great
+introduction to everything that is needed to build and run Archimedes.
 In general you need:
 
 - [git-crypt](https://github.com/AGWA/git-crypt)

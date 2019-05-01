@@ -156,10 +156,10 @@ const _testStorybook = async () =>
     }
   });
 
-const _testEuclidE2e = async () =>
+const _testArchimedesE2e = async () =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('running Euclid end-to-end tests');
+      console.log('running Archimedes end-to-end tests');
       const isServerAlreadyRunning = await isReachable(_serverUrl);
       if (isServerAlreadyRunning) {
         reject(new Error('server is already running!!'));
@@ -252,7 +252,7 @@ const updateCypressStorybookSnapshots = async () =>
 
 const runCypressTests = seriesPromise({
   name: 'runCypressTests',
-  tasks: [_testStorybook, _testEuclidE2e],
+  tasks: [_testStorybook, _testArchimedesE2e],
 });
 
 const cypressInstall = () =>

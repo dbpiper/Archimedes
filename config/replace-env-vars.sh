@@ -23,7 +23,7 @@ envTemplateFiles="${envTemplateFiles} ${dockerComposeTemplate}"
 envTemplateFiles="${envTemplateFiles} ${dockerfileTemplate}"
 envTemplateFiles="${envTemplateFiles} ${cypressDotenvsTemplate}"
 
-# output files which are actually used by Euclid
+# output files which are actually used by Archimedes
 prisma="${rootPath}/src/server/prisma.yml"
 dockerCompose="${rootPath}/src/server/docker-compose.yml"
 dockerfile="${rootPath}/src/server/config/docker/prisma/Dockerfile"

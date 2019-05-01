@@ -10,19 +10,19 @@
 - [Style Guide](#style-guide)
   - [Line Endings](#line-endings)
 - [Git Usage and Branching Strategy](#git-usage-and-branching-strategy)
-- [Development Configuration](https://github.com/dbpiper/Euclid/blob/docs/development-configuration.md)
+- [Development Configuration](https://github.com/dbpiper/Archimedes/blob/docs/development-configuration.md)
 
 ## Build System and Task Runners
 
 ### Build System Overview
 
-The build system in Euclid is comprised of two different, but related task running
+The build system in Archimedes is comprised of two different, but related task running
 systems: npm scripts and gulp, in addition to webpack for the client-side
 bundling. Most web developers are familiar with npm scripts, and they have become
 the de facto standard for task running on smaller projects. However, they are
 quite bulky when trying to run lots of non-trivial complex tasks. Thus, a
 proper, more fully-featured task runner like gulp is used to supplement npm
-scripts in Euclid.
+scripts in Archimedes.
 
 Essentially, npm scripts provide the task running API or the front-end interface
 for the task running system. Gulp provides the back-end and is where most of
@@ -164,7 +164,7 @@ with the following changes:
 - All CI related changes done in one "session" or short-period of time, and
   with related fixes should be squashed with a [squash rebase](https://blog.carbonfive.com/2017/08/28/always-squash-and-rebase-your-git-commits/) in the branch where they happen.
   This is because CI's such as [Travis CI](https://travis-ci.com/) which is what
-  Euclid uses make testing and running builds without making commits very difficult.
+  Archimedes uses make testing and running builds without making commits very difficult.
   So instead this policy exists so that there aren't tons of commits in there which
   were just trying to fix Travis.
 - Once CI fixes are squashed they should be pushed to the branch, since it is a

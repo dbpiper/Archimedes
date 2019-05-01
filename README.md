@@ -1,17 +1,25 @@
-# Euclid
+# Archimedes
 
-A website dedicated to tracking consumer goods price information.
-The original intention was to provide more detailed financial analytic
-capabilities to something like [PC Part Picker's Price Trends](https://pcpartpicker.com/trends/price/memory/) as I found myself checking it very often as I have a personal interest in the price trends of things like:
+Archimedes is a website to provide a news feed for developers. Specifically,
+it provides information about software releases in a similar manner to a
+news site like [BBC](http://bbc.com/) or [The Verge/tech](https://www.theverge.com/tech).
 
-* RAM
-* Hard Drives
-* GPUs
-* ...
+## Motivation
 
-In addition, I have found myself very disappointed with the analytic capabilities of this tool, for example it doesn't even let me see the exact data points or numbers on the graph. Much less more detailed Statistics about the data. So this is the main purpose of Euclid.
+I personally find myself constantly the releases of all sorts of software
+projects very often. For example, each day before I start working I will get
+a notification from my development OS: Manjaro, that I have package updates.
+Then I will have to go read up on them to see what changed, to see if it will
+potentially break anything and if there were any new features added that I
+might want to use.
 
-However, upon reflection it seems that (at least upon first glance to me) the exact same mechanism that can be used to track *all* types of consumer goods. So things like Smartphone prices or Food prices can theoretically also be tracked which could prove interesting as well.
+This process is essentially the same for things like my "Update Monday", where
+I go through and update all of my packages each Monday on whatever my main
+active project is. Doing so requires carefully reading the release notes
+of each of the packages that I am using. In other words, Archimedes is my
+solution to this problem: providing all of this information in one place
+so that there is no need to manually navigate to a ton of Github projects
+to read release notes.
 
 **[Contributing](docs/CONTRIBUTING.md)**
 
@@ -21,7 +29,7 @@ However, upon reflection it seems that (at least upon first glance to me) the ex
 
 See [Development Configuration](docs/development-configuration.md) for
 information on what is needed to work on the project. Especially see, the
-[CI script](https://github.com/dbpiper/Euclid/.travis.yml) as it provides
+[CI script](https://github.com/dbpiper/Archimedes/.travis.yml) as it provides
 consistent up-to-date information on exactly what is needed.
 
 **Essentially you need to:**

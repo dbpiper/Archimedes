@@ -21,7 +21,7 @@ const findElementRegex = (elementSelector: string, classRegex: string) =>
     .first();
 
 /**
- * Finds the Cypress wrapped element of the Euclid Header's
+ * Finds the Cypress wrapped element of the Archimedes Header's
  * Title. This can then be used to perform tests on the Header.
  */
 const findTitle = () => findElementRegex('span', 'Header.{2}Title.*');
