@@ -1,7 +1,7 @@
 {
   "author": "",
   "bugs": {
-    "url": "https://github.com/dbpiper/spa-starter-kit/issues"
+    "url": "https://github.com/dbpiper/Archimedes/issues"
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.3",
@@ -20,7 +20,7 @@
     "terminal-spawn": "^2.0.3",
     "wait-on": "^3.2.0"
   },
-  "description": "spa-starter-kit",
+  "description": "Archimedes",
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
@@ -44,7 +44,7 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.4"
   },
-  "homepage": "https://github.com/dbpiper/spa-starter-kit#readme",
+  "homepage": "https://github.com/dbpiper/Archimedes#readme",
   "husky": {
     "hooks": {
       "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS",
@@ -54,10 +54,10 @@
   },
   "license": "MIT",
   "main": "index.js",
-  "name": "spa-starter-kit",
+  "name": "Archimedes",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dbpiper/spa-starter-kit.git"
+    "url": "git+https://github.com/dbpiper/Archimedes.git"
   },
   "scripts": {
     "cypress:run": "npx gulp runCypressTests",
