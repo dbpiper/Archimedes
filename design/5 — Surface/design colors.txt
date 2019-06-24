@@ -8,8 +8,8 @@ Brand colors:
         • #
 
 3  Semantic colors:
-        • Red for error, danger, wrong — #
-        • Green for success, safe, right — #
+        • Red for error, danger, wrong — #EE204D (Crayola red)
+        • Green for success, safe, right — #27A773 (Mountain Meadow)
         • Yellow or Orange for alert, caution, warning — #
         • Blue for information — #
     
