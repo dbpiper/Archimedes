@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import STYLES from '../../STYLE';
 
 const H1 = styled.h1`
-  font-family: 'Varela Round', sans-serif;
-  font-size: 32px;
-  color: #000000;
-  filter: drop-shadow(0 4px 3px #adadad);
+  font-family: ${STYLES.text.h1.fontFamily};
+  font-weight: ${STYLES.text.h1.fontWeight};
+  font-size: ${STYLES.text.h1.fontSize};
+  line-height: ${STYLES.text.h1.lineHeight};
+  letter-spacing: ${STYLES.text.h1.letterSpacing};
+  color: ${STYLES.color.primaryDark};
 `;
 
 export default H1;
