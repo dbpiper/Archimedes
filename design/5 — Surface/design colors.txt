@@ -1,0 +1,22 @@
+1 Brand colors:
+    Primary colors: (60% of total color)
+            • #2D4BC3 (Cerulean blue)
+    Secondary colors: (30% of total color)
+            • #880085 (Mardi Gras)
+    
+2  Accent colors: (10% of total color)
+        • #FFBC20 (Dark Tangerine)
+
+3  Semantic colors:
+        • Red for error, danger, wrong — #EE204D (Crayola red)
+        • Green for success, safe, right — #27A773 (Mountain Meadow)
+        • Yellow or Orange for alert, caution, warning — #FBE870 (Safety orange)
+        • Blue for information — #0066FF (Crayola blue)
+    
+    
+4  Neutral colors:
+        • Primary light/Background — #FEFEFA (Baby powder)
+        • Primary dark — #343434 (Jet)
+        • Secondary dark — #414A4C (Outer space)
+        • On primary (text color) — #FEFEFA (Baby powder)
+        • On secondary (text color) — #FEFEFA (Baby powder)
