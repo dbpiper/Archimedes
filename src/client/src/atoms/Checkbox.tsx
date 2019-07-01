@@ -44,8 +44,6 @@ const S = Object.freeze({
 
 export const Checkbox = (props: { className?: string; checked: boolean }) => {
   const [checked, setChecked] = useState(props.checked);
-
-  console.log(checked);
   const toggleChecked = () => setChecked(!checked);
 
   return (
