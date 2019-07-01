@@ -4,7 +4,12 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 import textColor from 'App/shared/styles/text-color';
-import { ITheme } from 'config/types/react-select';
+import {
+  ActionMeta,
+  ITheme,
+  OptionType,
+  ValueType,
+} from 'config/types/react-select';
 
 const SearchSection = styled.section`
   margin-top: 1rem;
@@ -87,7 +92,8 @@ export interface ISelectElement {
 }
 
 export type HandleChangeSelectFunction = (
-  selected?: ISelectElement | ISelectElement[] | null,
+  value: ValueType<OptionType>,
+  action: ActionMeta,
 ) => void;
 
 interface ISearchFieldProps {

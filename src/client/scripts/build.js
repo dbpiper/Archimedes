@@ -129,7 +129,7 @@ const build = (previousFileSizes) => {
         return bfj
           .write(`${paths.appBuild} /bundle-stats.json`, stats.toJson())
           .then(() => resolve(resolveArguments))
-          .catch(error2 => reject(new Error(error2)));
+          .catch(error_ => reject(new Error(error_)));
       }
 
       return resolve(resolveArguments);
