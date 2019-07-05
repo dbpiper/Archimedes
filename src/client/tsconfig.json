@@ -4,6 +4,7 @@
     "paths": {
       "*": [
         "*",
+        "types/*",
         "config/@types/*",
         "screens/App/shared/*",
         "screens/App/screens/Home/shared/*"
