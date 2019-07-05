@@ -1,6 +1,16 @@
 import { getStorybookUrl } from '../config/dotenvs';
 
 /**
+ *
+ * Converts the raw string passed in by the user to a form that matches the
+ * format that Storybook uses. In other words, it makes it lowercase and
+ * replaces spaces with hyphens.
+ * @param {string} raw The raw string passed in.
+ */
+const _normalizeIdString = (raw: string) =>
+  raw.split(' ').join('-').toLowerCase();
+
+/**
  * Get the internal storybook id of the component, this is needed to
  * open the iframe as its src attribute is unreliable and sometimes appears
  * to be just '+' which isn't helpful for Cypress purposes.
@@ -9,19 +19,28 @@ import { getStorybookUrl } from '../config/dotenvs';
  * to Storybook, however I do think that it is the best option given what
  * we have to work with (no official iframe support from Cypress).
  *
- * @param {string} componentName The name of the component to grab the id of
+ * @param {string} storyName The name of the Story to grab the id of, this
+ * should generally be the same as the React Component name.
+ * @param {string} kindName The name of the story kind, this is basically
+ * an instance of the React Component with different props, in other words
+ * it would be the same story, but a different way to use it.
+ *
  */
-const _getComponentId = (componentName: string) => {
-  const lowerCaseName: string = componentName.toLowerCase();
+const _getStoryKindId = (kindName: string, storyName?: string) => {
+  const storyIdPortion: string = storyName ? _normalizeIdString(storyName) : '';
+  const kindIdPortion: string = _normalizeIdString(kindName);
   const typedName = cy
     .get('input')
     .should('have.attr', 'placeholder', 'Press "/" to search...')
-    .type(componentName);
+    .clear()
+    .type(kindName);
   typedName.then(() => {
     const getComponentDiv = () =>
       cy.get('div').filter((_index, element) => {
         const filteredElement = element.id.match(
-          `.*${lowerCaseName}--${lowerCaseName}`,
+          storyIdPortion.length > 0
+            ? `.*${storyIdPortion}--${kindIdPortion}`
+            : `.*--${kindIdPortion}`,
         );
         if (!filteredElement) {
           return false;
@@ -59,16 +78,18 @@ const _navigateToStorybookIFrame = (storybookUrl: string) => {
  * Cypress to visit the iframe url.
  *
  * @param {string} storybookUrl The url of the standard storybook page
- * @param {string} componentName The name of the component to navigate to for
- * testing
+ * @param {string} storyKindName The name of the story kind to navigate
+ * to. This is the instance of the component or story; what is created
+ * with `addWithJSX`.
  */
-const visitComponentStoryIFrame = (
+const visitComponentStoryIframe = (
   storybookUrl: string,
-  componentName: string,
+  storyKindName: string,
+  storyName?: string,
 ) => {
   cy.visit(storybookUrl);
-  _getComponentId(componentName);
+  _getStoryKindId(storyKindName, storyName);
   _navigateToStorybookIFrame(storybookUrl);
 };
 
-export { getStorybookUrl, visitComponentStoryIFrame };
+export { getStorybookUrl, visitComponentStoryIframe };
