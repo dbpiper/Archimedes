@@ -1,12 +1,12 @@
 import { findTitle } from '../../util/archimedes';
 import {
   getStorybookUrl,
-  visitComponentStoryIFrame,
+  visitComponentStoryIframe,
 } from '../../util/storybook';
 
 describe('Header', () => {
   specify('successfully loads', () => {
-    visitComponentStoryIFrame(getStorybookUrl(), 'Header');
+    visitComponentStoryIframe(getStorybookUrl(), 'Header');
   });
 
   describe('header tests', () => {
