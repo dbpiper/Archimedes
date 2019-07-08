@@ -3,7 +3,6 @@ import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { onError } from 'apollo-link-error';
-import 'normalize.css';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import styled from 'styled-components';
@@ -11,9 +10,7 @@ import styled from 'styled-components';
 import textColor from 'App/shared/styles/text-color';
 import Home from './screens/Home';
 
-const serverUrl = `${process.env.SERVER_PROTOCOL}://${
-  process.env.SERVER_ADDRESS
-}:${process.env.SERVER_PORT}`;
+const serverUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_ADDRESS}:${process.env.SERVER_PORT}`;
 
 // if the url is broken, we want to know about it...
 if (serverUrl.includes('undefined')) {

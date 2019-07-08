@@ -28,7 +28,7 @@ const S = Object.freeze({
     /* background-color: transparent; */
     border-radius: 5px;
     border: 1px solid;
-    border-color: ${STYLE.color.secondaryDark};
+    border-color: ${STYLE.color.darkSecondary};
     transition: all 150ms;
 
     /* center the checkmark */

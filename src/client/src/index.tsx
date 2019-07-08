@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
+import 'normalize.css';
+
 import App from 'App';
 import { rootReducer } from 'App/reducer';
 import './index.css';
