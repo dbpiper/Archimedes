@@ -1,26 +1,146 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import STYLE from '../STYLE';
 
+const Keyframes = Object.freeze({
+  __proto__: null,
+  hoverCircle: keyframes`
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 0.25;
+    }
+  `,
+  activeCircle: keyframes`
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 0.25;
+    }
+  `,
+  thumbContainer: {
+    on: keyframes`
+        0% {
+          left: 6px;
+        }
+
+        100% {
+          left: 33px;
+        }
+      `,
+    off: keyframes`
+        0% {
+          left: 33px;
+        }
+
+        100% {
+          left: 6px;
+        }
+      `,
+  },
+  track: {
+    on: keyframes`
+        0% {
+          background-color: ${STYLE.color.darkSecondary};
+        }
+        100% {
+          background-color: ${STYLE.color.primary};
+        }
+      `,
+    off: keyframes`
+        0% {
+          background-color: ${STYLE.color.primary};
+        }
+        100% {
+          background-color: ${STYLE.color.darkSecondary};
+        }
+      `,
+  },
+});
+
+const clickDuration = '333.3ms';
+
+const Animation = Object.freeze({
+  __proto__: null,
+  hoverCircle: css`
+    animation: ${Keyframes.hoverCircle} 33.33ms forwards
+      cubic-bezier(0.22, 1, 0.36, 1);
+  `,
+  activeCircle: css`
+    animation: ${Keyframes.activeCircle} 33.33ms forwards
+      cubic-bezier(0.22, 1, 0.36, 1);
+  `,
+  thumbContainer: {
+    on: css`
+      animation: ${Keyframes.thumbContainer.on} ${clickDuration} forwards
+        cubic-bezier(0.22, 1, 0.36, 1.5);
+    `,
+    off: css`
+      animation: ${Keyframes.thumbContainer.off} ${clickDuration} forwards
+        cubic-bezier(0.22, 1, 0.36, 1.5);
+    `,
+  },
+  track: {
+    on: css`
+      animation: ${Keyframes.track.on} ${clickDuration} forwards
+        cubic-bezier(0.22, 1, 0.36, 1);
+    `,
+    off: css`
+      animation: ${Keyframes.track.off} ${clickDuration} forwards
+        cubic-bezier(0.22, 1, 0.36, 1);
+    `,
+  },
+});
+
+const getThumbContainerAnimation = (clickCount: number) => {
+  const evenDivisor = 2;
+  if (clickCount === 0) {
+    return 'none';
+  }
+  if (clickCount % evenDivisor === 0) {
+    return Animation.thumbContainer.off;
+  }
+  return Animation.thumbContainer.on;
+};
+
+const getTrackAnimation = (clickCount: number) => {
+  const evenDivisor = 2;
+  if (clickCount === 0) {
+    return 'none';
+  }
+  if (clickCount % evenDivisor === 0) {
+    return Animation.track.off;
+  }
+  return Animation.track.on;
+};
+
 const S = Object.freeze({
-  Track: styled.button<{ active: boolean }>`
+  __proto__: null,
+  Track: styled.button<{ click: boolean; clickCount: number }>`
     position: relative;
     display: flex;
     padding: 6px;
     width: 60px;
     height: 33px;
     background-color: ${props =>
-      props.active ? STYLE.color.primary : STYLE.color.darkSecondary};
+      props.click ? STYLE.color.primary : STYLE.color.darkSecondary};
     border-radius: 16.5px;
     border: none !important;
     outline: none !important;
+    ${(props: { click: boolean; clickCount: number }) =>
+      getTrackAnimation(props.clickCount)};
   `,
-  ThumbContainer: styled.span<{ active: boolean }>`
+  ThumbContainer: styled.span<{ click: boolean; clickCount: number }>`
     display: inline-block;
     position: absolute;
     width: 21px;
     height: 21px;
-    right: ${props => (props.active ? '6px' : 'auto')};
+    ${(props: { click: boolean; clickCount: number }) =>
+      getThumbContainerAnimation(props.clickCount)};
   `,
   Thumb: styled.span`
     position: absolute;
@@ -38,48 +158,54 @@ const S = Object.freeze({
     display: inline-block;
     background-color: ${STYLE.color.darkPrimary};
     visibility: ${props => (props.hover ? 'visible' : 'hidden')};
-    opacity: 0.25;
     width: 42px;
     height: 42px;
     border-radius: 99px;
     transform: translate(-50%, -25%);
+    ${props => (props.hover ? Animation.hoverCircle : 'none')}
   `,
-  MouseDownCircle: styled.span<{ mouseDown: boolean }>`
+  ActiveCircle: styled.span<{ active: boolean }>`
     position: absolute;
     z-index: 2;
     display: inline-block;
     background-color: ${STYLE.color.darkPrimary};
-    visibility: ${props => (props.mouseDown ? 'visible' : 'hidden')};
+    visibility: ${props => (props.active ? 'visible' : 'hidden')};
     opacity: 0.5;
     width: 42px;
     height: 42px;
     border-radius: 99px;
     transform: translate(-50%, -25%);
+    ${props => (props.active ? Animation.activeCircle : 'none')}
   `,
 });
 
 export const Switch1 = ({}) => {
+  const [click, setClick] = useState(false);
+  const [clickCount, setCount] = useState(0);
   const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
-  const [mouseDown, setMouseDown] = useState(false);
-  const handleClick = () => setActive(!active);
+  const handleClick = () => {
+    setClick(!click);
+    setCount(clickCount + 1);
+  };
   const handleMouseOver = () => setHover(true);
   const handleMouseLeave = () => setHover(false);
-  const handleMouseDown = () => setMouseDown(true);
-  const handleMouseUp = () => setMouseDown(false);
+  const handleMouseDown = () => setActive(true);
+  const handleMouseUp = () => setActive(false);
 
   return (
     <S.Track
-      active={active}
       onClick={handleClick}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      click={click}
+      clickCount={clickCount}
     >
-      <S.ThumbContainer active={active}>
+      <S.ThumbContainer click={click} clickCount={clickCount}>
         <S.HoverCircle hover={hover} />
-        <S.MouseDownCircle mouseDown={mouseDown} />
+        <S.ActiveCircle active={active} />
         <S.Thumb />
       </S.ThumbContainer>
     </S.Track>

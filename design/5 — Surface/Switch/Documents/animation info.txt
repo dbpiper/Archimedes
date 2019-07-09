@@ -13,14 +13,15 @@ Animations:
                 □ Duration     — 1/30 of a second (33.33 ms)
                 □ Triggered by — User hovers over the switch.
     • Click/Toggle animation
-        ◦ Click circle
+        ◦ Active circle
             ■ Opacity
                 □ Keyframes
                     • 0%
                         ◦ Current opacity (should be either 0% or 25%)
                         ◦ Easing curve — qunitOut: cubic-bezier(0.22, 1.00, 0.36, 1.00)
                     • 100%
-                        ◦ 50% opacity
+                        ◦ 25% opacity (this adds with the Hover circle,
+                        	so the sum of them is 50% opacity; the desired effect)
                 □ Duration     — 1/30 of a second (33.33 ms)
                 □ Triggered by — User clicks the switch.
         ◦ Sliding thumb — Left to right (right to left is the same, but flipped)
