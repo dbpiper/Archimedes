@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import STYLE from '../STYLE';
+import {
+  AnimationDuration,
+  animationDurationToString,
+  parseAnimationDuration,
+} from '../util/animationDuration';
 
 const Keyframes = Object.freeze({
   __proto__: null,
@@ -62,35 +67,39 @@ const Keyframes = Object.freeze({
   },
 });
 
-const clickDuration = '333.3ms';
-
 const Animation = Object.freeze({
   __proto__: null,
-  hoverCircle: css`
-    animation: ${Keyframes.hoverCircle} 33.33ms forwards
+  hoverCircle: css<{ animationDuration: AnimationDuration }>`
+    animation: ${Keyframes.hoverCircle}
+      ${props => animationDurationToString(props.animationDuration)} forwards
       cubic-bezier(0.22, 1, 0.36, 1);
   `,
-  activeCircle: css`
-    animation: ${Keyframes.activeCircle} 33.33ms forwards
+  activeCircle: css<{ animationDuration: AnimationDuration }>`
+    animation: ${Keyframes.activeCircle}
+      ${props => animationDurationToString(props.animationDuration)} forwards
       cubic-bezier(0.22, 1, 0.36, 1);
   `,
   thumbContainer: {
-    on: css`
-      animation: ${Keyframes.thumbContainer.on} ${clickDuration} forwards
+    on: css<{ animationDuration: AnimationDuration }>`
+      animation: ${Keyframes.thumbContainer.on}
+        ${props => animationDurationToString(props.animationDuration)} forwards
         cubic-bezier(0.22, 1, 0.36, 1.5);
     `,
-    off: css`
-      animation: ${Keyframes.thumbContainer.off} ${clickDuration} forwards
+    off: css<{ animationDuration: AnimationDuration }>`
+      animation: ${Keyframes.thumbContainer.off}
+        ${props => animationDurationToString(props.animationDuration)} forwards
         cubic-bezier(0.22, 1, 0.36, 1.5);
     `,
   },
   track: {
-    on: css`
-      animation: ${Keyframes.track.on} ${clickDuration} forwards
+    on: css<{ animationDuration: AnimationDuration }>`
+      animation: ${Keyframes.track.on}
+        ${props => animationDurationToString(props.animationDuration)} forwards
         cubic-bezier(0.22, 1, 0.36, 1);
     `,
-    off: css`
-      animation: ${Keyframes.track.off} ${clickDuration} forwards
+    off: css<{ animationDuration: AnimationDuration }>`
+      animation: ${Keyframes.track.off}
+        ${props => animationDurationToString(props.animationDuration)} forwards
         cubic-bezier(0.22, 1, 0.36, 1);
     `,
   },
@@ -99,7 +108,7 @@ const Animation = Object.freeze({
 const getThumbContainerAnimation = (clickCount: number) => {
   const evenDivisor = 2;
   if (clickCount === 0) {
-    return 'none';
+    return 'animation: none';
   }
   if (clickCount % evenDivisor === 0) {
     return Animation.thumbContainer.off;
@@ -110,7 +119,7 @@ const getThumbContainerAnimation = (clickCount: number) => {
 const getTrackAnimation = (clickCount: number) => {
   const evenDivisor = 2;
   if (clickCount === 0) {
-    return 'none';
+    return 'animation: none';
   }
   if (clickCount % evenDivisor === 0) {
     return Animation.track.off;
@@ -118,11 +127,34 @@ const getTrackAnimation = (clickCount: number) => {
   return Animation.track.on;
 };
 
+interface TrackProps {
+  click: boolean;
+  clickCount: number;
+  animationDuration: AnimationDuration;
+}
+
+interface ThumbContainerProps {
+  click: boolean;
+  clickCount: number;
+  animationDuration: AnimationDuration;
+}
+
+interface HoverCircleProps {
+  hover: boolean;
+  animationDuration: AnimationDuration;
+}
+
+interface ActiveCircleProps {
+  active: boolean;
+  animationDuration: AnimationDuration;
+}
+
 const S = Object.freeze({
   __proto__: null,
-  Track: styled.button<{ click: boolean; clickCount: number }>`
+  Track: styled.button<TrackProps>`
     position: relative;
     display: flex;
+    align-items: center;
     padding: 6px;
     width: 60px;
     height: 33px;
@@ -131,16 +163,14 @@ const S = Object.freeze({
     border-radius: 16.5px;
     border: none !important;
     outline: none !important;
-    ${(props: { click: boolean; clickCount: number }) =>
-      getTrackAnimation(props.clickCount)};
+    ${props => getTrackAnimation(props.clickCount)};
   `,
-  ThumbContainer: styled.span<{ click: boolean; clickCount: number }>`
+  ThumbContainer: styled.span<ThumbContainerProps>`
     display: inline-block;
     position: absolute;
-    width: 21px;
+    width: 21.3px;
     height: 21px;
-    ${(props: { click: boolean; clickCount: number }) =>
-      getThumbContainerAnimation(props.clickCount)};
+    ${props => getThumbContainerAnimation(props.clickCount)};
   `,
   Thumb: styled.span`
     position: absolute;
@@ -152,7 +182,7 @@ const S = Object.freeze({
     border-radius: 99px;
     transform: translate(-50%, 0);
   `,
-  HoverCircle: styled.span<{ hover: boolean }>`
+  HoverCircle: styled.span<HoverCircleProps>`
     position: absolute;
     z-index: 1;
     display: inline-block;
@@ -164,7 +194,7 @@ const S = Object.freeze({
     transform: translate(-50%, -25%);
     ${props => (props.hover ? Animation.hoverCircle : 'none')}
   `,
-  ActiveCircle: styled.span<{ active: boolean }>`
+  ActiveCircle: styled.span<ActiveCircleProps>`
     position: absolute;
     z-index: 2;
     display: inline-block;
@@ -179,7 +209,22 @@ const S = Object.freeze({
   `,
 });
 
-export const Switch1 = ({}) => {
+interface Switch1Props {
+  clickAnimationDuration?: AnimationDuration;
+  circleEffectDuration?: AnimationDuration;
+}
+
+/**
+ *
+ * @param props {Switch1Props} This component takes the animation
+ *        durations as props, so that they can be set to '0s' for testing.
+ *        Of course this also means that the animations can be adjusted
+ *        as desired by the users.
+ */
+export const Switch1 = ({
+  clickAnimationDuration = parseAnimationDuration('333.3ms'),
+  circleEffectDuration = parseAnimationDuration('33.33ms'),
+}: Switch1Props) => {
   const [click, setClick] = useState(false);
   const [clickCount, setCount] = useState(0);
   const [active, setActive] = useState(false);
@@ -202,12 +247,22 @@ export const Switch1 = ({}) => {
       onMouseUp={handleMouseUp}
       click={click}
       clickCount={clickCount}
+      animationDuration={clickAnimationDuration}
     >
-      <S.ThumbContainer click={click} clickCount={clickCount}>
-        <S.HoverCircle hover={hover} />
-        <S.ActiveCircle active={active} />
+      <S.ThumbContainer
+        click={click}
+        clickCount={clickCount}
+        animationDuration={clickAnimationDuration}
+      >
+        <S.HoverCircle hover={hover} animationDuration={circleEffectDuration} />
+        <S.ActiveCircle
+          active={active}
+          animationDuration={circleEffectDuration}
+        />
         <S.Thumb />
       </S.ThumbContainer>
     </S.Track>
   );
 };
+
+export { parseAnimationDuration };
