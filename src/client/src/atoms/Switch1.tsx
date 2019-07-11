@@ -39,11 +39,11 @@ const Keyframes = Object.freeze({
       `,
     off: keyframes`
         0% {
-          left: 33px;
+          right: 6px;
         }
 
         100% {
-          left: 6px;
+          right: 33px;
         }
       `,
   },
@@ -165,22 +165,18 @@ const S = Object.freeze({
     outline: none !important;
     ${props => getTrackAnimation(props.clickCount)};
   `,
-  ThumbContainer: styled.span<ThumbContainerProps>`
-    display: inline-block;
+  ThumbContainer: styled.div<ThumbContainerProps>`
+    display: flex;
     position: absolute;
-    width: 21.3px;
-    height: 21px;
-    ${props => getThumbContainerAnimation(props.clickCount)};
-  `,
-  Thumb: styled.span`
-    position: absolute;
-    z-index: 3;
-    display: inline-block;
-    background-color: ${STYLE.color.onPrimary};
     width: 21px;
     height: 21px;
-    border-radius: 99px;
-    transform: translate(-50%, 0);
+    ${props => getThumbContainerAnimation(props.clickCount)};
+    align-items: center;
+  `,
+  Thumb: styled.svg`
+    z-index: 3;
+    position: relative;
+    display: inline-block;
   `,
   HoverCircle: styled.span<HoverCircleProps>`
     position: absolute;
@@ -190,8 +186,8 @@ const S = Object.freeze({
     visibility: ${props => (props.hover ? 'visible' : 'hidden')};
     width: 42px;
     height: 42px;
-    border-radius: 99px;
-    transform: translate(-50%, -25%);
+    border-radius: 100%;
+    transform: translate(-25%, 0);
     ${props => (props.hover ? Animation.hoverCircle : 'none')}
   `,
   ActiveCircle: styled.span<ActiveCircleProps>`
@@ -203,8 +199,8 @@ const S = Object.freeze({
     opacity: 0.5;
     width: 42px;
     height: 42px;
-    border-radius: 99px;
-    transform: translate(-50%, -25%);
+    border-radius: 100%;
+    transform: translate(-25%, 0);
     ${props => (props.active ? Animation.activeCircle : 'none')}
   `,
 });
@@ -259,7 +255,14 @@ export const Switch1 = ({
           active={active}
           animationDuration={circleEffectDuration}
         />
-        <S.Thumb />
+        <S.Thumb
+          viewBox="0 0 21 21"
+          height="21px"
+          width="21px"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="10.5" cy="10.5" r="10.5" fill={STYLE.color.onPrimary} />
+        </S.Thumb>
       </S.ThumbContainer>
     </S.Track>
   );

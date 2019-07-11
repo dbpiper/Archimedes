@@ -2,7 +2,7 @@ Switch 1:
 
 • There is 6px of padding on the inside of the track on the sides.
 • There is 6px of padding on the inside of the track on the top and bottom.
-• The thumb is a circle with a radius of 21px.
+• The thumb is a circle with a radius of 10.5px.
 • The track has a width of 60px and a height of 33px.
 • The track has a border radius of 16.5 px (completely rounded).
 • The track uses the secondary dark color when off.
@@ -16,7 +16,7 @@ Switch 2:
 
 • There is 4px of padding on the inside of the track on the sides.
 • There is 4px of padding on the inside of the track on the top and bottom.
-• The thumb is a circle with a radius of 14px.
+• The thumb is a circle with a radius of 7px.
 • The track has a width of 40px and a height of 22px.
 • The track has a border radius of 11px (completely rounded).
 • The track uses the secondary dark color when off.
