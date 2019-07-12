@@ -7,5 +7,5 @@ export const H3 = styled.h3`
   font-size: ${STYLES.text.h3.fontSize};
   line-height: ${STYLES.text.h3.lineHeight};
   letter-spacing: ${STYLES.text.h3.letterSpacing};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

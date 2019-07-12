@@ -7,5 +7,5 @@ export const Button2 = styled.p`
   font-size: ${STYLES.text.button2.fontSize};
   line-height: ${STYLES.text.button2.lineHeight};
   letter-spacing: ${STYLES.text.button2.letterSpacing};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

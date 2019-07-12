@@ -7,5 +7,5 @@ export const Caption = styled.p`
   font-size: ${STYLES.text.caption.fontSize};
   line-height: ${STYLES.text.caption.lineHeight};
   letter-spacing: ${STYLES.text.caption.letterSpacing};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

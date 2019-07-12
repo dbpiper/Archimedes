@@ -6,7 +6,7 @@ const S = Object.freeze({
   OrLine2: styled.div`
     width: 164px;
     height: 2px;
-    background-color: ${STYLE.color.primaryDark};
+    background-color: ${STYLE.color.darkPrimary};
     border-radius: 99px;
   `,
 });

@@ -8,5 +8,5 @@ export const Overline = styled.p`
   line-height: ${STYLES.text.overline.lineHeight};
   letter-spacing: ${STYLES.text.overline.letterSpacing};
   text-transform: ${STYLES.text.overline.textTransform};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

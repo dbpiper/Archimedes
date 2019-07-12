@@ -2,7 +2,7 @@ import { Chainable } from 'cypress';
 
 declare global {
   declare namespace Cypress {
-    type MatchImageSnapshot = (arg?: undefined | string) => void;
+    type MatchImageSnapshot = (arg?: undefined | string | object) => void;
     export interface Chainable<Subject = any> {
       matchImageSnapshot: MatchImageSnapshot;
     }

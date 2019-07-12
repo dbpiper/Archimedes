@@ -7,5 +7,5 @@ export const Body1 = styled.p`
   font-size: ${STYLES.text.body1.fontSize};
   line-height: ${STYLES.text.body1.lineHeight};
   letter-spacing: ${STYLES.text.body1.letterSpacing};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

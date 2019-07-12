@@ -7,5 +7,5 @@ export const H6 = styled.h6`
   font-size: ${STYLES.text.h6.fontSize};
   line-height: ${STYLES.text.h6.lineHeight};
   letter-spacing: ${STYLES.text.h6.letterSpacing};
-  color: ${STYLES.color.primaryDark};
+  color: ${STYLES.color.darkPrimary};
 `;

@@ -143,7 +143,6 @@
     "jest-enzyme": "^7.0.2",
     "jest-styled-components": "^6.3.3",
     "json-schema-traverse": "^0.4.1",
-    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "recharts-scale": "^0.4.2",
     "redux-test-utils": "^0.3.0",
     "storybook-addon-jsx": "^7.1.2",
