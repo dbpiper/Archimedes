@@ -4,7 +4,7 @@
     "url": "https://github.com/dbpiper/Archimedes/issues"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.4.4",
     "@types/dotenv": "^6.1.1",
@@ -18,21 +18,21 @@
     "is-reachable": "^3.1.0",
     "jest-cli": "^24.8.0",
     "terminal-spawn": "^2.0.3",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.3.0"
   },
   "description": "Archimedes",
   "devDependencies": {
-    "@commitlint/cli": "^8.0.0",
-    "@commitlint/config-conventional": "^8.0.0",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "@dbpiper/slack-notify-status": "^1.0.0-beta.2",
     "@types/jest": "^24.0.15",
     "babel-eslint": "^10.0.2",
-    "commitlint": "^8.0.0",
-    "cypress": "^3.3.2",
+    "commitlint": "^8.1.0",
+    "cypress": "^3.4.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jest": "^22.7.2",
+    "eslint-plugin-jest": "^22.8.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-unicorn": "^9.1.1",
@@ -42,7 +42,7 @@
     "tslint": "^5.18.0",
     "tslint-config-euclid": "1.1.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "homepage": "https://github.com/dbpiper/Archimedes#readme",
   "husky": {
