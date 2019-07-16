@@ -25,8 +25,8 @@ Animations (off to on):
         ◦ Track matte: Alpha matte (Box mask)
     • Box dark (bottom layer)
         ◦ 0%:
-            ■ Border Color: Dark primary
-            ■ Color: Dark primary
+            ■ Border Color: Dark secondary
+            ■ Color: Dark secondary
         ◦ 100%:
             ■ Border Color: Primary
             ■ Color: Primary

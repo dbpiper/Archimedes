@@ -164,6 +164,10 @@ const S = Object.freeze({
     border: none !important;
     outline: none !important;
     ${props => getTrackAnimation(props.clickCount)};
+
+    :hover {
+      cursor: pointer;
+    }
   `,
   ThumbContainer: styled.div<ThumbContainerProps>`
     display: flex;
