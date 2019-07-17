@@ -1,9 +1,50 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import STYLE from '../STYLE';
+import { parseAnimationDuration } from '../util/animationDuration';
+import {
+  createBinaryAnimation,
+  runBinaryAnimationPaused,
+} from '../util/animationHelpers';
+import { createCubicBezier } from '../util/cubicBezier';
 
 // tslint:disable-next-line: no-var-requires
 const Checkmark = require('../assets/Checkmark.svg') as string;
+
+const Keyframes = Object.freeze({
+  __proto__: null,
+  boxLight: {
+    on: keyframes`
+        0% {
+          transform: scale(1, 1);
+        }
+
+        100% {
+          transform: scale(0, 0);
+        }
+      `,
+    off: keyframes`
+        0% {
+          transform: scale(0, 0);
+        }
+
+        100% {
+          transform: scale(1, 1);
+        }
+      `,
+  },
+});
+
+const Animation = Object.freeze({
+  __proto__: null,
+  boxLight: createBinaryAnimation(
+    Keyframes.boxLight,
+    parseAnimationDuration('100ms'),
+    // these are from the motion design
+    // tslint:disable-next-line: no-magic-numbers
+    createCubicBezier(0.84, 0, 0.16, 1),
+  ),
+});
 
 const sStatic = Object.freeze({
   __proto__: null,
@@ -90,25 +131,29 @@ const sStatic = Object.freeze({
     width: 13px;
     height: 10px;
   `,
-});
+  BoxLight: styled.div<{ hover: boolean; clickCount: number }>`
+    position: absolute;
+    display: grid;
+    place-items: center;
+    z-index: 11;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border-color: ${STYLE.color.lightPrimary};
+    background-color: ${STYLE.color.lightPrimary};
 
-const BoxLight = styled.div`
-  position: absolute;
-  display: grid;
-  place-items: center;
-  z-index: 11;
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  border-color: ${STYLE.color.lightPrimary};
-  background-color: ${STYLE.color.lightPrimary};
-  /* clip-path: polygon(
+    ${props =>
+      runBinaryAnimationPaused(
+        props.clickCount,
+        Animation.boxLight,
+      )} /* clip-path: polygon(
       1.5px 1.5px,
       1.5px calc(100% - 1.5px),
       calc(100% - 1.5px) calc(100% - 1.5px),
       calc(100% - 1.5px) 1.5px
     ); */
-`;
+  `,
+});
 
 const sDynamic = Object.freeze({
   __proto__: null,
@@ -131,32 +176,34 @@ const sDynamic = Object.freeze({
     &:active ${sStatic.ActiveCircle} {
       visibility: visible;
     }
-
-    &:hover ${BoxLight} {
-      transform: scale(0, 0);
-
-      transition: transform 100ms cubic-bezier(0.84, 0, 0.16, 1);
-    }
   `,
 });
 
 export const Checkbox = (props: { className?: string; checked: boolean }) => {
   const [checked, setChecked] = useState(props.checked);
-  const toggleChecked = () => setChecked(!checked);
-
+  const [hover, setHover] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const handleClick = () => {
+    setChecked(!checked);
+    setClickCount(clickCount + 1);
+  };
+  const handleMouseOver = () => setHover(true);
+  const handleMouseLeave = () => setHover(false);
   return (
     <sDynamic.CheckboxContainer
       className={props.className}
-      onClick={toggleChecked}
+      onClick={handleClick}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
       <sStatic.HoverCircle />
       <sStatic.ActiveCircle />
-      <sStatic.HiddenCheckbox checked={checked} onChange={toggleChecked} />
+      <sStatic.HiddenCheckbox checked={checked} onChange={handleClick} />
 
       {/* <sStatic.StyledCheckbox>
         <img src={Checkmark} hidden={!checked} />
       </sStatic.StyledCheckbox> */}
-      <BoxLight />
+      <sStatic.BoxLight hover={hover} clickCount={clickCount} />
       <sStatic.BoxDark />
       <sStatic.CheckmarkImage src={Checkmark} />
     </sDynamic.CheckboxContainer>

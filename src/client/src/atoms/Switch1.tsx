@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import STYLE from '../STYLE';
 import {
   AnimationDuration,
-  animationDurationToString,
   parseAnimationDuration,
 } from '../util/animationDuration';
+import {
+  createBinaryAnimation,
+  runBinaryAnimationPaused,
+} from '../util/animationHelpers';
+import { createCubicBezier } from '../util/cubicBezier';
 
 const Keyframes = Object.freeze({
   __proto__: null,
-  hoverCircle: keyframes`
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 0.25;
-    }
-  `,
-  activeCircle: keyframes`
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 0.25;
-    }
-  `,
   thumbContainer: {
     on: keyframes`
         0% {
@@ -69,63 +55,23 @@ const Keyframes = Object.freeze({
 
 const Animation = Object.freeze({
   __proto__: null,
-  hoverCircle: css<{ animationDuration: AnimationDuration }>`
-    animation: ${Keyframes.hoverCircle}
-      ${props => animationDurationToString(props.animationDuration)} forwards
-      cubic-bezier(0.22, 1, 0.36, 1);
-  `,
-  activeCircle: css<{ animationDuration: AnimationDuration }>`
-    animation: ${Keyframes.activeCircle}
-      ${props => animationDurationToString(props.animationDuration)} forwards
-      cubic-bezier(0.22, 1, 0.36, 1);
-  `,
-  thumbContainer: {
-    on: css<{ animationDuration: AnimationDuration }>`
-      animation: ${Keyframes.thumbContainer.on}
-        ${props => animationDurationToString(props.animationDuration)} forwards
-        cubic-bezier(0.22, 1, 0.36, 1.5);
-    `,
-    off: css<{ animationDuration: AnimationDuration }>`
-      animation: ${Keyframes.thumbContainer.off}
-        ${props => animationDurationToString(props.animationDuration)} forwards
-        cubic-bezier(0.22, 1, 0.36, 1.5);
-    `,
-  },
-  track: {
-    on: css<{ animationDuration: AnimationDuration }>`
-      animation: ${Keyframes.track.on}
-        ${props => animationDurationToString(props.animationDuration)} forwards
-        cubic-bezier(0.22, 1, 0.36, 1);
-    `,
-    off: css<{ animationDuration: AnimationDuration }>`
-      animation: ${Keyframes.track.off}
-        ${props => animationDurationToString(props.animationDuration)} forwards
-        cubic-bezier(0.22, 1, 0.36, 1);
-    `,
-  },
+  thumbContainer: (duration: AnimationDuration) =>
+    createBinaryAnimation(
+      Keyframes.thumbContainer,
+      duration,
+      // these are from the motion design
+      // tslint:disable-next-line: no-magic-numbers
+      createCubicBezier(0.22, 1, 0.36, 1.5),
+    ),
+  track: (duration: AnimationDuration) =>
+    createBinaryAnimation(
+      Keyframes.track,
+      duration,
+      // these are from the motion design
+      // tslint:disable-next-line: no-magic-numbers
+      createCubicBezier(0.22, 1, 0.36, 1),
+    ),
 });
-
-const getThumbContainerAnimation = (clickCount: number) => {
-  const evenDivisor = 2;
-  if (clickCount === 0) {
-    return 'animation: none';
-  }
-  if (clickCount % evenDivisor === 0) {
-    return Animation.thumbContainer.off;
-  }
-  return Animation.thumbContainer.on;
-};
-
-const getTrackAnimation = (clickCount: number) => {
-  const evenDivisor = 2;
-  if (clickCount === 0) {
-    return 'animation: none';
-  }
-  if (clickCount % evenDivisor === 0) {
-    return Animation.track.off;
-  }
-  return Animation.track.on;
-};
 
 interface TrackProps {
   click: boolean;
@@ -139,18 +85,51 @@ interface ThumbContainerProps {
   animationDuration: AnimationDuration;
 }
 
-interface HoverCircleProps {
-  hover: boolean;
-  animationDuration: AnimationDuration;
-}
-
-interface ActiveCircleProps {
-  active: boolean;
-  animationDuration: AnimationDuration;
-}
-
-const S = Object.freeze({
+const sStatic = Object.freeze({
   __proto__: null,
+  ThumbContainer: styled.div<ThumbContainerProps>`
+    display: flex;
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    ${props =>
+      runBinaryAnimationPaused(
+        props.clickCount,
+        Animation.thumbContainer(props.animationDuration),
+      )};
+    align-items: center;
+  `,
+  Thumb: styled.svg`
+    z-index: 3;
+    position: relative;
+    display: inline-block;
+  `,
+  HoverCircle: styled.span`
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+    background-color: ${STYLE.color.darkPrimary};
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    transform: translate(-25%, 0);
+    opacity: 0;
+  `,
+  ActiveCircle: styled.span`
+    position: absolute;
+    z-index: 2;
+    display: inline-block;
+    background-color: ${STYLE.color.darkPrimary};
+    opacity: 0.5;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    transform: translate(-25%, 0);
+    opacity: 0;
+  `,
+});
+
+const sDynamic = Object.freeze({
   Track: styled.button<TrackProps>`
     position: relative;
     display: flex;
@@ -163,55 +142,27 @@ const S = Object.freeze({
     border-radius: 16.5px;
     border: none !important;
     outline: none !important;
-    ${props => getTrackAnimation(props.clickCount)};
+    ${props =>
+      runBinaryAnimationPaused(
+        props.clickCount,
+        Animation.track(props.animationDuration),
+      )};
 
     :hover {
       cursor: pointer;
     }
-  `,
-  ThumbContainer: styled.div<ThumbContainerProps>`
-    display: flex;
-    position: absolute;
-    width: 21px;
-    height: 21px;
-    ${props => getThumbContainerAnimation(props.clickCount)};
-    align-items: center;
-  `,
-  Thumb: styled.svg`
-    z-index: 3;
-    position: relative;
-    display: inline-block;
-  `,
-  HoverCircle: styled.span<HoverCircleProps>`
-    position: absolute;
-    z-index: 1;
-    display: inline-block;
-    background-color: ${STYLE.color.darkPrimary};
-    visibility: ${props => (props.hover ? 'visible' : 'hidden')};
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    transform: translate(-25%, 0);
-    ${props => (props.hover ? Animation.hoverCircle : 'none')}
-  `,
-  ActiveCircle: styled.span<ActiveCircleProps>`
-    position: absolute;
-    z-index: 2;
-    display: inline-block;
-    background-color: ${STYLE.color.darkPrimary};
-    visibility: ${props => (props.active ? 'visible' : 'hidden')};
-    opacity: 0.5;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    transform: translate(-25%, 0);
-    ${props => (props.active ? Animation.activeCircle : 'none')}
+
+    &:hover ${sStatic.HoverCircle} {
+      opacity: 0.25;
+    }
+    &:active ${sStatic.ActiveCircle} {
+      opacity: 0.25;
+    }
   `,
 });
 
 interface Switch1Props {
   clickAnimationDuration?: AnimationDuration;
-  circleEffectDuration?: AnimationDuration;
 }
 
 /**
@@ -223,52 +174,38 @@ interface Switch1Props {
  */
 export const Switch1 = ({
   clickAnimationDuration = parseAnimationDuration('333.3ms'),
-  circleEffectDuration = parseAnimationDuration('33.33ms'),
 }: Switch1Props) => {
   const [click, setClick] = useState(false);
-  const [clickCount, setCount] = useState(0);
-  const [active, setActive] = useState(false);
-  const [hover, setHover] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
   const handleClick = () => {
     setClick(!click);
-    setCount(clickCount + 1);
+    setClickCount(clickCount + 1);
   };
-  const handleMouseOver = () => setHover(true);
-  const handleMouseLeave = () => setHover(false);
-  const handleMouseDown = () => setActive(true);
-  const handleMouseUp = () => setActive(false);
 
   return (
-    <S.Track
+    <sDynamic.Track
       onClick={handleClick}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       click={click}
       clickCount={clickCount}
       animationDuration={clickAnimationDuration}
     >
-      <S.ThumbContainer
+      <sStatic.ThumbContainer
         click={click}
         clickCount={clickCount}
         animationDuration={clickAnimationDuration}
       >
-        <S.HoverCircle hover={hover} animationDuration={circleEffectDuration} />
-        <S.ActiveCircle
-          active={active}
-          animationDuration={circleEffectDuration}
-        />
-        <S.Thumb
+        <sStatic.HoverCircle />
+        <sStatic.ActiveCircle />
+        <sStatic.Thumb
           viewBox="0 0 21 21"
           height="21px"
           width="21px"
           xmlns="http://www.w3.org/2000/svg"
         >
           <circle cx="10.5" cy="10.5" r="10.5" fill={STYLE.color.onPrimary} />
-        </S.Thumb>
-      </S.ThumbContainer>
-    </S.Track>
+        </sStatic.Thumb>
+      </sStatic.ThumbContainer>
+    </sDynamic.Track>
   );
 };
 
