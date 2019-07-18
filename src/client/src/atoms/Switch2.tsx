@@ -7,7 +7,7 @@ import {
 } from '../util/animationDuration';
 import {
   createBinaryAnimation,
-  runBinaryAnimationPaused,
+  runBinaryAnimation,
 } from '../util/animationHelpers';
 import { createCubicBezier } from '../util/cubicBezier';
 
@@ -56,21 +56,23 @@ const Keyframes = Object.freeze({
 const Animation = Object.freeze({
   __proto__: null,
   thumbContainer: (duration: AnimationDuration) =>
-    createBinaryAnimation(
-      Keyframes.thumbContainer,
+    createBinaryAnimation({
       duration,
+      keyframes: Keyframes.thumbContainer,
+      initialState: Keyframes.thumbContainer.off,
       // these are from the motion design
       // tslint:disable-next-line: no-magic-numbers
-      createCubicBezier(0.22, 1, 0.36, 1.5),
-    ),
+      cubicBezier: createCubicBezier(0.22, 1, 0.36, 1.5),
+    }),
   track: (duration: AnimationDuration) =>
-    createBinaryAnimation(
-      Keyframes.track,
+    createBinaryAnimation({
       duration,
+      keyframes: Keyframes.track,
+      initialState: Keyframes.track.off,
       // these are from the motion design
       // tslint:disable-next-line: no-magic-numbers
-      createCubicBezier(0.22, 1, 0.36, 1),
-    ),
+      cubicBezier: createCubicBezier(0.22, 1, 0.36, 1),
+    }),
 });
 
 interface TrackProps {
@@ -93,7 +95,7 @@ const sStatic = Object.freeze({
     width: 14px;
     height: 14px;
     ${props =>
-      runBinaryAnimationPaused(
+      runBinaryAnimation(
         props.clickCount,
         Animation.thumbContainer(props.animationDuration),
       )};
@@ -143,7 +145,7 @@ const sDynamic = Object.freeze({
     border: none !important;
     outline: none !important;
     ${props =>
-      runBinaryAnimationPaused(
+      runBinaryAnimation(
         props.clickCount,
         Animation.track(props.animationDuration),
       )};

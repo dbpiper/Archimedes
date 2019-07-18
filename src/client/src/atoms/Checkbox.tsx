@@ -4,7 +4,7 @@ import STYLE from '../STYLE';
 import { parseAnimationDuration } from '../util/animationDuration';
 import {
   createBinaryAnimation,
-  runBinaryAnimationPaused,
+  runBinaryAnimation,
 } from '../util/animationHelpers';
 import { createCubicBezier } from '../util/cubicBezier';
 
@@ -33,17 +33,52 @@ const Keyframes = Object.freeze({
         }
       `,
   },
+  boxDark: {
+    on: keyframes`
+        0% {
+          border-color: ${STYLE.color.darkSecondary};
+          background-color: ${STYLE.color.darkSecondary};
+        }
+
+        100% {
+          border-color: ${STYLE.color.primary};
+          background-color: ${STYLE.color.primary};
+        }
+      `,
+    off: keyframes`
+        0% {
+          border-color: ${STYLE.color.primary};
+          background-color: ${STYLE.color.primary};
+        }
+
+        100% {
+          border-color: ${STYLE.color.darkSecondary};
+          background-color: ${STYLE.color.darkSecondary};
+        }
+      `,
+  },
 });
 
 const Animation = Object.freeze({
   __proto__: null,
-  boxLight: createBinaryAnimation(
-    Keyframes.boxLight,
-    parseAnimationDuration('100ms'),
-    // these are from the motion design
-    // tslint:disable-next-line: no-magic-numbers
-    createCubicBezier(0.84, 0, 0.16, 1),
-  ),
+  boxLight: (checked: boolean, duration = parseAnimationDuration('100ms')) =>
+    createBinaryAnimation({
+      duration,
+      keyframes: Keyframes.boxLight,
+      initialState: checked ? Keyframes.boxLight.on : Keyframes.boxLight.off,
+      // these are from the motion design
+      // tslint:disable-next-line: no-magic-numbers
+      cubicBezier: createCubicBezier(0.84, 0, 0.16, 1),
+    }),
+  boxDark: (checked: boolean, duration = parseAnimationDuration('133.33ms')) =>
+    createBinaryAnimation({
+      duration,
+      keyframes: Keyframes.boxDark,
+      initialState: checked ? Keyframes.boxDark.on : Keyframes.boxDark.off,
+      // these are from the motion design
+      // tslint:disable-next-line: no-magic-numbers
+      cubicBezier: createCubicBezier(0.22, 1, 0.36, 1),
+    }),
 });
 
 const sStatic = Object.freeze({
@@ -63,24 +98,6 @@ const sStatic = Object.freeze({
     white-space: nowrap;
     width: 1px;
     z-index: 3;
-  `,
-  StyledCheckbox: styled.div`
-    position: absolute;
-    z-index: 5;
-    width: 20px;
-    height: 20px;
-    border-radius: 5px;
-    border: 1px solid;
-    border-color: ${STYLE.color.darkSecondary};
-    background-color: ${STYLE.color.lightPrimary};
-    transition: all 150ms;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    :hover {
-      cursor: pointer;
-    }
   `,
   HoverCircle: styled.span`
     position: absolute;
@@ -103,9 +120,8 @@ const sStatic = Object.freeze({
     opacity: 0.25;
   `,
   CheckboxContainer: styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-content: center;
     margin: 25px;
     width: 40px;
     height: 40px;
@@ -115,7 +131,7 @@ const sStatic = Object.freeze({
       cursor: pointer;
     }
   `,
-  BoxDark: styled.div`
+  BoxDark: styled.div<{ clickCount: number; checked: boolean }>`
     position: absolute;
     z-index: 10;
     width: 20px;
@@ -124,14 +140,23 @@ const sStatic = Object.freeze({
     border: 1.5px solid;
     border-color: ${STYLE.color.darkSecondary};
     background-color: ${STYLE.color.darkSecondary};
+    ${props =>
+      runBinaryAnimation(props.clickCount, Animation.boxDark(props.checked))};
   `,
   CheckmarkImage: styled.img`
     position: absolute;
     z-index: 13;
     width: 13px;
     height: 10px;
+
+    /* clip-path: polygon(
+      1.5px 1.5px,
+      1.5px calc(100% - 1.5px),
+      calc(100% - 1.5px) calc(100% - 1.5px),
+      calc(100% - 1.5px) 1.5px
+    ); */
   `,
-  BoxLight: styled.div<{ hover: boolean; clickCount: number }>`
+  BoxLight: styled.div<{ clickCount: number; checked: boolean }>`
     position: absolute;
     display: grid;
     place-items: center;
@@ -143,15 +168,7 @@ const sStatic = Object.freeze({
     background-color: ${STYLE.color.lightPrimary};
 
     ${props =>
-      runBinaryAnimationPaused(
-        props.clickCount,
-        Animation.boxLight,
-      )} /* clip-path: polygon(
-      1.5px 1.5px,
-      1.5px calc(100% - 1.5px),
-      calc(100% - 1.5px) calc(100% - 1.5px),
-      calc(100% - 1.5px) 1.5px
-    ); */
+      runBinaryAnimation(props.clickCount, Animation.boxLight(props.checked))}
   `,
 });
 
@@ -180,31 +197,25 @@ const sDynamic = Object.freeze({
 });
 
 export const Checkbox = (props: { className?: string; checked: boolean }) => {
-  const [checked, setChecked] = useState(props.checked);
-  const [hover, setHover] = useState(false);
+  const [checkedInternal, setCheckedInternal] = useState(props.checked);
   const [clickCount, setClickCount] = useState(0);
   const handleClick = () => {
-    setChecked(!checked);
+    setCheckedInternal(!checkedInternal);
     setClickCount(clickCount + 1);
   };
-  const handleMouseOver = () => setHover(true);
-  const handleMouseLeave = () => setHover(false);
   return (
     <sDynamic.CheckboxContainer
       className={props.className}
       onClick={handleClick}
-      onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
     >
       <sStatic.HoverCircle />
       <sStatic.ActiveCircle />
-      <sStatic.HiddenCheckbox checked={checked} onChange={handleClick} />
-
-      {/* <sStatic.StyledCheckbox>
-        <img src={Checkmark} hidden={!checked} />
-      </sStatic.StyledCheckbox> */}
-      <sStatic.BoxLight hover={hover} clickCount={clickCount} />
-      <sStatic.BoxDark />
+      <sStatic.HiddenCheckbox
+        checked={checkedInternal}
+        onChange={handleClick}
+      />
+      <sStatic.BoxLight clickCount={clickCount} checked={props.checked} />
+      <sStatic.BoxDark clickCount={clickCount} checked={props.checked} />
       <sStatic.CheckmarkImage src={Checkmark} />
     </sDynamic.CheckboxContainer>
   );
