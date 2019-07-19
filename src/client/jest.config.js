@@ -36,6 +36,7 @@ module.exports = {
   // eslint-disable-next-line unicorn/prevent-abbreviations
   setupFilesAfterEnv: [
     'jest-enzyme',
+    'jest-extended',
   ],
   snapshotSerializers: [
     'enzyme-to-json/serializer',

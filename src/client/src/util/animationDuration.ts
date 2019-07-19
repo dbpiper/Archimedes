@@ -1,18 +1,29 @@
 export interface AnimationDuration extends String {
   __duration__: never;
 }
+
 const checkValidAnimationDurationStr = (str: string): boolean =>
   str.match(/^\d+((\.)?\d+)?(ms|s)$/) !== null;
+
+export const isAnimationDuration = (
+  arg: string | AnimationDuration,
+): arg is AnimationDuration => {
+  if (arg) {
+    return checkValidAnimationDurationStr(arg as string);
+  }
+
+  return false;
+};
 
 export const parseAnimationDuration = (
   animationDuration: string,
 ): AnimationDuration => {
-  if (checkValidAnimationDurationStr(animationDuration)) {
-    return (animationDuration as unknown) as AnimationDuration;
+  if (isAnimationDuration(animationDuration)) {
+    return animationDuration;
   }
 
   throw new Error(
-    `The animation duration string: ${animationDuration} is not valid!`,
+    `The provided value ${animationDuration} is not a valid animation duration string!`,
   );
 };
 
