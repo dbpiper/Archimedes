@@ -36,26 +36,53 @@ const Keyframes = Object.freeze({
   boxDark: {
     on: keyframes`
         0% {
-          border-color: ${STYLE.color.darkSecondary};
           background-color: ${STYLE.color.darkSecondary};
         }
 
         100% {
-          border-color: ${STYLE.color.primary};
           background-color: ${STYLE.color.primary};
         }
       `,
     off: keyframes`
         0% {
-          border-color: ${STYLE.color.primary};
           background-color: ${STYLE.color.primary};
         }
 
         100% {
-          border-color: ${STYLE.color.darkSecondary};
           background-color: ${STYLE.color.darkSecondary};
         }
       `,
+  },
+  checkmark: {
+    on: keyframes`
+      0% {
+        /* completely hidden */
+        clip-path: polygon(-2px -2px, -2px -2px, -2px 12px, -2px 12px);
+      }
+      25% {
+        /* some of the left side is visible */
+        clip-path: polygon(-2px -2px, 3px -2px, 3px 12px, -2px 12px);
+        animation-timing-function: cubic-bezier(0.84, 0, 0.16, 1);
+      }
+      100% {
+        /* completely visible */
+        clip-path: polygon(-2px -2px, 15px -2px, 15px 12px, -2px 12px);
+      }
+    `,
+    off: keyframes`
+      0% {
+        /* completely visible */
+        clip-path: polygon(-2px -2px, 15px -2px, 15px 12px, -2px 12px);
+      }
+      75% {
+        /* some of the left side is visible */
+        clip-path: polygon(-2px -2px, 3px -2px, 3px 12px, -2px 12px);
+      }
+      100% {
+        /* completely hidden */
+        clip-path: polygon(-2px -2px, -2px -2px, -2px 12px, -2px 12px);
+      }
+    `,
   },
 });
 
@@ -78,6 +105,15 @@ const Animation = Object.freeze({
       // these are from the motion design
       // tslint:disable-next-line: no-magic-numbers
       cubicBezier: createCubicBezier(0.22, 1, 0.36, 1),
+    }),
+  checkmark: (checked: boolean, duration = parseAnimationDuration('100ms')) =>
+    createBinaryAnimation({
+      duration,
+      keyframes: Keyframes.checkmark,
+      initialState: checked ? Keyframes.checkmark.on : Keyframes.checkmark.off,
+      // these are from the motion design
+      // tslint:disable-next-line: no-magic-numbers
+      cubicBezier: createCubicBezier(0.17, 0.17, 0.83, 0.83),
     }),
 });
 
@@ -134,27 +170,28 @@ const sStatic = Object.freeze({
   BoxDark: styled.div<{ clickCount: number; checked: boolean }>`
     position: absolute;
     z-index: 10;
-    width: 20px;
-    height: 20px;
+    width: 21.5px;
+    height: 21.5px;
     border-radius: 3px;
-    border: 1.5px solid;
-    border-color: ${STYLE.color.darkSecondary};
     background-color: ${STYLE.color.darkSecondary};
+
+    will-change: background-color;
     ${props =>
       runBinaryAnimation(props.clickCount, Animation.boxDark(props.checked))};
   `,
-  CheckmarkImage: styled.img`
+  CheckmarkImage: styled.img<{ clickCount: number; checked: boolean }>`
     position: absolute;
     z-index: 13;
     width: 13px;
     height: 10px;
+    display: grid;
+    place-content: center;
+    /* completely hidden */
+    clip-path: polygon(-2px -2px, -2px -2px, -2px 12px, -2px 12px);
+    will-change: clip-path, animation-timing-function;
 
-    /* clip-path: polygon(
-      1.5px 1.5px,
-      1.5px calc(100% - 1.5px),
-      calc(100% - 1.5px) calc(100% - 1.5px),
-      calc(100% - 1.5px) 1.5px
-    ); */
+    ${props =>
+      runBinaryAnimation(props.clickCount, Animation.checkmark(props.checked))};
   `,
   BoxLight: styled.div<{ clickCount: number; checked: boolean }>`
     position: absolute;
@@ -216,9 +253,13 @@ export const Checkbox = (props: { className?: string; checked: boolean }) => {
       />
       <sStatic.BoxLight clickCount={clickCount} checked={props.checked} />
       <sStatic.BoxDark clickCount={clickCount} checked={props.checked} />
-      <sStatic.CheckmarkImage src={Checkmark} />
+      <sStatic.CheckmarkImage
+        checked={props.checked}
+        clickCount={clickCount}
+        src={Checkmark}
+      />
     </sDynamic.CheckboxContainer>
   );
 };
 
-Checkbox.defaultProps = { checked: true };
+Checkbox.defaultProps = { checked: false };
