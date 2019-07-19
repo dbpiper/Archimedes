@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import STYLE from '../STYLE';
-import { parseAnimationDuration } from '../util/animationDuration';
+import {
+  AnimationDuration,
+  animationDurationToString,
+  parseAnimationDuration,
+} from '../util/animationDuration';
 import {
   createBinaryAnimation,
   runBinaryAnimation,
@@ -155,19 +159,11 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     opacity: 0.25;
   `,
-  CheckboxContainer: styled.div`
-    display: grid;
-    place-content: center;
-    margin: 25px;
-    width: 40px;
-    height: 40px;
-    user-select: none;
-
-    :hover {
-      cursor: pointer;
-    }
-  `,
-  BoxDark: styled.div<{ clickCount: number; checked: boolean }>`
+  BoxDark: styled.div<{
+    clickCount: number;
+    checked: boolean;
+    duration?: AnimationDuration;
+  }>`
     position: absolute;
     z-index: 10;
     width: 21.5px;
@@ -177,9 +173,16 @@ const sStatic = Object.freeze({
 
     will-change: background-color;
     ${props =>
-      runBinaryAnimation(props.clickCount, Animation.boxDark(props.checked))};
+      runBinaryAnimation(
+        props.clickCount,
+        Animation.boxDark(props.checked, props.duration),
+      )};
   `,
-  CheckmarkImage: styled.img<{ clickCount: number; checked: boolean }>`
+  CheckmarkImage: styled.img<{
+    clickCount: number;
+    checked: boolean;
+    duration?: AnimationDuration;
+  }>`
     position: absolute;
     z-index: 13;
     width: 13px;
@@ -191,9 +194,16 @@ const sStatic = Object.freeze({
     will-change: clip-path, animation-timing-function;
 
     ${props =>
-      runBinaryAnimation(props.clickCount, Animation.checkmark(props.checked))};
+      runBinaryAnimation(
+        props.clickCount,
+        Animation.checkmark(props.checked, props.duration),
+      )};
   `,
-  BoxLight: styled.div<{ clickCount: number; checked: boolean }>`
+  BoxLight: styled.div<{
+    clickCount: number;
+    checked: boolean;
+    duration?: AnimationDuration;
+  }>`
     position: absolute;
     display: grid;
     place-items: center;
@@ -205,7 +215,10 @@ const sStatic = Object.freeze({
     background-color: ${STYLE.color.lightPrimary};
 
     ${props =>
-      runBinaryAnimation(props.clickCount, Animation.boxLight(props.checked))}
+      runBinaryAnimation(
+        props.clickCount,
+        Animation.boxLight(props.checked, props.duration),
+      )}
   `,
 });
 
@@ -233,13 +246,31 @@ const sDynamic = Object.freeze({
   `,
 });
 
-export const Checkbox = (props: { className?: string; checked: boolean }) => {
+export const Checkbox = (props: {
+  className?: string;
+  checked: boolean;
+  animationDuration?: AnimationDuration;
+}) => {
   const [checkedInternal, setCheckedInternal] = useState(props.checked);
   const [clickCount, setClickCount] = useState(0);
   const handleClick = () => {
     setCheckedInternal(!checkedInternal);
     setClickCount(clickCount + 1);
   };
+  let boxDarkDuration;
+  if (props.animationDuration) {
+    const boxDarkMultiplier = 1.3333333333333333;
+    const durationValue = parseFloat(
+      animationDurationToString(props.animationDuration),
+    );
+    const durationUnit = props.animationDuration.replace(
+      durationValue.toString(),
+      '',
+    );
+    boxDarkDuration = parseAnimationDuration(
+      `${durationValue * boxDarkMultiplier}${durationUnit}`,
+    );
+  }
   return (
     <sDynamic.CheckboxContainer
       className={props.className}
@@ -251,12 +282,21 @@ export const Checkbox = (props: { className?: string; checked: boolean }) => {
         checked={checkedInternal}
         onChange={handleClick}
       />
-      <sStatic.BoxLight clickCount={clickCount} checked={props.checked} />
-      <sStatic.BoxDark clickCount={clickCount} checked={props.checked} />
+      <sStatic.BoxLight
+        clickCount={clickCount}
+        checked={props.checked}
+        duration={props.animationDuration}
+      />
+      <sStatic.BoxDark
+        clickCount={clickCount}
+        checked={props.checked}
+        duration={boxDarkDuration}
+      />
       <sStatic.CheckmarkImage
         checked={props.checked}
         clickCount={clickCount}
         src={Checkmark}
+        duration={props.animationDuration}
       />
     </sDynamic.CheckboxContainer>
   );
