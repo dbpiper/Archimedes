@@ -16,20 +16,20 @@ const Keyframes = Object.freeze({
   thumbContainer: {
     on: keyframes`
         0% {
-          left: 4px;
+          transform: translateX(0);
         }
 
         100% {
-          left: 23px;
+          transform: translateX(19px);
         }
       `,
     off: keyframes`
         0% {
-          right: 4px;
+          transform: translateX(19px);
         }
 
         100% {
-          right: 23px;
+          transform: translateX(0);
         }
       `,
   },
@@ -94,12 +94,14 @@ const sStatic = Object.freeze({
     position: absolute;
     width: 14px;
     height: 14px;
+    align-items: center;
+
+    will-change: transform;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
         Animation.thumbContainer(props.animationDuration),
       ).animation};
-    align-items: center;
   `,
   Thumb: styled.svg`
     z-index: 3;
@@ -116,6 +118,8 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
+
+    will-change: opacity;
   `,
   ActiveCircle: styled.span`
     position: absolute;
@@ -128,6 +132,8 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
+
+    will-change: opacity;
   `,
 });
 
@@ -144,6 +150,8 @@ const sDynamic = Object.freeze({
     border-radius: 11px;
     border: none !important;
     outline: none !important;
+
+    will-change: background-color, cursor;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
