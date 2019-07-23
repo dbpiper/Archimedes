@@ -78,9 +78,10 @@ const Keyframes = Object.freeze({
         /* completely visible */
         clip-path: polygon(-2px -2px, 15px -2px, 15px 12px, -2px 12px);
       }
-      75% {
+      25% {
         /* some of the left side is visible */
         clip-path: polygon(-2px -2px, 3px -2px, 3px 12px, -2px 12px);
+        animation-timing-function: cubic-bezier(0.84, 0, 0.16, 1);
       }
       100% {
         /* completely hidden */
