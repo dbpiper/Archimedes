@@ -8,7 +8,7 @@ import {
 } from '../util/animationDuration';
 import {
   createBinaryAnimation,
-  runBinaryAnimation,
+  currentBinaryAnimation,
 } from '../util/animationHelpers';
 import { createCubicBezier } from '../util/cubicBezier';
 
@@ -173,10 +173,10 @@ const sStatic = Object.freeze({
 
     will-change: background-color;
     ${props =>
-      runBinaryAnimation(
+      currentBinaryAnimation(
         props.clickCount,
         Animation.boxDark(props.checked, props.duration),
-      )};
+      ).animation};
   `,
   CheckmarkImage: styled.img<{
     clickCount: number;
@@ -194,10 +194,10 @@ const sStatic = Object.freeze({
     will-change: clip-path, animation-timing-function;
 
     ${props =>
-      runBinaryAnimation(
+      currentBinaryAnimation(
         props.clickCount,
         Animation.checkmark(props.checked, props.duration),
-      )};
+      ).animation};
   `,
   BoxLight: styled.div<{
     clickCount: number;
@@ -215,10 +215,10 @@ const sStatic = Object.freeze({
     background-color: ${STYLE.color.lightPrimary};
 
     ${props =>
-      runBinaryAnimation(
+      currentBinaryAnimation(
         props.clickCount,
         Animation.boxLight(props.checked, props.duration),
-      )}
+      ).animation}
   `,
 });
 

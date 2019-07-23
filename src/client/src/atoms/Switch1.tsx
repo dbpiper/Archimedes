@@ -7,7 +7,7 @@ import {
 } from '../util/animationDuration';
 import {
   createBinaryAnimation,
-  runBinaryAnimation,
+  currentBinaryAnimation,
 } from '../util/animationHelpers';
 import { createCubicBezier } from '../util/cubicBezier';
 
@@ -95,10 +95,10 @@ const sStatic = Object.freeze({
     width: 21px;
     height: 21px;
     ${props =>
-      runBinaryAnimation(
+      currentBinaryAnimation(
         props.clickCount,
         Animation.thumbContainer(props.animationDuration),
-      )};
+      ).animation};
     align-items: center;
   `,
   Thumb: styled.svg`
@@ -145,10 +145,10 @@ const sDynamic = Object.freeze({
     border: none !important;
     outline: none !important;
     ${props =>
-      runBinaryAnimation(
+      currentBinaryAnimation(
         props.clickCount,
         Animation.track(props.animationDuration),
-      )};
+      ).animation};
 
     :hover {
       cursor: pointer;

@@ -35,7 +35,7 @@ export interface BinaryAnimation {
   initialState: AnimationWithKeyframe;
 }
 
-interface BinaryAnimationOptions {
+export interface BinaryAnimationOptions {
   keyframes: BinaryAnimationKeyframes;
   initialState: Keyframes;
   duration: AnimationDuration;
@@ -74,27 +74,27 @@ export const createBinaryAnimation = (
   return binaryAnimation;
 };
 
-export const runBinaryAnimation = (
+export const currentBinaryAnimation = (
   animationCounter: number,
   binaryAnimation: BinaryAnimation,
-): CSSAnimation => {
+): AnimationWithKeyframe => {
   const evenDivisor = 2;
   if (animationCounter === 0) {
-    return binaryAnimation.initialState.animation;
+    return binaryAnimation.initialState;
   }
 
   // it was not checked at the start; this is the default state
   if (binaryAnimation.initialState.keyframe === binaryAnimation.off.keyframe) {
     if (animationCounter % evenDivisor === 0) {
-      return binaryAnimation.off.animation;
+      return binaryAnimation.off;
     }
 
-    return binaryAnimation.on.animation;
+    return binaryAnimation.on;
   }
 
   // it was checked from the start by the user
   if (animationCounter % evenDivisor === 0) {
-    return binaryAnimation.on.animation;
+    return binaryAnimation.on;
   }
-  return binaryAnimation.off.animation;
+  return binaryAnimation.off;
 };
