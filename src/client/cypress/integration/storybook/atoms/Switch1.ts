@@ -5,8 +5,7 @@ import {
 
 import { findElementRegex } from '../../../util/archimedes';
 
-
-export {};describe('Switch1', () => {
+describe('Switch1', () => {
   describe('Switch1 (no animation) tests', () => {
     before(() => {
       visitComponentStoryIframe(
