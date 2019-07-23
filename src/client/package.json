@@ -57,6 +57,7 @@
     "identity-obj-proxy": "^3.0.0",
     "iex-api": "^0.0.3",
     "isomorphic-fetch": "^2.2.1",
+    "jest-extended": "^0.11.2",
     "jest-pnp-resolver": "^1.2.1",
     "jest-resolve": "^24.8.0",
     "lodash": "^4.17.14",

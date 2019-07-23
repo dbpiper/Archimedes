@@ -1,0 +1,38 @@
+Animations (off to on):
+    • Checkmark mask (above Box light)
+        ◦ This was implemented as a Bezier path, with a rectangle that is slightly
+          taller than the checkmark and expands slowly from left to right to make
+          the Checkmark slowly visible. This gives it the appearance of being drawn.
+        ◦ 0%
+            ■ Width: 0
+        ◦ 25%
+            ■ Width: ~2px (about half of the way from the left of the checkmark to the dip/angle in the mark)
+            ■ Timing function: quint — cubic-bezier(0.84, 0, 0.16, 1)
+        ◦ 100%
+            ■ Width: (slightly wider than checkmark)
+        ◦ Duration: 100ms
+        ◦ Timing function: linear — cubic-bezier(0.17, 0.17, 0.83, 0.83)
+    • Checkmark (above Box mask) (no direct animations)
+        ◦ Track matte: Alpha matte (Checkmark mask)
+    • Box mask (above Box light)
+        ◦ 0%
+            ■ Scale: 100%
+        ◦ 100%
+            ■ Scale: 0%
+        ◦ Duration: 100ms
+        ◦ Timing function: quint — cubic-bezier(0.84, 0, 0.16, 1)
+    • Box light (above Box dark) (no direct animations)
+        ◦ Track matte: Alpha matte (Box mask)
+    • Box dark (bottom layer)
+        ◦ 0%:
+            ■ Border Color: Dark secondary
+            ■ Color: Dark secondary
+        ◦ 100%:
+            ■ Border Color: Primary
+            ■ Color: Primary
+        ◦ Duration: 133.33ms
+        ◦ Timing function: quintOut — cubic-bezier(0.22, 1, 0.36, 1)
+    • Active circle:
+      ◦ Enable on mouse down (no keyframe)
+    • Hover circle
+      ◦ Enable on mouse down (no keyframe)

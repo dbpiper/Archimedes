@@ -1,0 +1,43 @@
+Properties:
+
+--------------------------------------------
+    // conceptual only
+    • Box (unchecked):
+        ◦ Width: 20px
+        ◦ Height: 20px
+        ◦ Corner radius: 3px
+        ◦ Border thickness: 1.5px
+        ◦ Background color: Light primary
+        ◦ Border color: Dark secondary
+    • Box (checked):
+        ◦ Width: 20px
+        ◦ Height: 20px
+        ◦ Corner radius: 3px
+        ◦ Border thickness: 0px (no border)
+        ◦ Background color: Primary
+--------------------------------------------
+    • Hover circle:
+        ◦ Radius: 20px
+        ◦ Corner radius: 3px
+        ◦ Border thickness: 0px (no border)
+        ◦ Background color: Dark primary
+        ◦ Opacity: 0.25
+    • Box mask
+    	◦ Width: 18.5px
+    	◦ Height: 18.5px
+      	◦ Roundness: 3px
+    • Box light
+      	◦ Width: 20px
+      	◦ Height: 20px
+      	◦ Roundness: 3px
+      	◦ Border: 1.5px solid Light primary
+      	◦ Background color: Light primary
+    • Box dark
+      	◦ Width: 20px
+      	◦ Height: 20px
+      	◦ Roundness: 3px
+      	◦ Border: 1.5px solid Dark secondary
+      	◦ Background color: Dark secondary
+    • Checkmark mask
+      	◦ Width: 0px
+      	◦ Height: ~17px (just taller than the checkmark)
