@@ -164,7 +164,7 @@ const sDynamic = Object.freeze({
 });
 
 interface Switch2Props {
-  clickAnimationDuration?: AnimationDuration;
+  animationDuration?: AnimationDuration;
 }
 
 /**
@@ -175,7 +175,7 @@ interface Switch2Props {
  *        as desired by the users.
  */
 export const Switch2 = ({
-  clickAnimationDuration = parseAnimationDuration('333.3ms'),
+  animationDuration = parseAnimationDuration('333.3ms'),
 }: Switch2Props) => {
   const [click, setClick] = useState(false);
   const [clickCount, setClickCount] = useState(0);
@@ -189,12 +189,12 @@ export const Switch2 = ({
       onClick={handleClick}
       click={click}
       clickCount={clickCount}
-      animationDuration={clickAnimationDuration}
+      animationDuration={animationDuration}
     >
       <sStatic.ThumbContainer
         click={click}
         clickCount={clickCount}
-        animationDuration={clickAnimationDuration}
+        animationDuration={animationDuration}
       >
         <sStatic.HoverCircle />
         <sStatic.ActiveCircle />
