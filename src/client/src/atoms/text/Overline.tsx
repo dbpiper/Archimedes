@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import STYLES from '../../STYLE';
+import { Text } from './Text';
 
-export const Overline = styled.span`
+export const Overline = styled(Text)`
   font-family: ${STYLES.text.overline.fontFamily};
   font-weight: ${STYLES.text.overline.fontWeight};
   font-size: ${STYLES.text.overline.fontSize};

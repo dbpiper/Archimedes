@@ -229,9 +229,8 @@ const sDynamic = Object.freeze({
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     user-select: none;
 
     :hover {
@@ -248,15 +247,19 @@ const sDynamic = Object.freeze({
 });
 
 export const Checkbox = (props: {
-  className?: string;
   checked: boolean;
   animationDuration?: AnimationDuration;
+  className?: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }) => {
   const [checkedInternal, setCheckedInternal] = useState(props.checked);
   const [clickCount, setClickCount] = useState(0);
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setCheckedInternal(!checkedInternal);
     setClickCount(clickCount + 1);
+    if (props.onClick) {
+      props.onClick(event);
+    }
   };
   let boxDarkDuration;
   if (props.animationDuration) {
@@ -279,10 +282,7 @@ export const Checkbox = (props: {
     >
       <sStatic.HoverCircle />
       <sStatic.ActiveCircle />
-      <sStatic.HiddenCheckbox
-        checked={checkedInternal}
-        onChange={handleClick}
-      />
+      <sStatic.HiddenCheckbox checked={checkedInternal} />
       <sStatic.BoxLight
         clickCount={clickCount}
         checked={props.checked}
