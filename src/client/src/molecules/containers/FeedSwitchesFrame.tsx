@@ -11,9 +11,15 @@ const S = Object.freeze({
   `,
 });
 
-export const FeedSwitchesFrame = () => (
+interface ProjectFeed {
+  label: string;
+  on?: boolean;
+}
+
+export const FeedSwitchesFrame = ({ feeds }: { feeds: ProjectFeed[] }) => (
   <S.FeedSwitchesFrame>
-    <Subsetting label="JavaScript" />
-    <Subsetting label="Python" />
+    {feeds.map((value, index) => (
+      <Subsetting key={index} label={value.label} on={value.on} />
+    ))}
   </S.FeedSwitchesFrame>
 );
