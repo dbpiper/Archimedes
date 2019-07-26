@@ -1,3 +1,5 @@
+import convert from 'color-convert';
+
 /**
  * Finds the first matching Cypress wrapped element
  *
@@ -26,4 +28,13 @@ const findElementRegex = (elementSelector: string, classRegex: string) =>
  */
 const findTitle = () => findElementRegex('span', 'Header.{2}Title.*');
 
-export { findTitle, findElementRegex };
+// cypress color matching expects the color to be in rgb format rather than hex
+const hexColorToRGBCssString = (color: string) => {
+  const r = 0;
+  const g = 1;
+  const b = 2;
+  const rgbColor = convert.hex.rgb(color.split('#').join(''));
+  return `rgb(${rgbColor[r]}, ${rgbColor[g]}, ${rgbColor[b]})`;
+};
+
+export { findTitle, findElementRegex, hexColorToRGBCssString };
