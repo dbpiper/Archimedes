@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@types/color-convert": "^1.9.0",
-    "@types/node": "^11.13.2",
+    "@types/node": "^12.6.8",
     "color-convert": "^2.0.0",
-    "cypress-image-snapshot": "^3.0.1"
+    "cypress-image-snapshot": "^3.1.1"
   }
 }

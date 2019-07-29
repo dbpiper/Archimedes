@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+
 const fs = require('fs');
 const path = require('path');
 const dotenvExpand = require('dotenv-expand');
