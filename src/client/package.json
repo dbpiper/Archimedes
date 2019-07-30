@@ -167,6 +167,7 @@
     "cypress:storybook:open": "npx gulp cypressStorybookOpen",
     "cypress:storybook:open-update-snapshots": "npx gulp cypressStorybookOpenUpdateSnapshots",
     "cypress:storybook:run": "npx gulp cypressStorybookRun",
+    "cypress:storybook:update-snapshot-file": "npx cypress run --config 'integrationFolder=cypress/integration/storybook' --spec cypress/integration/storybook/$SNAPSHOT_PATH --env 'updateSnapshots=true'",
     "cypress:storybook:update-snapshots": "npx gulp cypressStorybookUpdateSnapshots",
     "generate:graphql-types": "npx gulp generateGraphQlTypes",
     "lint": "npx gulp lint",

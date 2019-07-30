@@ -1,11 +1,16 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { parseAnimationDuration } from '../../util/animationDuration';
+import { StorybookWrapper } from '../../helpers/StorybookWrapper';
 import { Checkbox } from '../Checkbox';
 
-storiesOf('atoms/Checkbox', module).addWithJSX(
-  'Checkbox (no animation)',
-  () => <Checkbox animationDuration={parseAnimationDuration('0s')} />,
-);
+storiesOf('atoms/Checkbox/unchecked', module).addWithJSX('Checkbox', () => (
+  <StorybookWrapper>
+    <Checkbox />
+  </StorybookWrapper>
+));
 
-storiesOf('atoms/Checkbox', module).addWithJSX('Checkbox', () => <Checkbox />);
+storiesOf('atoms/Checkbox/checked', module).addWithJSX('Checkbox', () => (
+  <StorybookWrapper>
+    <Checkbox checked={true} />
+  </StorybookWrapper>
+));

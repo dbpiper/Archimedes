@@ -1,5 +1,5 @@
 import { getClientUrl } from '../../config/dotenvs';
-import { findTitle } from '../../util/archimedes';
+import { findElementRegex } from '../../util/archimedes';
 
 describe('Home screen', () => {
   specify('successfully loads', () => {
@@ -8,7 +8,7 @@ describe('Home screen', () => {
 
   describe('header tests', () => {
     specify('the title is correct', () => {
-      findTitle().contains('Archimedes');
+      findElementRegex(/Header.{2}Title.*/).contains('Archimedes');
     });
   });
 });

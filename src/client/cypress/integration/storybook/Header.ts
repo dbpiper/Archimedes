@@ -1,19 +1,15 @@
-import { findTitle } from '../../util/archimedes';
+import { findElementRegex } from '../../util/archimedes';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../util/storybook';
 
 describe('Header', () => {
-  specify('successfully loads', () => {
+  before('successfully loads', () => {
     visitComponentStoryIframe(getStorybookUrl(), 'Header');
   });
-
-  describe('header tests', () => {
-    specify('the title is correct', () => {
-      cy.reload(true);
-      findTitle().contains('Archimedes');
-    });
+  specify('the title is correct', () => {
+    findElementRegex(/Header.{2}Title.*/).contains('Archimedes');
   });
 });
 

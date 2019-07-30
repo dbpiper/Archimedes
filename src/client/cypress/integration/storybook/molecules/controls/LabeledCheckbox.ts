@@ -1,24 +1,36 @@
-import { findElementRegex } from '../../../../util/archimedes';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../../util/storybook';
 
-describe('LabeledCheckbox test suite', () => {
+// We don't need to test that the checkbox works, since it is tested
+// in the checkbox tests. So we only test that the layout is correct here.
+
+describe('LabeledCheckbox/unchecked test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'LabeledCheckbox');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'LabeledCheckbox',
+      'LabeledCheckbox/unchecked',
+    );
   });
 
   specify('default view looks correct', () => {
     cy.matchImageSnapshot();
   });
+});
 
-  specify('looks correct after click', () => {
-    findElementRegex('div', 'Checkbox.{2}CheckboxContainer.*')
-      .click()
-      .then(() => {
-        cy.matchImageSnapshot();
-      });
+describe('LabeledCheckbox/checked test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'LabeledCheckbox',
+      'LabeledCheckbox/checked',
+    );
+  });
+
+  specify('default view looks correct', () => {
+    cy.matchImageSnapshot();
   });
 });
 

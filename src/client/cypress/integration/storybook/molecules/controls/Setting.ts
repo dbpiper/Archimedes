@@ -1,24 +1,27 @@
-import { findElementRegex } from '../../../../util/archimedes';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../../util/storybook';
 
-describe('Setting test suite', () => {
+// We don't need to test that the switch works, since it is tested
+// in the switch tests. So we only test that the layout is correct here.
+
+describe('Setting/off test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Setting');
+    visitComponentStoryIframe(getStorybookUrl(), 'Setting', 'Setting/off');
   });
 
   specify('default view looks correct', () => {
     cy.matchImageSnapshot();
   });
+});
+describe('Setting/on test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'Setting', 'Setting/on');
+  });
 
-  specify('looks correct after click', () => {
-    findElementRegex('button', 'Switch2.{2}Track.*')
-      .click()
-      .then(() => {
-        cy.matchImageSnapshot();
-      });
+  specify('default view looks correct', () => {
+    cy.matchImageSnapshot();
   });
 });
 

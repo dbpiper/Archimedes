@@ -15,9 +15,17 @@ const S = Object.freeze({
   `,
 });
 
-export const LabeledCheckbox = ({ label }: { label: string }) => (
+export const LabeledCheckbox = ({
+  label,
+  checked,
+}: {
+  label: string;
+  checked?: boolean;
+}) => (
   <S.LabeledCheckbox>
-    <Checkbox />
+    <Checkbox checked={checked} />
     <Caption>{label}</Caption>
   </S.LabeledCheckbox>
 );
+
+LabeledCheckbox.defaultProps = { checked: false };

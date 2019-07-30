@@ -20,3 +20,5 @@ export const Subsetting = ({ label, on }: { label: string; on?: boolean }) => (
     <Switch2 on={on} />
   </S.Subsetting>
 );
+
+Subsetting.defaultProps = { on: false };

@@ -14,9 +14,11 @@ const S = Object.freeze({
   `,
 });
 
-export const Setting = ({ label }: { label: string }) => (
+export const Setting = ({ label, on }: { label: string; on?: boolean }) => (
   <S.Setting>
     <Body1>{label}</Body1>
-    <Switch2 />
+    <Switch2 on={on} />
   </S.Setting>
 );
+
+Setting.defaultProps = { on: false };

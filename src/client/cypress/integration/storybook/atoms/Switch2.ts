@@ -5,103 +5,51 @@ import {
 } from '../../../util/storybook';
 
 import {
-  findElementRegex,
-  hexColorToRGBCssString,
+  clickAndVerifyTransform,
+  verifyBgColor,
 } from '../../../util/archimedes';
 
-const snapshotAfterVerifyBGColor = (color: string) => {
-  findElementRegex('button', 'Switch2.{2}Track.*')
-    .should('have.css', 'background-color', hexColorToRGBCssString(color))
-    .then(() => {
-      cy.matchImageSnapshot();
-    });
-};
-const snapshotAfterClickAndVerifyBGColor = (
-  beforeColor: string,
-  afterColor: string,
-) => {
-  findElementRegex('button', 'Switch2.{2}Track.*')
-    .should('have.css', 'background-color', hexColorToRGBCssString(beforeColor))
-    .click()
-    .should('have.css', 'background-color', hexColorToRGBCssString(afterColor))
-    .then(() => {
-      cy.matchImageSnapshot();
-    });
-};
+import { translateX } from '../../../util/css';
 
-describe('Switch2/off', () => {
-  describe('Switch2 (no animation) tests', () => {
-    before(() => {
-      visitComponentStoryIframe(
-        getStorybookUrl(),
-        'Switch2 (no animation)',
-        'Switch2/off',
-      );
-    });
-    specify('default view looks correct', () => {
-      snapshotAfterVerifyBGColor(STYLES.color.darkSecondary);
-    });
+const SwitchTrackRegex = /Switch2.{2}Track.*/;
+const ThumbRegex = /Switch2.{2}Thumb.*/;
 
-    specify('looks good after click', () => {
-      snapshotAfterClickAndVerifyBGColor(
-        STYLES.color.darkSecondary,
-        STYLES.color.primary,
-      );
-    });
+// the offset from the left, in pixels that the thumb is when in the on position
+const offsetOnRightSide = 19;
+
+describe('Switch2/off test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/off');
+  });
+  specify('default view looks correct', () => {
+    verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
   });
 
-  describe('Switch2 tests', () => {
-    before(() => {
-      visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/off');
-    });
-    specify('default view looks correct', () => {
-      snapshotAfterVerifyBGColor(STYLES.color.darkSecondary);
-    });
-
-    specify('looks good after click', () => {
-      snapshotAfterClickAndVerifyBGColor(
-        STYLES.color.darkSecondary,
-        STYLES.color.primary,
-      );
-    });
+  specify('looks good after click', () => {
+    clickAndVerifyTransform(
+      translateX(0),
+      translateX(offsetOnRightSide),
+      ThumbRegex,
+      SwitchTrackRegex,
+    );
   });
 });
 
-describe('Switch2/on', () => {
-  describe('Switch2 (no animation) tests', () => {
-    before(() => {
-      visitComponentStoryIframe(
-        getStorybookUrl(),
-        'Switch2 (no animation)',
-        'Switch2/on',
-      );
-    });
-    specify('default view looks correct', () => {
-      snapshotAfterVerifyBGColor(STYLES.color.primary);
-    });
-
-    specify('looks good after click', () => {
-      snapshotAfterClickAndVerifyBGColor(
-        STYLES.color.primary,
-        STYLES.color.darkSecondary,
-      );
-    });
+describe('Switch2/on test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/on');
+  });
+  specify('default view looks correct', () => {
+    verifyBgColor(STYLES.color.primary, SwitchTrackRegex);
   });
 
-  describe('Switch2 tests', () => {
-    before(() => {
-      visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/on');
-    });
-    specify('default view looks correct', () => {
-      snapshotAfterVerifyBGColor(STYLES.color.primary);
-    });
-
-    specify('looks good after click', () => {
-      snapshotAfterClickAndVerifyBGColor(
-        STYLES.color.primary,
-        STYLES.color.darkSecondary,
-      );
-    });
+  specify('looks good after click', () => {
+    clickAndVerifyTransform(
+      translateX(offsetOnRightSide),
+      translateX(0),
+      ThumbRegex,
+      SwitchTrackRegex,
+    );
   });
 });
 

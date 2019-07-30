@@ -172,7 +172,6 @@ const sStatic = Object.freeze({
     border-radius: 3px;
     background-color: ${STYLE.color.darkSecondary};
 
-    will-change: background-color;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
@@ -192,7 +191,6 @@ const sStatic = Object.freeze({
     place-content: center;
     /* completely hidden */
     clip-path: polygon(-2px -2px, -2px -2px, -2px 12px, -2px 12px);
-    will-change: clip-path, animation-timing-function;
 
     ${props =>
       currentBinaryAnimation(

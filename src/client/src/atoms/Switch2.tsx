@@ -114,7 +114,6 @@ const sStatic = Object.freeze({
     height: 14px;
     align-items: center;
 
-    will-change: transform;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
@@ -136,8 +135,6 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
-
-    will-change: opacity;
   `,
   ActiveCircle: styled.span`
     position: absolute;
@@ -150,8 +147,6 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
-
-    will-change: opacity;
   `,
 });
 
@@ -167,7 +162,6 @@ const sDynamic = Object.freeze({
     border: none !important;
     outline: none !important;
 
-    will-change: background-color, cursor;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
@@ -249,5 +243,3 @@ export const Switch2 = ({
 };
 
 Switch2.defaultProps = { on: false };
-
-export { parseAnimationDuration };

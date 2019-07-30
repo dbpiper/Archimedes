@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import STYLES from '../../STYLE';
+import STYLES from '../STYLE';
 
 // There is no storybook story for this component because it is purely
 // here for programming purposes. Basically, I need this element so that
