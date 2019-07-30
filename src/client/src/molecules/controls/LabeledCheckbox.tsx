@@ -7,7 +7,6 @@ const S = Object.freeze({
   __proto__: null,
   LabeledCheckbox: styled.div`
     width: 124px;
-    /* height: 20px; */
     display: inline-flex;
     align-items: center;
     justify-content: space-between;

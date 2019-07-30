@@ -32,6 +32,14 @@ const hexColorToRgbCssString = (color: string) => {
 };
 
 /**
+ * Checks that the background-color CSS property is the correct value and
+ * then compares the visual snapshot to verify that the visual appearance is
+ * correct; Visual Regression tests it.
+ *
+ * The reason for all of these checks is to avoid race-conditions, since if we
+ * get to the point where there is a correct value then we are done with the
+ * animation. Otherwise, we would never know for certain that the animation was
+ * done.
  *
  * @param bgColor The hex string of the expected color of the background.
  * @param bgColorElementClassRegex The regex used to select the element, based
@@ -47,6 +55,16 @@ const verifyBgColor = (bgColor: string, bgColorElementClassRegex: RegExp) => {
 };
 
 /**
+ *
+ * Checks that the background-color CSS property is the correct value, clicks,
+ * then waits for the animation to finish, by ensuring that the desired value
+ * is reached and then compares the visual snapshot
+ * to verify that the visual appearance is correct; Visual Regression tests it.
+ *
+ * The reason for all of these checks is to avoid race-conditions, since if we
+ * get to the point where there is a correct value then we are done with the
+ * animation. Otherwise, we would never know for certain that the animation was
+ * done.
  *
  * @param beforeBgColor The hex string of the expected color of the background
  * before the click.
@@ -83,6 +101,16 @@ const clickAndVerifyBgColor = (
 };
 
 /**
+ *
+ * Checks that the transform CSS property is the correct value, clicks,
+ * then waits for the animation to finish by ensuring that the desired value
+ * is reached and then compares the visual snapshot
+ * to verify that the visual appearance is correct; Visual Regression tests it.
+ *
+ * The reason for all of these checks is to avoid race-conditions, since if we
+ * get to the point where there is a correct value then we are done with the
+ * animation. Otherwise, we would never know for certain that the animation was
+ * done.
  *
  * @param beforeBgColor The hex string of the expected color of the background
  * before the click.

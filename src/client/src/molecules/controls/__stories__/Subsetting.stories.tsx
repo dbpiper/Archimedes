@@ -1,5 +1,3 @@
-// tslint:disable: no-magic-numbers
-
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { Subsetting } from '../Subsetting';
