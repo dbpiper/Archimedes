@@ -6,8 +6,14 @@ const S = Object.freeze({
   __proto__: null,
   FeedSwitchesFrame: styled.div`
     width: 173px;
-    display: grid;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  `,
+  // Since only Firefox supports flexbox gap, this is a hack to work around that.
+  // We wrap all elements, but the last one with this div which has a bottom
+  // margin, which is our 'gap' property.
+  SubsettingContainer: styled.div`
+    margin-bottom: 20px;
   `,
 });
 
@@ -18,8 +24,14 @@ interface ProjectFeed {
 
 export const FeedSwitchesFrame = ({ feeds }: { feeds: ProjectFeed[] }) => (
   <S.FeedSwitchesFrame>
-    {feeds.map((value, index) => (
-      <Subsetting key={index} label={value.label} on={value.on} />
-    ))}
+    {feeds.map((value, index) =>
+      index < feeds.length - 1 ? (
+        <S.SubsettingContainer>
+          <Subsetting key={index} label={value.label} on={value.on} />
+        </S.SubsettingContainer>
+      ) : (
+        <Subsetting key={index} label={value.label} on={value.on} />
+      ),
+    )}
   </S.FeedSwitchesFrame>
 );
