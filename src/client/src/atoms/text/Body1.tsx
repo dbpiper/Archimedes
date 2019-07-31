@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Text } from '../../helpers/Text';
 import STYLES from '../../STYLE';
 
-export const Body1 = styled.p`
+export const Body1 = styled(Text)`
   font-family: ${STYLES.text.body1.fontFamily};
   font-weight: ${STYLES.text.body1.fontWeight};
   font-size: ${STYLES.text.body1.fontSize};

@@ -1,56 +1,55 @@
+import STYLES from '../../../../src/STYLE';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../util/storybook';
 
-import { findElementRegex } from '../../../util/archimedes';
+import {
+  clickAndVerifyTransform,
+  verifyBgColor,
+} from '../../../util/archimedes';
 
-describe('Switch2', () => {
-  describe('Switch2 (no animation) tests', () => {
-    before(() => {
-      visitComponentStoryIframe(
-        getStorybookUrl(),
-        'Switch2 (no animation)',
-        'Switch2',
-      );
-    });
-    specify('default view looks correct', () => {
-      cy.matchImageSnapshot();
-    });
+import { translateX } from '../../../util/css';
 
-    specify('looks good after click', () => {
-      findElementRegex('button', 'Switch2.{2}Track.*')
-        .click()
-        .then(() => {
-          // we have to disable cypress' disabling of animations in this case
-          // since here we have set the animations to have a 0s duration,
-          // thus effectively disabling them; but in apparently a different
-          // manner than cypress.
-          cy.matchImageSnapshot({
-            disableTimersAndAnimations: false,
-          });
-        });
-    });
+const SwitchTrackRegex = /Switch2.{2}Track.*/;
+const ThumbRegex = /Switch2.{2}Thumb.*/;
+
+// the offset from the left, in pixels that the thumb is when in the on position
+const offsetOnRightSide = 19;
+
+describe('Switch2/off test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/off');
+  });
+  specify('default view looks correct', () => {
+    verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
   });
 
-  describe('Switch2 tests', () => {
-    before(() => {
-      visitComponentStoryIframe(getStorybookUrl(), 'Switch2');
-    });
-    specify('default view looks correct', () => {
-      cy.matchImageSnapshot();
-    });
+  specify('looks good after click', () => {
+    clickAndVerifyTransform(
+      translateX(0),
+      translateX(offsetOnRightSide),
+      ThumbRegex,
+      SwitchTrackRegex,
+    );
+  });
+});
 
-    specify('looks good after click', () => {
-      // cypress.screenshot() will automatically stop animations
-      // but this screenshot will look slightly different due to this behavior
-      // (the thumb will not be on the right side)
-      findElementRegex('button', 'Switch2.{2}Track.*')
-        .click()
-        .then(() => {
-          cy.matchImageSnapshot();
-        });
-    });
+describe('Switch2/on test suite', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/on');
+  });
+  specify('default view looks correct', () => {
+    verifyBgColor(STYLES.color.primary, SwitchTrackRegex);
+  });
+
+  specify('looks good after click', () => {
+    clickAndVerifyTransform(
+      translateX(offsetOnRightSide),
+      translateX(0),
+      ThumbRegex,
+      SwitchTrackRegex,
+    );
   });
 });
 

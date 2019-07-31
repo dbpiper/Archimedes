@@ -8,7 +8,10 @@ import { getStorybookUrl } from '../config/dotenvs';
  * @param {string} raw The raw string passed in.
  */
 const _normalizeIdString = (raw: string) =>
-  raw.split(' ').join('-').toLowerCase();
+  raw
+    .split(/[\ \/]+/)
+    .join('-')
+    .toLowerCase();
 
 /**
  * Get the internal storybook id of the component, this is needed to

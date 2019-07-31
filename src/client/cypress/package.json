@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/color-convert": "^1.9.0",
     "@types/node": "^12.6.8",
-    "cypress-image-snapshot": "^3.1.1"
+    "color-convert": "^2.0.0",
+    "cypress-image-snapshot": "^3.1.1",
+    "transformation-matrix": "^2.1.0"
   }
 }

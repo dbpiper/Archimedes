@@ -41,40 +41,51 @@ const storybookStart = () =>
 
 // Cypress
 
+const _cypressRunStorybookCommands = (updateSnapshots?: boolean) => [
+  `npx cypress run \
+      --config "integrationFolder=cypress/integration/storybook" \
+      --spec "cypress/integration/storybook/atoms/**/*" \
+      ${updateSnapshots ? '--env "updateSnapshots=true"' : ''} \
+     `,
+  `npx cypress run \
+      --config "integrationFolder=cypress/integration/storybook" \
+      --spec "cypress/integration/storybook/molecules/**/*" \
+      ${updateSnapshots ? '--env "updateSnapshots=true"' : ''} \
+     `,
+  `npx cypress run \
+      --config "integrationFolder=cypress/integration/storybook" \
+      --spec "cypress/integration/storybook/*" \
+      ${updateSnapshots ? '--env "updateSnapshots=true"' : ''} \
+     `,
+];
+
 const cypressStorybookOpen = () =>
   terminalSpawn(
-    'npx cypress open --config integrationFolder=cypress/integration/storybook',
+    'npx cypress open --config "integrationFolder=cypress/integration/storybook"',
   ).promise;
 
 const cypressStorybookRun = () =>
-  terminalSpawn(
-    'npx cypress run --config integrationFolder=cypress/integration/storybook',
-  ).promise;
+  terminalSpawn(_cypressRunStorybookCommands()).promise;
 
 const cypressStorybookUpdateSnapshots = () =>
-  terminalSpawn(
-    `npx cypress run \
-      --config integrationFolder=cypress/integration/storybook \
-      --env updateSnapshots=true \
-     `,
-  ).promise;
+  terminalSpawn(_cypressRunStorybookCommands(true)).promise;
 
 const cypressStorybookOpenUpdateSnapshots = () =>
   terminalSpawn(
     `npx cypress open \
-      --config integrationFolder=cypress/integration/storybook \
-      --env updateSnapshots=true \
+      --config "integrationFolder=cypress/integration/storybook" \
+      --env "updateSnapshots=true" \
      `,
   ).promise;
 
 const cypressE2eOpen = () =>
   terminalSpawn(
-    'npx cypress open --config integrationFolder=cypress/integration/end-to-end',
+    'npx cypress open --config "integrationFolder=cypress/integration/end-to-end"',
   ).promise;
 
 const cypressE2eRun = () =>
   terminalSpawn(
-    'npx cypress run --config integrationFolder=cypress/integration/end-to-end',
+    'npx cypress run --config "integrationFolder=cypress/integration/end-to-end"',
   ).promise;
 
 // Testing

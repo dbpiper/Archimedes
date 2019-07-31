@@ -55,20 +55,22 @@ const Keyframes = Object.freeze({
 
 const Animation = Object.freeze({
   __proto__: null,
-  thumbContainer: (duration: AnimationDuration) =>
+  thumbContainer: (on: boolean, duration: AnimationDuration) =>
     createBinaryAnimation({
       duration,
       keyframes: Keyframes.thumbContainer,
-      initialState: Keyframes.thumbContainer.off,
+      initialState: on
+        ? Keyframes.thumbContainer.on
+        : Keyframes.thumbContainer.off,
       // these are from the motion design
       // tslint:disable-next-line: no-magic-numbers
       cubicBezier: createCubicBezier(0.22, 1, 0.36, 1.5),
     }),
-  track: (duration: AnimationDuration) =>
+  track: (on: boolean, duration: AnimationDuration) =>
     createBinaryAnimation({
       duration,
       keyframes: Keyframes.track,
-      initialState: Keyframes.track.off,
+      initialState: on ? Keyframes.track.on : Keyframes.track.off,
       // these are from the motion design
       // tslint:disable-next-line: no-magic-numbers
       cubicBezier: createCubicBezier(0.22, 1, 0.36, 1),
@@ -76,19 +78,35 @@ const Animation = Object.freeze({
 });
 
 interface TrackProps {
-  click: boolean;
+  on: boolean;
   clickCount: number;
   animationDuration: AnimationDuration;
 }
 
 interface ThumbContainerProps {
-  click: boolean;
+  on: boolean;
   clickCount: number;
   animationDuration: AnimationDuration;
 }
 
 const sStatic = Object.freeze({
   __proto__: null,
+  HiddenCheckbox: styled.input.attrs({ type: 'checkbox' })`
+    /* Hide checkbox visually but remain accessible to screen readers.
+     * Source: https://polished.js.org/docs/#hidevisually
+     */
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    z-index: 3;
+  `,
   ThumbContainer: styled.div<ThumbContainerProps>`
     display: flex;
     position: absolute;
@@ -96,11 +114,10 @@ const sStatic = Object.freeze({
     height: 14px;
     align-items: center;
 
-    will-change: transform;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
-        Animation.thumbContainer(props.animationDuration),
+        Animation.thumbContainer(props.on, props.animationDuration),
       ).animation};
   `,
   Thumb: styled.svg`
@@ -118,8 +135,6 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
-
-    will-change: opacity;
   `,
   ActiveCircle: styled.span`
     position: absolute;
@@ -132,30 +147,25 @@ const sStatic = Object.freeze({
     border-radius: 100%;
     transform: translate(-25%, 0);
     opacity: 0;
-
-    will-change: opacity;
   `,
 });
 
 const sDynamic = Object.freeze({
   Track: styled.button<TrackProps>`
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     padding: 4px;
     width: 40px;
     height: 22px;
-    background-color: ${props =>
-      props.click ? STYLE.color.primary : STYLE.color.darkSecondary};
     border-radius: 11px;
     border: none !important;
     outline: none !important;
 
-    will-change: background-color, cursor;
     ${props =>
       currentBinaryAnimation(
         props.clickCount,
-        Animation.track(props.animationDuration),
+        Animation.track(props.on, props.animationDuration),
       ).animation};
 
     :hover {
@@ -173,6 +183,9 @@ const sDynamic = Object.freeze({
 
 interface Switch2Props {
   animationDuration?: AnimationDuration;
+  on: boolean;
+  className?: string;
+  onChange?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 /**
@@ -183,24 +196,34 @@ interface Switch2Props {
  *        as desired by the users.
  */
 export const Switch2 = ({
-  animationDuration = parseAnimationDuration('333.3ms'),
+  on,
+  animationDuration = parseAnimationDuration('180ms'),
+  onChange,
+  className,
 }: Switch2Props) => {
-  const [click, setClick] = useState(false);
+  const [onInternal, setOnInternal] = useState(on);
   const [clickCount, setClickCount] = useState(0);
-  const handleClick = () => {
-    setClick(!click);
+  const handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    setOnInternal(!onInternal);
     setClickCount(clickCount + 1);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   return (
     <sDynamic.Track
+      on={on}
       onClick={handleClick}
-      click={click}
       clickCount={clickCount}
       animationDuration={animationDuration}
+      className={className}
     >
+      <sStatic.HiddenCheckbox checked={onInternal} />
       <sStatic.ThumbContainer
-        click={click}
+        on={on}
         clickCount={clickCount}
         animationDuration={animationDuration}
       >
@@ -219,4 +242,4 @@ export const Switch2 = ({
   );
 };
 
-export { parseAnimationDuration };
+Switch2.defaultProps = { on: false };

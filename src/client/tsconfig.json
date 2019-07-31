@@ -24,6 +24,6 @@
   "extends": "../../tsconfig-base",
   "include": [
     "src/**/*",
-    "config/**/*"
+    "config/**/*", "src/molecules/controls/.tsx"
   ]
 }

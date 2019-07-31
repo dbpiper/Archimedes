@@ -1,75 +1,60 @@
+import STYLES from '../../../../src/STYLE';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../util/storybook';
 
-import { findElementRegex } from '../../../util/archimedes';
+import { clickAndVerifyBgColor, verifyBgColor } from '../../../util/archimedes';
 
-describe('Checkbox', () => {
+const CheckboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
+const BoxDarkRegex = /Checkbox.{2}BoxDark.*/;
+
+describe('Checkbox/unchecked test suite', () => {
   specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Checkbox');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'Checkbox',
+      'Checkbox/unchecked',
+    );
   });
 
   describe('Checkbox tests', () => {
     specify('default view looks correct', () => {
-      cy.matchImageSnapshot();
+      verifyBgColor(STYLES.color.darkSecondary, BoxDarkRegex);
     });
 
     specify('looks good after click', () => {
-      findElementRegex('div', 'Checkbox.{2}CheckboxContainer.*')
-        .click()
-        .then(() => {
-          cy.matchImageSnapshot();
-        });
+      clickAndVerifyBgColor(
+        STYLES.color.darkSecondary,
+        STYLES.color.primary,
+        BoxDarkRegex,
+        CheckboxContainerRegex,
+      );
     });
   });
 });
 
-describe('Checkbox', () => {
-  describe('Checkbox (no animation) tests', () => {
-    before(() => {
-      visitComponentStoryIframe(
-        getStorybookUrl(),
-        'Checkbox (no animation)',
-        'Checkbox',
-      );
-    });
-    specify('default view looks correct', () => {
-      cy.matchImageSnapshot();
-    });
-
-    specify('looks good after click', () => {
-      findElementRegex('div', 'Checkbox.{2}CheckboxContainer.*')
-        .click()
-        .then(() => {
-          // we have to disable cypress' disabling of animations in this case
-          // since here we have set the animations to have a 0s duration,
-          // thus effectively disabling them; but in apparently a different
-          // manner than cypress.
-          cy.matchImageSnapshot({
-            disableTimersAndAnimations: false,
-          });
-        });
-    });
+describe('Checkbox/checked test suite', () => {
+  specify('successfully loads', () => {
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'Checkbox',
+      'Checkbox/checked',
+    );
   });
 
   describe('Checkbox tests', () => {
-    before(() => {
-      visitComponentStoryIframe(getStorybookUrl(), 'Checkbox');
-    });
     specify('default view looks correct', () => {
-      cy.matchImageSnapshot();
+      verifyBgColor(STYLES.color.primary, BoxDarkRegex);
     });
 
     specify('looks good after click', () => {
-      // cypress.screenshot() will automatically stop animations
-      // but this screenshot will look slightly different due to this behavior
-      // (the thumb will not be on the right side)
-      findElementRegex('div', 'Checkbox.{2}CheckboxContainer.*')
-        .click()
-        .then(() => {
-          cy.matchImageSnapshot();
-        });
+      clickAndVerifyBgColor(
+        STYLES.color.primary,
+        STYLES.color.darkSecondary,
+        BoxDarkRegex,
+        CheckboxContainerRegex,
+      );
     });
   });
 });

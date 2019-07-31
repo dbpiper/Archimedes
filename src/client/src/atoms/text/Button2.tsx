@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Text } from '../../helpers/Text';
 import STYLES from '../../STYLE';
 
-export const Button2 = styled.p`
+export const Button2 = styled(Text)`
   font-family: ${STYLES.text.button2.fontFamily};
   font-weight: ${STYLES.text.button2.fontWeight};
   font-size: ${STYLES.text.button2.fontSize};
