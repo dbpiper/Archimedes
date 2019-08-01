@@ -9,6 +9,8 @@ import {
   visitComponentStoryIframe,
 } from '../../../util/storybook';
 
+const switch1Path = 'atoms/Switch1';
+
 const SwitchTrackRegex = /Switch1.{2}Track.*/;
 const ThumbRegex = /Switch1.{2}Thumb.*/;
 
@@ -17,7 +19,11 @@ const offsetOnRightSide = 27;
 
 describe('Switch1/off test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch1', 'Switch1/off');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch1Path}/off`,
+      'Switch1',
+    );
   });
   specify('default view looks correct', () => {
     verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
@@ -35,7 +41,11 @@ describe('Switch1/off test suite', () => {
 
 describe('Switch1/on test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch1', 'Switch1/on');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch1Path}/on`,
+      'Switch1',
+    );
   });
   specify('default view looks correct', () => {
     verifyBgColor(STYLES.color.primary, SwitchTrackRegex);

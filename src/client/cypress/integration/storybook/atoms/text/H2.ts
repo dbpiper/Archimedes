@@ -5,7 +5,7 @@ import {
 
 describe('H2', () => {
   specify('it looks correct', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'H2');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', 'H2');
     cy.matchImageSnapshot();
   });
 });

@@ -11,6 +11,8 @@ import {
 
 import { translateX } from '../../../util/css';
 
+const switch2Path = 'atoms/Switch2';
+
 const SwitchTrackRegex = /Switch2.{2}Track.*/;
 const ThumbRegex = /Switch2.{2}Thumb.*/;
 
@@ -19,7 +21,11 @@ const offsetOnRightSide = 19;
 
 describe('Switch2/off test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/off');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch2Path}/off`,
+      'Switch2',
+    );
   });
   specify('default view looks correct', () => {
     verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
@@ -37,7 +43,11 @@ describe('Switch2/off test suite', () => {
 
 describe('Switch2/on test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/on');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch2Path}/on`,
+      'Switch2',
+    );
   });
   specify('default view looks correct', () => {
     verifyBgColor(STYLES.color.primary, SwitchTrackRegex);

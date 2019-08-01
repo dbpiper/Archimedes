@@ -5,7 +5,7 @@ import {
 
 describe('OrLine2', () => {
   specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'OrLine2');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', 'OrLine2');
   });
 
   describe('OrLine2 tests', () => {

@@ -6,7 +6,11 @@ import {
 
 describe('Header', () => {
   before('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Header');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'App/shared/components',
+      'Header',
+    );
   });
   specify('the title is correct', () => {
     findElementRegex(/Header.{2}Title.*/).contains('Archimedes');

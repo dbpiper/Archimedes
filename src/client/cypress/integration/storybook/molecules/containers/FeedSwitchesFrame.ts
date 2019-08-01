@@ -5,7 +5,11 @@ import {
 
 describe('FeedSwitchesFrame test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'FeedSwitchesFrame');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'molecules/containers',
+      'FeedSwitchesFrame',
+    );
   });
 
   specify('default view looks correct', () => {

@@ -5,7 +5,7 @@ import {
 
 describe('Overline', () => {
   specify('it looks correct', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Overline');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', 'Overline');
     cy.matchImageSnapshot();
   });
 });

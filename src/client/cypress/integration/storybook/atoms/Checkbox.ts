@@ -9,12 +9,14 @@ import { clickAndVerifyBgColor, verifyBgColor } from '../../../util/archimedes';
 const CheckboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
 const BoxDarkRegex = /Checkbox.{2}BoxDark.*/;
 
+const checkboxPath = 'atoms/Checkbox';
+
 describe('Checkbox/unchecked test suite', () => {
   specify('successfully loads', () => {
     visitComponentStoryIframe(
       getStorybookUrl(),
+      `${checkboxPath}/unchecked`,
       'Checkbox',
-      'Checkbox/unchecked',
     );
   });
 
@@ -38,8 +40,8 @@ describe('Checkbox/checked test suite', () => {
   specify('successfully loads', () => {
     visitComponentStoryIframe(
       getStorybookUrl(),
+      `${checkboxPath}/checked`,
       'Checkbox',
-      'Checkbox/checked',
     );
   });
 

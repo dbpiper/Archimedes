@@ -5,7 +5,7 @@ import {
 
 describe('Accent', () => {
   specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Accent');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', 'Accent');
   });
 
   describe('accent tests', () => {

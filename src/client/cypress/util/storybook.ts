@@ -29,32 +29,34 @@ const _normalizeIdString = (raw: string) =>
  * it would be the same story, but a different way to use it.
  *
  */
-const _getStoryKindId = (kindName: string, storyName?: string) => {
-  const storyIdPortion: string = storyName ? _normalizeIdString(storyName) : '';
-  const kindIdPortion: string = _normalizeIdString(kindName);
-  const typedName = cy
-    .get('input')
-    .should('have.attr', 'placeholder', 'Press "/" to search...')
-    .clear()
-    .type(kindName);
-  typedName.then(() => {
-    const getComponentDiv = () =>
-      cy.get('div').filter((_index, element) => {
-        const filteredElement = element.id.match(
-          storyIdPortion.length > 0
-            ? `.*${storyIdPortion}--${kindIdPortion}`
-            : `.*--${kindIdPortion}`,
-        );
-        if (!filteredElement) {
-          return false;
-        }
-        return true;
-      });
-    getComponentDiv()
-      .invoke('attr', 'id')
-      .as('ComponentId');
-  });
-};
+// const _getStoryKindId = (kindName: string, storyName?: string) => {
+//   const storyIdPortion: string = storyName ? _normalizeIdString(storyName) : '';
+//   const kindIdPortion: string = _normalizeIdString(kindName);
+//   const typedName = cy
+//     .get('input')
+//     .should('have.attr', 'placeholder', 'Press "/" to search...')
+//     .clear()
+//     .type(kindName, {
+//       delay: 0,
+//     });
+//   typedName.then(() => {
+//     const getComponentDiv = () =>
+//       cy.get('div').filter((_index, element) => {
+//         const filteredElement = element.id.match(
+//           storyIdPortion.length > 0
+//             ? `.*${storyIdPortion}--${kindIdPortion}`
+//             : `.*--${kindIdPortion}`,
+//         );
+//         if (!filteredElement) {
+//           return false;
+//         }
+//         return true;
+//       });
+//     getComponentDiv()
+//       .invoke('attr', 'id')
+//       .as('ComponentId');
+//   });
+// };
 
 /**
  * Navigates cypress to the iframe containing the storybook story
@@ -63,12 +65,22 @@ const _getStoryKindId = (kindName: string, storyName?: string) => {
  *
  * @param {string} storybookUrl The base url of the running storybook
  */
-const _navigateToStorybookIFrame = (storybookUrl: string) => {
-  cy.get('@ComponentId').then(componentId => {
-    const iframeUrl = `iframe.html?id=${componentId}`;
-    cy.visit(`${storybookUrl}/${iframeUrl}`, {
-      timeout: Cypress.config('pageLoadTimeout'),
-    });
+// const _navigateToStorybookIFrame = (storybookUrl: string) => {
+//   cy.get('@ComponentId').then(componentId => {
+//     const iframeUrl = `iframe.html?id=${componentId}`;
+//     cy.visit(`${storybookUrl}/${iframeUrl}`, {
+//       timeout: Cypress.config('pageLoadTimeout'),
+//     });
+//   });
+// };
+
+const _navigateToStorybookIFrame = (
+  storybookUrl: string,
+  storyKindIframePath: string,
+) => {
+  const iframeUrl = `iframe.html?id=${storyKindIframePath}`;
+  cy.visit(`${storybookUrl}/${iframeUrl}`, {
+    timeout: Cypress.config('pageLoadTimeout'),
   });
 };
 
@@ -87,12 +99,17 @@ const _navigateToStorybookIFrame = (storybookUrl: string) => {
  */
 const visitComponentStoryIframe = (
   storybookUrl: string,
+  storyPath: string,
   storyKindName: string,
-  storyName?: string,
 ) => {
   cy.visit(storybookUrl);
-  _getStoryKindId(storyKindName, storyName);
-  _navigateToStorybookIFrame(storybookUrl);
+  const storyKindIframePath = _normalizeIdString(
+    `${storyPath}--${storyKindName}`,
+  );
+  // wait for the storybook to finish loading, we can test for this
+  // by simply waiting for the input to resolve
+  cy.get('input').should('have.attr', 'placeholder', 'Press "/" to search...');
+  _navigateToStorybookIFrame(storybookUrl, storyKindIframePath);
 };
 
 export { getStorybookUrl, visitComponentStoryIframe };

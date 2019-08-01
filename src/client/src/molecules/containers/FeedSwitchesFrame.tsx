@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Subsetting } from '../controls/Subsetting';
+import { Subsetting } from '../selection/Subsetting';
 
 const S = Object.freeze({
   __proto__: null,

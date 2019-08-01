@@ -186,7 +186,7 @@ interface Switch1Props {
   animationDuration?: AnimationDuration;
   on: boolean;
   className?: string;
-  onChange?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 /**
@@ -199,7 +199,7 @@ interface Switch1Props {
 export const Switch1 = ({
   on,
   animationDuration = parseAnimationDuration('180ms'),
-  onChange,
+  onClick,
   className,
 }: Switch1Props) => {
   const [onInternal, setOnInternal] = useState(on);
@@ -209,8 +209,8 @@ export const Switch1 = ({
   ) => {
     setOnInternal(!onInternal);
     setClickCount(clickCount + 1);
-    if (onChange) {
-      onChange(event);
+    if (onClick) {
+      onClick(event);
     }
   };
 

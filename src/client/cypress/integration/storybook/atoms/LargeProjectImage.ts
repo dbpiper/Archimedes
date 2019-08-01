@@ -5,7 +5,7 @@ import {
 
 describe('LargeProjectImage', () => {
   specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'LargeProjectImage');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', 'LargeProjectImage');
   });
 
   describe('LargeProjectImage tests', () => {

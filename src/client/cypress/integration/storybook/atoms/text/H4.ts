@@ -4,8 +4,11 @@ import {
 } from '../../../../util/storybook';
 
 describe('H4', () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', 'H4');
+  });
+
   specify('it looks correct', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'H4');
     cy.matchImageSnapshot();
   });
 });
