@@ -5,11 +5,16 @@ import styled from 'styled-components';
 import STYLES from '../../STYLE';
 
 const S = Object.freeze({
-  VoteButton: styled.button<{ on: boolean }>`
+  VoteButton: styled.button<{ on: boolean; down: boolean }>`
     display: inline-grid;
     width: 25px;
     height: 25px;
-    color: ${props => (props.on ? STYLES.color.success : STYLES.color.error)};
+    color: ${props =>
+      props.on
+        ? props.down
+          ? STYLES.color.error
+          : STYLES.color.success
+        : STYLES.color.darkSecondary};
     border: 0;
     background: none;
     background-color: none;
@@ -19,7 +24,7 @@ const S = Object.freeze({
 
     &:active {
       color: ${props =>
-        props.on ? STYLES.color.successDark : STYLES.color.errorDark};
+        props.down ? STYLES.color.errorDark : STYLES.color.successDark};
     }
   `,
 });
@@ -47,7 +52,12 @@ export const VoteButton = ({
   };
 
   return (
-    <S.VoteButton onClick={handleClick} className={className} on={onInternal}>
+    <S.VoteButton
+      onClick={handleClick}
+      className={className}
+      on={onInternal}
+      down={down}
+    >
       <FontAwesomeIcon icon={icon} size="lg" />
     </S.VoteButton>
   );

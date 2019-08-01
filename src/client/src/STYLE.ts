@@ -33,7 +33,7 @@ const STYLE = Object.freeze({
     errorDark: '#A50021',
     success: '#27A773',
     successMedium: '#679267',
-    successDark: '#006A4E',
+    successDark: '#1D7D56',
     warning: '#FF6700',
     information: '#0066FF',
     lightPrimary: '#FEFEFA',

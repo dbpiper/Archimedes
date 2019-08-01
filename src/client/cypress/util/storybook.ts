@@ -1,4 +1,5 @@
 import { getStorybookUrl } from '../config/dotenvs';
+import { findElementRegex } from './archimedes';
 
 /**
  *
@@ -14,66 +15,12 @@ const _normalizeIdString = (raw: string) =>
     .toLowerCase();
 
 /**
- * Get the internal storybook id of the component, this is needed to
- * open the iframe as its src attribute is unreliable and sometimes appears
- * to be just '+' which isn't helpful for Cypress purposes.
- *
- * This **is** a workaround and it *could* potentially break with an update
- * to Storybook, however I do think that it is the best option given what
- * we have to work with (no official iframe support from Cypress).
- *
- * @param {string} storyName The name of the Story to grab the id of, this
- * should generally be the same as the React Component name.
- * @param {string} kindName The name of the story kind, this is basically
- * an instance of the React Component with different props, in other words
- * it would be the same story, but a different way to use it.
- *
- */
-// const _getStoryKindId = (kindName: string, storyName?: string) => {
-//   const storyIdPortion: string = storyName ? _normalizeIdString(storyName) : '';
-//   const kindIdPortion: string = _normalizeIdString(kindName);
-//   const typedName = cy
-//     .get('input')
-//     .should('have.attr', 'placeholder', 'Press "/" to search...')
-//     .clear()
-//     .type(kindName, {
-//       delay: 0,
-//     });
-//   typedName.then(() => {
-//     const getComponentDiv = () =>
-//       cy.get('div').filter((_index, element) => {
-//         const filteredElement = element.id.match(
-//           storyIdPortion.length > 0
-//             ? `.*${storyIdPortion}--${kindIdPortion}`
-//             : `.*--${kindIdPortion}`,
-//         );
-//         if (!filteredElement) {
-//           return false;
-//         }
-//         return true;
-//       });
-//     getComponentDiv()
-//       .invoke('attr', 'id')
-//       .as('ComponentId');
-//   });
-// };
-
-/**
  * Navigates cypress to the iframe containing the storybook story
- * preview. This uses the alias of the component which Cypress gets
- * in the `getComponentId` function.
+ * preview.
  *
  * @param {string} storybookUrl The base url of the running storybook
+ * @param {string} storyKindIframePath The story path of the iframe
  */
-// const _navigateToStorybookIFrame = (storybookUrl: string) => {
-//   cy.get('@ComponentId').then(componentId => {
-//     const iframeUrl = `iframe.html?id=${componentId}`;
-//     cy.visit(`${storybookUrl}/${iframeUrl}`, {
-//       timeout: Cypress.config('pageLoadTimeout'),
-//     });
-//   });
-// };
-
 const _navigateToStorybookIFrame = (
   storybookUrl: string,
   storyKindIframePath: string,
@@ -102,14 +49,11 @@ const visitComponentStoryIframe = (
   storyPath: string,
   storyKindName: string,
 ) => {
-  cy.visit(storybookUrl);
   const storyKindIframePath = _normalizeIdString(
     `${storyPath}--${storyKindName}`,
   );
-  // wait for the storybook to finish loading, we can test for this
-  // by simply waiting for the input to resolve
-  cy.get('input').should('have.attr', 'placeholder', 'Press "/" to search...');
   _navigateToStorybookIFrame(storybookUrl, storyKindIframePath);
+  findElementRegex(/sb-show-main/);
 };
 
 export { getStorybookUrl, visitComponentStoryIframe };
