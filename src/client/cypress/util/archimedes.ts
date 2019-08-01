@@ -6,8 +6,11 @@ import convert from 'color-convert';
  * @param {RegExp} classRegex The regular expression to use to filter matching
  * elements from the selected elements -- Essentially provides the ability
  * to extend the CSS selector to have the power of Regex.
+ * @param {number} index The index to select from the resulting set if there
+ * are more than one. Will default to 0; i.e. select the first element in the
+ * result set.
  */
-const findElementRegex = (classRegex: RegExp) =>
+const findElementRegex = (classRegex: RegExp, index = 0) =>
   cy
     .get('*')
     .filter((_index, element) => {
@@ -20,7 +23,14 @@ const findElementRegex = (classRegex: RegExp) =>
       }
       return false;
     })
-    .first();
+    // essentially we're doing an array access like array[index]
+    // where array is the elements that match our regex
+    .filter((fIndex, _element) => {
+      if (fIndex === index) {
+        return true;
+      }
+      return false;
+    });
 
 // cypress color matching expects the color to be in rgb format rather than hex
 const hexColorToRgbCssString = (color: string) => {

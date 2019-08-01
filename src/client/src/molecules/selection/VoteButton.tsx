@@ -1,6 +1,6 @@
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import STYLES from '../../STYLE';
 
@@ -50,6 +50,10 @@ export const VoteButton = ({
       onClick(event);
     }
   };
+
+  useEffect(() => {
+    setOnInternal(on);
+  }, [on]);
 
   return (
     <S.VoteButton
