@@ -35,7 +35,7 @@ storiesOf('molecules/selection/VoteButton/down/on', module).addWithJSX(
   getDisplayName(VoteButton),
   () => (
     <StorybookWrapper>
-      <VoteButton down={true} />
+      <VoteButton on={true} down={true} />
     </StorybookWrapper>
   ),
 );

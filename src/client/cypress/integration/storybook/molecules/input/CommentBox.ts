@@ -1,4 +1,4 @@
-import { findElementRegex } from '../../../../util/archimedes';
+import { findElementRegex } from '../../../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
@@ -8,7 +8,11 @@ const CommentBoxRegex = /CommentBox.*/;
 
 describe('CommentBox test suite', () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'molecules/input', 'CommentBox');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'molecules/input',
+      'CommentBox',
+    );
   });
 
   specify('default view looks correct', () => {

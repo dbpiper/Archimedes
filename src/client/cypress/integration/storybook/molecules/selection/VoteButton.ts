@@ -1,12 +1,16 @@
-import { findElementRegex } from '../../../../util/archimedes';
+import STYLES from '../../../../../src/STYLE';
+import {
+  CssProperty,
+  findElementRegex,
+  verifyCssProperty,
+} from '../../../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../../util/storybook';
 
-const VoteButtonRegex = /VoteButton.*/;
-
 const voteButtonPath = 'molecules/selection/VoteButton';
+const voteButtonRegex = /VoteButton.*/;
 
 describe('VoteButton/up test suite', () => {
   describe('VoteButton/up/off test suite', () => {
@@ -19,12 +23,26 @@ describe('VoteButton/up test suite', () => {
     });
 
     specify('default view looks correct', () => {
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
 
     specify('looks correct after click', () => {
-      // there is no animation here so we don't need to worry about a race-condition
-      findElementRegex(VoteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
+      findElementRegex(voteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.success,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
   });
@@ -39,12 +57,26 @@ describe('VoteButton/up test suite', () => {
     });
 
     specify('default view looks correct', () => {
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.success,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
 
     specify('looks correct after click', () => {
-      // there is no animation here so we don't need to worry about a race-condition
-      findElementRegex(VoteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.success,
+        voteButtonRegex,
+      );
+      findElementRegex(voteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
   });
@@ -61,12 +93,22 @@ describe('VoteButton/down test suite', () => {
     });
 
     specify('default view looks correct', () => {
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
 
     specify('looks correct after click', () => {
-      // there is no animation here so we don't need to worry about a race-condition
-      findElementRegex(VoteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
+      findElementRegex(voteButtonRegex).click();
+      verifyCssProperty(CssProperty.Color, STYLES.color.error, voteButtonRegex);
       cy.matchImageSnapshot();
     });
   });
@@ -81,12 +123,18 @@ describe('VoteButton/down test suite', () => {
     });
 
     specify('default view looks correct', () => {
+      verifyCssProperty(CssProperty.Color, STYLES.color.error, voteButtonRegex);
       cy.matchImageSnapshot();
     });
 
     specify('looks correct after click', () => {
-      // there is no animation here so we don't need to worry about a race-condition
-      findElementRegex(VoteButtonRegex).click();
+      verifyCssProperty(CssProperty.Color, STYLES.color.error, voteButtonRegex);
+      findElementRegex(voteButtonRegex).click();
+      verifyCssProperty(
+        CssProperty.Color,
+        STYLES.color.darkSecondary,
+        voteButtonRegex,
+      );
       cy.matchImageSnapshot();
     });
   });

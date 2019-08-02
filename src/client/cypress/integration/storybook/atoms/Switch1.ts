@@ -1,9 +1,10 @@
 import STYLES from '../../../../src/STYLE';
-import {
-  clickAndVerifyTransform,
-  verifyBgColor,
-} from '../../../util/archimedes';
 import { translateX } from '../../../util/css';
+import {
+  CssProperty,
+  findElementRegex,
+  verifyCssProperty,
+} from '../../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
@@ -11,8 +12,8 @@ import {
 
 const switch1Path = 'atoms/Switch1';
 
-const SwitchTrackRegex = /Switch1.{2}Track.*/;
-const ThumbRegex = /Switch1.{2}Thumb.*/;
+const switchTrackRegex = /Switch1.{2}Track.*/;
+const thumbRegex = /Switch1.{2}Thumb.*/;
 
 // the offset from the left, in pixels that the thumb is when in the on position
 const offsetOnRightSide = 27;
@@ -26,16 +27,23 @@ describe('Switch1/off test suite', () => {
     );
   });
   specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.darkSecondary,
+      switchTrackRegex,
+    );
+    cy.matchImageSnapshot();
   });
 
   specify('looks good after click', () => {
-    clickAndVerifyTransform(
-      translateX(0),
+    verifyCssProperty(CssProperty.Transform, translateX(0), thumbRegex);
+    findElementRegex(switchTrackRegex).click();
+    verifyCssProperty(
+      CssProperty.Transform,
       translateX(offsetOnRightSide),
-      ThumbRegex,
-      SwitchTrackRegex,
+      thumbRegex,
     );
+    cy.matchImageSnapshot();
   });
 });
 
@@ -48,16 +56,23 @@ describe('Switch1/on test suite', () => {
     );
   });
   specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.primary, SwitchTrackRegex);
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.primary,
+      switchTrackRegex,
+    );
+    cy.matchImageSnapshot();
   });
 
   specify('looks good after click', () => {
-    clickAndVerifyTransform(
+    verifyCssProperty(
+      CssProperty.Transform,
       translateX(offsetOnRightSide),
-      translateX(0),
-      ThumbRegex,
-      SwitchTrackRegex,
+      thumbRegex,
     );
+    findElementRegex(switchTrackRegex).click();
+    verifyCssProperty(CssProperty.Transform, translateX(0), thumbRegex);
+    cy.matchImageSnapshot();
   });
 });
 

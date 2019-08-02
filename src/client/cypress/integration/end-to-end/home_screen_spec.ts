@@ -1,5 +1,5 @@
 import { getClientUrl } from '../../config/dotenvs';
-import { findElementRegex } from '../../util/archimedes';
+import { findElementRegex } from '../../util/cypress';
 
 describe('Home screen', () => {
   specify('successfully loads', () => {

@@ -1,5 +1,5 @@
 import { getStorybookUrl } from '../config/dotenvs';
-import { findElementRegex } from './archimedes';
+import { findElementRegex } from './cypress';
 
 /**
  *

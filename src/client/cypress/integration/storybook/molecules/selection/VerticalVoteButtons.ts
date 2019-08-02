@@ -1,11 +1,16 @@
-import { findElementRegex } from '../../../../util/archimedes';
+import STYLES from '../../../../../src/STYLE';
+import {
+  CssProperty,
+  findElementRegex,
+  verifyCssProperty,
+} from '../../../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../../util/storybook';
 
 const verticalVoteButtonsPath = 'molecules/selection';
-const voteButtonRegex = /VoteButton.*/;
+const voteButtonRegex = /^VoteButton.*/;
 
 describe('VerticalVoteButtons test suite', () => {
   before(() => {
@@ -17,16 +22,45 @@ describe('VerticalVoteButtons test suite', () => {
   });
 
   specify('default view looks correct', () => {
+    verifyCssProperty(
+      CssProperty.Color,
+      STYLES.color.darkSecondary,
+      voteButtonRegex,
+    );
+    verifyCssProperty(
+      CssProperty.Color,
+      STYLES.color.darkSecondary,
+      voteButtonRegex,
+      1,
+    );
     cy.matchImageSnapshot();
   });
 
   specify('up vote works', () => {
-    findElementRegex(voteButtonRegex);
+    findElementRegex(voteButtonRegex, 0).click();
+    verifyCssProperty(CssProperty.Color, STYLES.color.success, voteButtonRegex);
+    verifyCssProperty(
+      CssProperty.Color,
+      STYLES.color.darkSecondary,
+      voteButtonRegex,
+      1,
+    );
     cy.matchImageSnapshot();
   });
 
   specify('down vote works', () => {
-    findElementRegex(voteButtonRegex, 1);
+    findElementRegex(voteButtonRegex, 1).click();
+    verifyCssProperty(
+      CssProperty.Color,
+      STYLES.color.darkSecondary,
+      voteButtonRegex,
+    );
+    verifyCssProperty(
+      CssProperty.Color,
+      STYLES.color.error,
+      voteButtonRegex,
+      1,
+    );
     cy.matchImageSnapshot();
   });
 });

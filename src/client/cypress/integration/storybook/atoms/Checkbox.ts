@@ -1,18 +1,21 @@
 import STYLES from '../../../../src/STYLE';
 import {
+  CssProperty,
+  findElementRegex,
+  verifyCssProperty,
+} from '../../../util/cypress';
+import {
   getStorybookUrl,
   visitComponentStoryIframe,
 } from '../../../util/storybook';
 
-import { clickAndVerifyBgColor, verifyBgColor } from '../../../util/archimedes';
-
-const CheckboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
-const BoxDarkRegex = /Checkbox.{2}BoxDark.*/;
+const checkboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
+const boxDarkRegex = /Checkbox.{2}BoxDark.*/;
 
 const checkboxPath = 'atoms/Checkbox';
 
 describe('Checkbox/unchecked test suite', () => {
-  specify('successfully loads', () => {
+  before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${checkboxPath}/unchecked`,
@@ -20,19 +23,24 @@ describe('Checkbox/unchecked test suite', () => {
     );
   });
 
-  describe('Checkbox tests', () => {
-    specify('default view looks correct', () => {
-      verifyBgColor(STYLES.color.darkSecondary, BoxDarkRegex);
-    });
+  specify('default view looks correct', () => {
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.darkSecondary,
+      boxDarkRegex,
+    );
+    cy.matchImageSnapshot();
+  });
 
-    specify('looks good after click', () => {
-      clickAndVerifyBgColor(
-        STYLES.color.darkSecondary,
-        STYLES.color.primary,
-        BoxDarkRegex,
-        CheckboxContainerRegex,
-      );
-    });
+  specify('looks good after click', () => {
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.darkSecondary,
+      boxDarkRegex,
+    );
+    findElementRegex(checkboxContainerRegex).click();
+    verifyCssProperty(CssProperty.BackgroundColor, STYLES.color.primary, boxDarkRegex);
+    cy.matchImageSnapshot();
   });
 });
 
@@ -47,16 +55,19 @@ describe('Checkbox/checked test suite', () => {
 
   describe('Checkbox tests', () => {
     specify('default view looks correct', () => {
-      verifyBgColor(STYLES.color.primary, BoxDarkRegex);
+      verifyCssProperty(CssProperty.BackgroundColor, STYLES.color.primary, boxDarkRegex);
+      cy.matchImageSnapshot();
     });
 
     specify('looks good after click', () => {
-      clickAndVerifyBgColor(
-        STYLES.color.primary,
+      verifyCssProperty(CssProperty.BackgroundColor, STYLES.color.primary, boxDarkRegex);
+      findElementRegex(checkboxContainerRegex).click();
+      verifyCssProperty(
+        CssProperty.BackgroundColor,
         STYLES.color.darkSecondary,
-        BoxDarkRegex,
-        CheckboxContainerRegex,
+        boxDarkRegex,
       );
+      cy.matchImageSnapshot();
     });
   });
 });

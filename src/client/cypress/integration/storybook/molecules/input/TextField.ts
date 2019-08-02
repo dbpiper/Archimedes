@@ -1,4 +1,4 @@
-import { findElementRegex } from '../../../../util/archimedes';
+import { findElementRegex } from '../../../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
