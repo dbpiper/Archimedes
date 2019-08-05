@@ -19,7 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@svgr/webpack": "^4.3.2",
     "@types/dotenv": "^6.1.1",
-    "@types/numeral": "0.0.25",
+    "@types/numeral": "0.0.26",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link": "^1.2.12",
