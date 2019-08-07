@@ -1,19 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-// We don't need to test that the switch works, since it is tested
-// in the switch tests. So we only test that the layout is correct here.
+const componentName = 'Subsetting';
+const subsettingPath = `molecules/selection/${componentName}`;
 
-const subsettingPath = 'molecules/selection/Subsetting';
-
-describe('Subsetting/off test suite', () => {
+describe(`${componentName}/off test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${subsettingPath}/off`,
-      'Subsetting',
+      componentName,
     );
   });
 
@@ -22,12 +17,12 @@ describe('Subsetting/off test suite', () => {
   });
 });
 
-describe('Subsetting/on test suite', () => {
+describe(`${componentName}/on test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${subsettingPath}/on`,
-      'Subsetting',
+      componentName,
     );
   });
 

@@ -1,11 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('SmallProjectAdditionalInfo test suite', () => {
+const componentName = 'SmallProjectAdditionalInfo';
+
+describe(`${componentName} test suite`, () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'molecules/output', 'SmallProjectAdditionalInfo');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'molecules/output',
+      componentName,
+    );
   });
 
   specify('it looks correct', () => {

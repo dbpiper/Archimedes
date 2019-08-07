@@ -1,18 +1,14 @@
-import STYLES from '../../../../src/STYLE';
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
-
+import STYLES from '@src/STYLE';
+import { translateX } from '@util/css';
 import {
   CssProperty,
-  findElementRegex,
   verifyCssProperty,
-} from '../../../util/cypress';
+  verifyCssPropertyAndClick,
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-import { translateX } from '../../../util/css';
-
-const switch2Path = 'atoms/Switch2';
+const componentName = 'Switch2';
+const switch2Path = `atoms/${componentName}`;
 
 const switchTrackRegex = /Switch2.{2}Track.*/;
 const thumbRegex = /Switch2.{2}Thumb.*/;
@@ -20,12 +16,12 @@ const thumbRegex = /Switch2.{2}Thumb.*/;
 // the offset from the left, in pixels that the thumb is when in the on position
 const offsetOnRightSide = 19;
 
-describe('Switch2/off test suite', () => {
+describe(`${componentName}/off test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${switch2Path}/off`,
-      'Switch2',
+      componentName,
     );
   });
   specify('default view looks correct', () => {
@@ -38,23 +34,23 @@ describe('Switch2/off test suite', () => {
   });
 
   specify('looks good after click', () => {
-    verifyCssProperty(CssProperty.Transform, translateX(0), thumbRegex);
-    findElementRegex(switchTrackRegex).click();
-    verifyCssProperty(
+    verifyCssPropertyAndClick(
       CssProperty.Transform,
+      translateX(0),
       translateX(offsetOnRightSide),
       thumbRegex,
+      switchTrackRegex,
     );
     cy.matchImageSnapshot();
   });
 });
 
-describe('Switch2/on test suite', () => {
+describe(`${componentName}/on test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${switch2Path}/on`,
-      'Switch2',
+      componentName,
     );
   });
   specify('default view looks correct', () => {
@@ -67,13 +63,13 @@ describe('Switch2/on test suite', () => {
   });
 
   specify('looks good after click', () => {
-    verifyCssProperty(
+    verifyCssPropertyAndClick(
       CssProperty.Transform,
       translateX(offsetOnRightSide),
+      translateX(0),
       thumbRegex,
+      switchTrackRegex,
     );
-    findElementRegex(switchTrackRegex).click();
-    verifyCssProperty(CssProperty.Transform, translateX(0), thumbRegex);
     cy.matchImageSnapshot();
   });
 });

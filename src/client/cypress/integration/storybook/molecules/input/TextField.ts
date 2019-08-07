@@ -1,17 +1,15 @@
-import { findElementRegex } from '../../../../util/cypress';
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { findElementRegex } from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-const TextFieldRegex = /TextField.*/;
+const componentName = 'TextField';
+const textFieldRegex = /TextField.*/;
 
-describe('TextField test suite', () => {
+describe(`${componentName} test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       'molecules/input',
-      'TextField',
+      componentName,
     );
   });
 
@@ -20,7 +18,7 @@ describe('TextField test suite', () => {
   });
 
   specify('looks correct after typing', () => {
-    findElementRegex(TextFieldRegex).type('hello world!');
+    findElementRegex(textFieldRegex).type('hello world!');
     cy.matchImageSnapshot();
   });
 });

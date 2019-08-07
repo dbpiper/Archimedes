@@ -1,16 +1,26 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "baseUrl": "../node_modules",
+    "baseUrl": "./",
     "target": "esnext",
+    "lib": ["dom", "esnext"],
     "types": ["cypress", "node"],
-    "noEmit": false
+    "noEmit": false,
+    "paths": {
+      "@src/*": [
+        "../src/*"
+      ],
+      "@util/*": [
+        "util/*"
+      ]
+    },
   },
   "include": [
     "**/*.ts",
-    "config/types/*.d.ts"
+    "config/types/**/*"
   ],
   "exclude": [
-    "**/templates/**"
+    "**/templates/**",
+    "node_modules",
   ]
 }

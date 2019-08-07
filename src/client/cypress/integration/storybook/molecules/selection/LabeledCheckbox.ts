@@ -1,19 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-// We don't need to test that the checkbox works, since it is tested
-// in the checkbox tests. So we only test that the layout is correct here.
+const componentName = 'LabeledCheckbox';
+const labeledCheckboxPath = `molecules/selection/${componentName}`;
 
-const labeledCheckboxPath = 'molecules/selection/LabeledCheckbox';
-
-describe('LabeledCheckbox/unchecked test suite', () => {
+describe(`${componentName}/unchecked test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${labeledCheckboxPath}/unchecked`,
-      'LabeledCheckbox',
+      componentName,
     );
   });
 
@@ -22,12 +17,12 @@ describe('LabeledCheckbox/unchecked test suite', () => {
   });
 });
 
-describe('LabeledCheckbox/checked test suite', () => {
+describe(`${componentName}/checked test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${labeledCheckboxPath}/unchecked`,
-      'LabeledCheckbox',
+      componentName,
     );
   });
 

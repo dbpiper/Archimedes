@@ -1,17 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('SmallProjectImage', () => {
-  specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'atoms', 'SmallProjectImage');
+const componentName = 'SmallProjectImage';
+
+describe(`${componentName} test suite`, () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', componentName);
   });
 
-  describe('SmallProjectImage tests', () => {
-    specify('it looks correct', () => {
-      cy.matchImageSnapshot();
-    });
+  specify('it looks correct', () => {
+    cy.matchImageSnapshot();
   });
 });
 

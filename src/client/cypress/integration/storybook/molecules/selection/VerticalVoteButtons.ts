@@ -1,23 +1,21 @@
-import STYLES from '../../../../../src/STYLE';
+import STYLES from '@src/STYLE';
 import {
   CssProperty,
   findElementRegex,
   verifyCssProperty,
-} from '../../../../util/cypress';
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
+const componentName = 'VerticalVoteButtons';
 const verticalVoteButtonsPath = 'molecules/selection';
 const voteButtonRegex = /^VoteButton.*/;
 
-describe('VerticalVoteButtons test suite', () => {
+describe(`${componentName} test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       verticalVoteButtonsPath,
-      'VerticalVoteButtons',
+      componentName,
     );
   });
 

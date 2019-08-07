@@ -1,11 +1,9 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-const iconPath = 'atoms/Icon';
+const componentName = 'Icon';
+const iconPath = `atoms/${componentName}`;
 
-describe('Icon', () => {
+describe(`${componentName} test suite`, () => {
   specify('Search Icon looks right', () => {
     visitComponentStoryIframe(getStorybookUrl(), iconPath, 'Search Icon');
     cy.matchImageSnapshot();

@@ -1,11 +1,10 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('H4', () => {
+const componentName = 'H4';
+
+describe(`${componentName} test suite`, () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', 'H4');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', componentName);
   });
 
   specify('it looks correct', () => {

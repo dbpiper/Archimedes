@@ -1,14 +1,13 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('OrSignifier2 test suite', () => {
+const componentName = 'OrSignifier2';
+
+describe(`${componentName} test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       'molecules/output',
-      'OrSignifier2',
+      componentName,
     );
   });
 

@@ -1,11 +1,10 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('H5', () => {
+const componentName = 'H5';
+
+describe(`${componentName} test suite`, () => {
   specify('it looks correct', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', 'H5');
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms/text', componentName);
     cy.matchImageSnapshot();
   });
 });

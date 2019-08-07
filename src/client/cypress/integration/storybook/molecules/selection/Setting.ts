@@ -1,19 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-// We don't need to test that the switch works, since it is tested
-// in the switch tests. So we only test that the layout is correct here.
+const componentName = 'Setting';
+const settingPath = `molecules/selection/${componentName}`;
 
-const settingPath = 'molecules/selection/Setting';
-
-describe('Setting/off test suite', () => {
+describe(`${componentName}/off test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${settingPath}/off`,
-      'Setting',
+      componentName,
     );
   });
 
@@ -21,12 +16,12 @@ describe('Setting/off test suite', () => {
     cy.matchImageSnapshot();
   });
 });
-describe('Setting/on test suite', () => {
+describe(`${componentName}/on test suite`, () => {
   before(() => {
     visitComponentStoryIframe(
       getStorybookUrl(),
       `${settingPath}/on`,
-      'Setting',
+      componentName,
     );
   });
 

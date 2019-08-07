@@ -1,24 +1,22 @@
-import STYLES from '../../../../../src/STYLE';
+import STYLES from '@src/STYLE';
 import {
   CssProperty,
-  findElementRegex,
   verifyCssProperty,
-} from '../../../../util/cypress';
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+  verifyCssPropertyAndClick,
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-const voteButtonPath = 'molecules/selection/VoteButton';
+const componentName = 'VoteButton';
+const voteButtonPath = `molecules/selection/${componentName}`;
 const voteButtonRegex = /VoteButton.*/;
 
-describe('VoteButton/up test suite', () => {
-  describe('VoteButton/up/off test suite', () => {
+describe(`${componentName}/up test suite`, () => {
+  describe('off test suite', () => {
     before(() => {
       visitComponentStoryIframe(
         getStorybookUrl(),
         `${voteButtonPath}/up/off`,
-        'VoteButton',
+        componentName,
       );
     });
 
@@ -32,14 +30,9 @@ describe('VoteButton/up test suite', () => {
     });
 
     specify('looks correct after click', () => {
-      verifyCssProperty(
+      verifyCssPropertyAndClick(
         CssProperty.Color,
         STYLES.color.darkSecondary,
-        voteButtonRegex,
-      );
-      findElementRegex(voteButtonRegex).click();
-      verifyCssProperty(
-        CssProperty.Color,
         STYLES.color.success,
         voteButtonRegex,
       );
@@ -47,12 +40,12 @@ describe('VoteButton/up test suite', () => {
     });
   });
 
-  describe('VoteButton/up/on test suite', () => {
+  describe('on test suite', () => {
     before(() => {
       visitComponentStoryIframe(
         getStorybookUrl(),
         `${voteButtonPath}/up/on`,
-        'VoteButton',
+        componentName,
       );
     });
 
@@ -66,14 +59,9 @@ describe('VoteButton/up test suite', () => {
     });
 
     specify('looks correct after click', () => {
-      verifyCssProperty(
+      verifyCssPropertyAndClick(
         CssProperty.Color,
         STYLES.color.success,
-        voteButtonRegex,
-      );
-      findElementRegex(voteButtonRegex).click();
-      verifyCssProperty(
-        CssProperty.Color,
         STYLES.color.darkSecondary,
         voteButtonRegex,
       );
@@ -82,13 +70,13 @@ describe('VoteButton/up test suite', () => {
   });
 });
 
-describe('VoteButton/down test suite', () => {
-  describe('VoteButton/down/off test suite', () => {
+describe(`${componentName}/down test suite`, () => {
+  describe('off test suite', () => {
     before(() => {
       visitComponentStoryIframe(
         getStorybookUrl(),
         `${voteButtonPath}/down/off`,
-        'VoteButton',
+        componentName,
       );
     });
 
@@ -102,23 +90,22 @@ describe('VoteButton/down test suite', () => {
     });
 
     specify('looks correct after click', () => {
-      verifyCssProperty(
+      verifyCssPropertyAndClick(
         CssProperty.Color,
         STYLES.color.darkSecondary,
+        STYLES.color.error,
         voteButtonRegex,
       );
-      findElementRegex(voteButtonRegex).click();
-      verifyCssProperty(CssProperty.Color, STYLES.color.error, voteButtonRegex);
       cy.matchImageSnapshot();
     });
   });
 
-  describe('VoteButton/down/on test suite', () => {
+  describe('on test suite', () => {
     before(() => {
       visitComponentStoryIframe(
         getStorybookUrl(),
         `${voteButtonPath}/down/on`,
-        'VoteButton',
+        componentName,
       );
     });
 
@@ -128,10 +115,9 @@ describe('VoteButton/down test suite', () => {
     });
 
     specify('looks correct after click', () => {
-      verifyCssProperty(CssProperty.Color, STYLES.color.error, voteButtonRegex);
-      findElementRegex(voteButtonRegex).click();
-      verifyCssProperty(
+      verifyCssPropertyAndClick(
         CssProperty.Color,
+        STYLES.color.error,
         STYLES.color.darkSecondary,
         voteButtonRegex,
       );
