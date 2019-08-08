@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Text } from '../../helpers/Text';
-import STYLES from '../../STYLE';
+
+import { Text } from '@src/helpers/Text';
+import STYLES from '@src/STYLE';
 
 export const Subtitle2 = styled(Text)`
   font-family: ${STYLES.text.subtitle2.fontFamily};

@@ -2,7 +2,8 @@ import githubColors from 'github-colors';
 import numeral from 'numeral';
 import React from 'react';
 import styled from 'styled-components';
-import { Caption } from '../../atoms/text/Caption';
+
+import { Caption } from '@atoms/text/Caption';
 
 const S = Object.freeze({
   __proto__: null,

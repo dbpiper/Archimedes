@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import STYLES from '../../STYLE';
+
+import STYLES from '@src/STYLE';
 
 export const H4 = styled.h4`
   font-family: ${STYLES.text.h4.fontFamily};

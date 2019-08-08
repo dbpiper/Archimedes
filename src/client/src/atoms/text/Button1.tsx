@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Text } from '../../helpers/Text';
-import { ButtonStyle } from '../../molecules/selection/Button';
-import STYLES from '../../STYLE';
+
+import { ButtonStyle } from '@molecules/selection/Button';
+import { Text } from '@src/helpers/Text';
+import STYLES from '@src/STYLE';
 
 const getColor = (
   secondary: boolean = false,

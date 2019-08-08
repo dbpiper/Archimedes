@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Subsetting } from '../selection/Subsetting';
+
+import { Subsetting } from '@molecules/selection/Subsetting';
 
 const S = Object.freeze({
   __proto__: null,

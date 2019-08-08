@@ -12,6 +12,15 @@
       "@util/*": [
         "util/*"
       ],
+      "@src/*": [
+        "./*"
+      ],
+      "@atoms/*": [
+        "./atoms/*"
+      ],
+      "@molecules/*": [
+        "./molecules/*"
+      ],
       "App": [
         "screens/App"
       ],

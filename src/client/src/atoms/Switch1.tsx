@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import STYLE from '../STYLE';
+
+import STYLE from '@src/STYLE';
 import {
   AnimationDuration,
   parseAnimationDuration,
-} from '../util/animationDuration';
+} from '@util/animationDuration';
 import {
   createBinaryAnimation,
   currentBinaryAnimation,
-} from '../util/animationHelpers';
-import { createCubicBezier } from '../util/cubicBezier';
+} from '@util/animationHelpers';
+import { createCubicBezier } from '@util/cubicBezier';
 
 const Keyframes = Object.freeze({
   __proto__: null,

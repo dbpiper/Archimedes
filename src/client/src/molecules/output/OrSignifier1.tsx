@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { OrLine1 } from '../../atoms/OrLine1';
-import { H6 } from '../../atoms/text/H6';
+
+import { OrLine1 } from '@atoms/OrLine1';
+import { H6 } from '@atoms/text/H6';
 
 const S = Object.freeze({
   __proto__: null,

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useVoteButtonsState, Vote } from 'util/hooks/useVoteButtonsState';
+
+import { useVoteButtonsState, Vote } from '@util/hooks/useVoteButtonsState';
 import { VoteButton } from './VoteButton';
 
 const S = Object.freeze({

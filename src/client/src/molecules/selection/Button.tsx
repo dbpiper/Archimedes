@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Button1 } from '../../atoms/text/Button1';
-import STYLES from '../../STYLE';
+
+import { Button1 } from '@atoms/text/Button1';
+import STYLES from '@src/STYLE';
 
 export enum ButtonStyle {
   Contained,

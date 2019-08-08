@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Checkbox } from '../../atoms/Checkbox';
-import { Caption } from '../../atoms/text/Caption';
+
+import { Checkbox } from '@atoms/Checkbox';
+import { Caption } from '@atoms/text/Caption';
 
 const S = Object.freeze({
   __proto__: null,

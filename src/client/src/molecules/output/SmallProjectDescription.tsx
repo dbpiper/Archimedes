@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Body2 } from '../../atoms/text/Body2';
+
+import { Body2 } from '@atoms/text/Body2';
 
 const S = Object.freeze({
   __proto__: null,

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Switch2 } from '../../atoms/Switch2';
-import { Body1 } from '../../atoms/text/Body1';
+
+import { Switch2 } from '@atoms/Switch2';
+import { Body1 } from '@atoms/text/Body1';
 
 const S = Object.freeze({
   __proto__: null,

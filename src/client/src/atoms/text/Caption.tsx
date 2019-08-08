@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Text } from '../../helpers/Text';
-import STYLES from '../../STYLE';
+
+import { Text } from '@src/helpers/Text';
+import STYLES from '@src/STYLE';
 
 export const Caption = styled(Text)`
   font-family: ${STYLES.text.caption.fontFamily};

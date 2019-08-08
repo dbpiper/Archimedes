@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import STYLES from '../../STYLE';
+
+import STYLES from '@src/STYLE';
 
 // the box model adds the width/height to the padding, so in order
 // to achieve the correct padding _and_ total width/height we need to

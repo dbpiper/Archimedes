@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import STYLE from '../STYLE';
+
+import STYLE from '@src/STYLE';
 
 const S = Object.freeze({
   OrLine2: styled.div`
