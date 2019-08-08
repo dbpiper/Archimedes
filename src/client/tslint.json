@@ -26,7 +26,8 @@
         "config",
         "src",
         "actions",
-        "util"
+        "util",
+        "@util"
       ]
     ],
     "no-submodule-imports": [

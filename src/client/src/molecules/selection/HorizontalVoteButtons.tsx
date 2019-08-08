@@ -5,14 +5,18 @@ import { VoteButton } from './VoteButton';
 
 const S = Object.freeze({
   __proto__: null,
-  VerticalVoteButtons: styled.div`
+  HorizontalVoteButtons: styled.div`
     display: grid;
     gap: 20px;
-    grid: 25px 25px / 25px;
+    grid: 33px / 25px 25px;
+    place-items: top;
+  `,
+  DownVoteWrapper: styled.div`
+    padding-top: 8px;
   `,
 });
 
-export const VerticalVoteButtons = ({ vote }: { vote: Vote }) => {
+export const HorizontalVoteButtons = ({ vote }: { vote: Vote }) => {
   const [voteButtonsState, setVoteButtonsState] = useVoteButtonsState(vote);
   const handleUpClick = () => {
     setVoteButtonsState(Vote.Up);
@@ -22,15 +26,17 @@ export const VerticalVoteButtons = ({ vote }: { vote: Vote }) => {
   };
 
   return (
-    <S.VerticalVoteButtons>
+    <S.HorizontalVoteButtons>
       <VoteButton onClick={handleUpClick} on={voteButtonsState.upOn} />
-      <VoteButton
-        onClick={handleDownClick}
-        down={true}
-        on={voteButtonsState.downOn}
-      />
-    </S.VerticalVoteButtons>
+      <S.DownVoteWrapper>
+        <VoteButton
+          onClick={handleDownClick}
+          down={true}
+          on={voteButtonsState.downOn}
+        />
+      </S.DownVoteWrapper>
+    </S.HorizontalVoteButtons>
   );
 };
 
-VerticalVoteButtons.defaultProps = { vote: Vote.None };
+HorizontalVoteButtons.defaultProps = { vote: Vote.None };

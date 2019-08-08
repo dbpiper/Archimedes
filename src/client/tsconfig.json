@@ -9,6 +9,9 @@
         "screens/App/shared/*",
         "screens/App/screens/Home/shared/*"
       ],
+      "@util/*": [
+        "util/*"
+      ],
       "App": [
         "screens/App"
       ],
