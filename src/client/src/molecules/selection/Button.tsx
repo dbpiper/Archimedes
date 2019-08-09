@@ -68,6 +68,9 @@ const S = Object.freeze({
     }
   `,
   TextButton: styled(BaseButton)<{ secondary?: boolean }>`
+    display: inline-flex;
+    padding: 3.75px 7.5px 3.75px;
+
     background-image: linear-gradient(
       0deg,
       ${STYLES.color.lightPrimary},
