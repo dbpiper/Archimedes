@@ -8,7 +8,7 @@ const S = Object.freeze({
   __proto__: null,
   HorizontalVoteButtons: styled.div`
     display: grid;
-    gap: 20px;
+    gap: 10px;
     grid: 33px / 25px 25px;
     place-items: top;
   `,

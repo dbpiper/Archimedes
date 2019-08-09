@@ -1,15 +1,14 @@
-import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
 import { Caption } from '@atoms/text/Caption';
 import { Button, ButtonStyle } from '@molecules/selection/Button';
-import { StorybookWrapper } from '@src/helpers/StorybookWrapper';
+import { getDurationForLabel } from '@util/getDurationForLabel';
 
 const S = Object.freeze({
   __proto__: null,
   MessageActions: styled.div`
-    width: 173px;
+    width: 128px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -20,28 +19,24 @@ const S = Object.freeze({
   `,
 });
 
+/**
+ *
+ * All DateTimes are expected to be ISO 8601 formatted DateTime strings.
+ *
+ */
 export const MessageActions = ({
   messageArrivalDateTime,
   comparisonDateTime,
 }: {
   messageArrivalDateTime: string;
   comparisonDateTime?: string;
-}) => {
-  const _comparisonDateTime = comparisonDateTime
-    ? comparisonDateTime
-    : moment.utc().toISOString();
-
-  const messageArrivalMoment = moment.utc(messageArrivalDateTime).local();
-  const comparisonMoment = moment.utc(_comparisonDateTime).local();
-
-  return (
-    <StorybookWrapper>
-      <S.MessageActions>
-        <Button buttonStyle={ButtonStyle.Text}>reply</Button>
-        <S.CaptionWrapper>
-          <Caption>{messageArrivalMoment.from(comparisonMoment)}</Caption>
-        </S.CaptionWrapper>
-      </S.MessageActions>
-    </StorybookWrapper>
-  );
-};
+}) => (
+    <S.MessageActions>
+      <Button buttonStyle={ButtonStyle.Text}>reply</Button>
+      <S.CaptionWrapper>
+        <Caption>
+          {getDurationForLabel(messageArrivalDateTime, comparisonDateTime)}
+        </Caption>
+      </S.CaptionWrapper>
+    </S.MessageActions>
+);
