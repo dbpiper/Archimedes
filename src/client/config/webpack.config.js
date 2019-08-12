@@ -75,11 +75,11 @@ module.exports = (webpackEnvironment) => {
       isEnvironmentDevelopment && require.resolve('style-loader'),
       isEnvironmentProduction && {
         loader: MiniCssExtractPlugin.loader,
-        options: Object.assign({},
-          shouldUseRelativeAssetPaths ? {
+        options: {
+          ...(shouldUseRelativeAssetPaths ? {
             publicPath: '../../'
-          } : undefined,
-        ),
+          } : undefined),
+        },
       },
       {
         loader: require.resolve('css-loader'),
@@ -520,11 +520,9 @@ module.exports = (webpackEnvironment) => {
       }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
-        Object.assign({}, {
-            inject: true,
+        ({ inject: true,
             template: paths.appHtml,
-          },
-          isEnvironmentProduction ? {
+          ...(isEnvironmentProduction ? {
             minify: {
               removeComments: true,
               collapseWhitespace: true,
@@ -538,8 +536,8 @@ module.exports = (webpackEnvironment) => {
               minifyURLs: true,
             },
           } :
-          undefined,
-        ),
+          undefined),
+        }),
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
