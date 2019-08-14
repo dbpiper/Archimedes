@@ -45,6 +45,7 @@ const STYLE = Object.freeze({
     warning: '#FF6700',
     information: '#0066FF',
     lightPrimary: '#FEFEFA',
+    lightSecondary: '#F0F0EC',
     darkPrimary: '#343434',
     darkSecondary: '#414A4C',
     onPrimary: '#FEFEFA',
