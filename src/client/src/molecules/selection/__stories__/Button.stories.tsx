@@ -1,3 +1,4 @@
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
@@ -22,6 +23,32 @@ storiesOf(
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Contained} secondary={true}>
       sign in
+    </Button>
+  </StorybookWrapper>
+));
+
+storiesOf(
+  `molecules/selection/${componentName}/contained/primary/icon`,
+  module,
+).addWithJSX(componentName, () => (
+  <StorybookWrapper>
+    <Button buttonStyle={ButtonStyle.Contained} icon={faGoogle}>
+      sign in with Google
+    </Button>
+  </StorybookWrapper>
+));
+
+storiesOf(
+  `molecules/selection/${componentName}/contained/secondary/icon`,
+  module,
+).addWithJSX(componentName, () => (
+  <StorybookWrapper>
+    <Button
+      buttonStyle={ButtonStyle.Contained}
+      secondary={true}
+      icon={faGoogle}
+    >
+      sign in with Google
     </Button>
   </StorybookWrapper>
 ));

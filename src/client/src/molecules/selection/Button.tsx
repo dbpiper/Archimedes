@@ -1,7 +1,10 @@
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { Icon } from '@atoms/Icon';
 import { Button1 } from '@atoms/text/Button1';
+import { Text } from '@src/helpers/Text';
 import STYLES from '@src/STYLE';
 
 export enum ButtonStyle {
@@ -15,7 +18,10 @@ const BaseButton = styled.button`
   border: 0;
   background: none;
   background-color: none;
+  display: flex;
   place-content: center;
+  align-items: center;
+  align-content: center;
   outline: none !important;
   appearance: none;
   border-radius: 5px;
@@ -23,6 +29,14 @@ const BaseButton = styled.button`
 
 const S = Object.freeze({
   __proto__: null,
+  IconContainer: styled(Text)<{ secondary?: boolean }>`
+    color: ${props =>
+      props.secondary ? STYLES.color.onSecondary : STYLES.color.onPrimary};
+    margin-left: -10px;
+    margin-right: 15px;
+    /* we want to simply use the height of the child icon */
+    line-height: 0;
+  `,
   ContainedButton: styled(BaseButton)<{ secondary?: boolean }>`
     background-color: ${props =>
       props.secondary ? STYLES.color.secondary : STYLES.color.primary};
@@ -108,14 +122,24 @@ export const Button = ({
   children,
   secondary,
   buttonStyle,
+  icon,
 }: {
   children: ReactNode;
   secondary: boolean;
   buttonStyle: ButtonStyle;
+  icon?: IconDefinition;
 }) => {
   const SelectedButton = getSelectedButtonStyle(buttonStyle);
   return (
     <SelectedButton secondary={secondary}>
+      {/* we only support icons on contained buttons */}
+      {icon && buttonStyle === ButtonStyle.Contained ? (
+        <S.IconContainer secondary={secondary}>
+          <Icon icon={icon} />
+        </S.IconContainer>
+      ) : (
+        <></>
+      )}
       <Button1 buttonStyle={buttonStyle} secondary={secondary}>
         {children}
       </Button1>

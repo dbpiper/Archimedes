@@ -27,6 +27,25 @@ describe(`${componentName}/contained test suite`, () => {
       );
       cy.matchImageSnapshot();
     });
+
+    describe('icon test suite', () => {
+      before(() => {
+        visitComponentStoryIframe(
+          getStorybookUrl(),
+          `${buttonPath}/contained/primary/icon`,
+          componentName,
+        );
+      });
+
+      specify('default view looks correct', () => {
+        verifyCssProperty(
+          CssProperty.BackgroundColor,
+          STYLES.color.primary,
+          buttonRegex,
+        );
+        cy.matchImageSnapshot();
+      });
+    });
   });
 
   describe('secondary test suite', () => {
@@ -45,6 +64,25 @@ describe(`${componentName}/contained test suite`, () => {
         buttonRegex,
       );
       cy.matchImageSnapshot();
+    });
+
+    describe('icon test suite', () => {
+      before(() => {
+        visitComponentStoryIframe(
+          getStorybookUrl(),
+          `${buttonPath}/contained/secondary/icon`,
+          componentName,
+        );
+      });
+
+      specify('default view looks correct', () => {
+        verifyCssProperty(
+          CssProperty.BackgroundColor,
+          STYLES.color.secondary,
+          buttonRegex,
+        );
+        cy.matchImageSnapshot();
+      });
     });
   });
 });
