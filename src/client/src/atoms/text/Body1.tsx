@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Text } from '@src/helpers/Text';
+import { Text } from '@atoms/helpers/Text';
 import STYLES from '@src/STYLE';
 
 export const Body1 = styled(Text)`

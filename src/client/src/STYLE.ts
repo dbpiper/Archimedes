@@ -48,6 +48,7 @@ const STYLE = Object.freeze({
     lightSecondary: '#F0F0EC',
     darkPrimary: '#343434',
     darkSecondary: '#414A4C',
+    darkSecondaryLight: '#5C686B',
     onPrimary: '#FEFEFA',
     onSecondary: '#FEFEFA',
   }),

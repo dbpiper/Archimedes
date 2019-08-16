@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
+import { Text } from '@atoms/helpers/Text';
 import { ButtonStyle } from '@molecules/selection/Button';
-import { Text } from '@src/helpers/Text';
 import STYLES from '@src/STYLE';
 
 const getColor = (

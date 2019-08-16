@@ -2,7 +2,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
-import { StorybookWrapper } from '../../../helpers/StorybookWrapper';
+import { StorybookWrapper } from '../../../shared/helpers/StorybookWrapper';
 import { Button, ButtonStyle } from '../Button';
 
 const componentName = getDisplayName(Button);

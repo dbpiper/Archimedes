@@ -3,7 +3,7 @@ import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
 const componentName = 'SearchField';
 const searchFieldPath = `molecules/input/${componentName}`;
-const searchFieldInputRegex = /SearchField.{2}Input*/;
+const inputRegex = /.*Input-.*/;
 const clearInputButtonRegex = /.*ClearInputButton.*/;
 
 describe(`${componentName}/large test suite`, () => {
@@ -20,22 +20,32 @@ describe(`${componentName}/large test suite`, () => {
   });
 
   specify('looks correct after typing', () => {
-    findElementRegex(searchFieldInputRegex).type('the');
+    findElementRegex(inputRegex).type('the');
+    cy.matchImageSnapshot();
+    findElementRegex(clearInputButtonRegex).click();
+  });
+
+  specify('correctly selects whatever you type', () => {
+    findElementRegex(inputRegex)
+      .type('the quick brown fox jumped over the lazy dog')
+      .type('{enter}');
     cy.matchImageSnapshot();
     findElementRegex(clearInputButtonRegex).click();
   });
 
   specify('correctly selects first result', () => {
-    findElementRegex(searchFieldInputRegex)
+    findElementRegex(inputRegex)
       .type('the')
+      .type('{downarrow}')
       .type('{enter}');
     cy.matchImageSnapshot();
     findElementRegex(clearInputButtonRegex).click();
   });
 
   specify('correctly selects second result', () => {
-    findElementRegex(searchFieldInputRegex)
+    findElementRegex(inputRegex)
       .type('the')
+      .type('{downarrow}')
       .type('{downarrow}')
       .type('{enter}');
     cy.matchImageSnapshot();
@@ -57,22 +67,32 @@ describe(`${componentName}/small test suite`, () => {
   });
 
   specify('looks correct after typing', () => {
-    findElementRegex(searchFieldInputRegex).type('the');
+    findElementRegex(inputRegex).type('the');
     cy.matchImageSnapshot();
     findElementRegex(clearInputButtonRegex).click();
   });
 
-  specify('correctly selects first result', () => {
-    findElementRegex(searchFieldInputRegex)
+  specify('correctly selects whatever you type', () => {
+    findElementRegex(inputRegex)
       .type('the')
       .type('{enter}');
     cy.matchImageSnapshot();
     findElementRegex(clearInputButtonRegex).click();
   });
 
-  specify('correctly selects second result', () => {
-    findElementRegex(searchFieldInputRegex)
+  specify('correctly selects first result', () => {
+    findElementRegex(inputRegex)
       .type('the')
+      .type('{downarrow}')
+      .type('{enter}');
+    cy.matchImageSnapshot();
+    findElementRegex(clearInputButtonRegex).click();
+  });
+
+  specify('correctly selects second result', () => {
+    findElementRegex(inputRegex)
+      .type('the')
+      .type('{downarrow}')
       .type('{downarrow}')
       .type('{enter}');
     cy.matchImageSnapshot();

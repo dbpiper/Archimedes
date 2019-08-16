@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
-import { StorybookWrapper } from '../../../helpers/StorybookWrapper';
+import { StorybookWrapper } from '../../../shared/helpers/StorybookWrapper';
 import { VoteButton } from '../VoteButton';
 
 storiesOf('molecules/selection/VoteButton/up/off', module).addWithJSX(

@@ -2,9 +2,9 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { Text } from '@atoms/helpers/Text';
 import { Icon } from '@atoms/Icon';
 import { Button1 } from '@atoms/text/Button1';
-import { Text } from '@src/helpers/Text';
 import STYLES from '@src/STYLE';
 
 export enum ButtonStyle {
