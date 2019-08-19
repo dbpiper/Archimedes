@@ -1,55 +1,76 @@
-import STYLES from '../../../../src/STYLE';
+import STYLES from '@src/STYLE';
+import { translateX } from '@util/css';
 import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+  CssProperty,
+  verifyCssProperty,
+  verifyCssPropertyAndClick,
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-import {
-  clickAndVerifyTransform,
-  verifyBgColor,
-} from '../../../util/archimedes';
+const componentName = 'Switch2';
+const switch2Path = `atoms/${componentName}`;
 
-import { translateX } from '../../../util/css';
-
-const SwitchTrackRegex = /Switch2.{2}Track.*/;
-const ThumbRegex = /Switch2.{2}Thumb.*/;
+const switchTrackRegex = /Switch2.{2}Track.*/;
+const thumbRegex = /Switch2.{2}Thumb.*/;
 
 // the offset from the left, in pixels that the thumb is when in the on position
 const offsetOnRightSide = 19;
 
-describe('Switch2/off test suite', () => {
+describe(`${componentName}/off test suite`, () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/off');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch2Path}/off`,
+      componentName,
+    );
   });
   specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.darkSecondary,
+      switchTrackRegex,
+    );
+    cy.matchImageSnapshot();
   });
 
   specify('looks good after click', () => {
-    clickAndVerifyTransform(
+    verifyCssPropertyAndClick(
+      CssProperty.Transform,
       translateX(0),
       translateX(offsetOnRightSide),
-      ThumbRegex,
-      SwitchTrackRegex,
+      thumbRegex,
+      switchTrackRegex,
     );
+    cy.matchImageSnapshot();
   });
 });
 
-describe('Switch2/on test suite', () => {
+describe(`${componentName}/on test suite`, () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch2', 'Switch2/on');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      `${switch2Path}/on`,
+      componentName,
+    );
   });
   specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.primary, SwitchTrackRegex);
+    verifyCssProperty(
+      CssProperty.BackgroundColor,
+      STYLES.color.primary,
+      switchTrackRegex,
+    );
+    cy.matchImageSnapshot();
   });
 
   specify('looks good after click', () => {
-    clickAndVerifyTransform(
+    verifyCssPropertyAndClick(
+      CssProperty.Transform,
       translateX(offsetOnRightSide),
       translateX(0),
-      ThumbRegex,
-      SwitchTrackRegex,
+      thumbRegex,
+      switchTrackRegex,
     );
+    cy.matchImageSnapshot();
   });
 });
 

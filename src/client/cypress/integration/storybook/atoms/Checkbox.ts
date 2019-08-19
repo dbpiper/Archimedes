@@ -1,60 +1,74 @@
-import STYLES from '../../../../src/STYLE';
+import STYLES from '@src/STYLE';
 import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+  CssProperty,
+  verifyCssProperty,
+  verifyCssPropertyAndClick,
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-import { clickAndVerifyBgColor, verifyBgColor } from '../../../util/archimedes';
+const componentName = 'Checkbox';
+const checkboxPath = `atoms/${componentName}`;
+const checkboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
+const boxDarkRegex = /Checkbox.{2}BoxDark.*/;
 
-const CheckboxContainerRegex = /Checkbox.{2}CheckboxContainer.*/;
-const BoxDarkRegex = /Checkbox.{2}BoxDark.*/;
+describe(`${componentName} test suite`, () => {
+  describe('unchecked test suite', () => {
+    before(() => {
+      visitComponentStoryIframe(
+        getStorybookUrl(),
+        `${checkboxPath}/unchecked`,
+        componentName,
+      );
+    });
 
-describe('Checkbox/unchecked test suite', () => {
-  specify('successfully loads', () => {
-    visitComponentStoryIframe(
-      getStorybookUrl(),
-      'Checkbox',
-      'Checkbox/unchecked',
-    );
-  });
-
-  describe('Checkbox tests', () => {
     specify('default view looks correct', () => {
-      verifyBgColor(STYLES.color.darkSecondary, BoxDarkRegex);
+      verifyCssProperty(
+        CssProperty.BackgroundColor,
+        STYLES.color.darkSecondary,
+        boxDarkRegex,
+      );
+      cy.matchImageSnapshot();
     });
 
     specify('looks good after click', () => {
-      clickAndVerifyBgColor(
+      verifyCssPropertyAndClick(
+        CssProperty.BackgroundColor,
         STYLES.color.darkSecondary,
         STYLES.color.primary,
-        BoxDarkRegex,
-        CheckboxContainerRegex,
+        boxDarkRegex,
+        checkboxContainerRegex,
       );
+      cy.matchImageSnapshot();
     });
   });
-});
 
-describe('Checkbox/checked test suite', () => {
-  specify('successfully loads', () => {
-    visitComponentStoryIframe(
-      getStorybookUrl(),
-      'Checkbox',
-      'Checkbox/checked',
-    );
-  });
+  describe('checked test suite', () => {
+    before(() => {
+      visitComponentStoryIframe(
+        getStorybookUrl(),
+        `${checkboxPath}/checked`,
+        componentName,
+      );
+    });
 
-  describe('Checkbox tests', () => {
     specify('default view looks correct', () => {
-      verifyBgColor(STYLES.color.primary, BoxDarkRegex);
+      verifyCssProperty(
+        CssProperty.BackgroundColor,
+        STYLES.color.primary,
+        boxDarkRegex,
+      );
+      cy.matchImageSnapshot();
     });
 
     specify('looks good after click', () => {
-      clickAndVerifyBgColor(
+      verifyCssPropertyAndClick(
+        CssProperty.BackgroundColor,
         STYLES.color.primary,
         STYLES.color.darkSecondary,
-        BoxDarkRegex,
-        CheckboxContainerRegex,
+        boxDarkRegex,
+        checkboxContainerRegex,
       );
+      cy.matchImageSnapshot();
     });
   });
 });

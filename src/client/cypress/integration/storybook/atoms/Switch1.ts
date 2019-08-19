@@ -1,53 +1,77 @@
-import STYLES from '../../../../src/STYLE';
+import STYLES from '@src/STYLE';
+import { translateX } from '@util/css';
 import {
-  clickAndVerifyTransform,
-  verifyBgColor,
-} from '../../../util/archimedes';
-import { translateX } from '../../../util/css';
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+  CssProperty,
+  verifyCssProperty,
+  verifyCssPropertyAndClick,
+} from '@util/cypress';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-const SwitchTrackRegex = /Switch1.{2}Track.*/;
-const ThumbRegex = /Switch1.{2}Thumb.*/;
+const componentName = 'Switch1';
+const switch1Path = `atoms/${componentName}`;
+const switchTrackRegex = /Switch1.{2}Track.*/;
+const thumbRegex = /Switch1.{2}Thumb.*/;
 
 // the offset from the left, in pixels that the thumb is when in the on position
 const offsetOnRightSide = 27;
 
-describe('Switch1/off test suite', () => {
-  before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch1', 'Switch1/off');
-  });
-  specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.darkSecondary, SwitchTrackRegex);
+describe(`${componentName} test suite`, () => {
+  describe('off test suite', () => {
+    before(() => {
+      visitComponentStoryIframe(
+        getStorybookUrl(),
+        `${switch1Path}/off`,
+        componentName,
+      );
+    });
+    specify('default view looks correct', () => {
+      verifyCssProperty(
+        CssProperty.BackgroundColor,
+        STYLES.color.darkSecondary,
+        switchTrackRegex,
+      );
+      cy.matchImageSnapshot();
+    });
+
+    specify('looks good after click', () => {
+      verifyCssPropertyAndClick(
+        CssProperty.Transform,
+        translateX(0),
+        translateX(offsetOnRightSide),
+        thumbRegex,
+        switchTrackRegex,
+      );
+      cy.matchImageSnapshot();
+    });
   });
 
-  specify('looks good after click', () => {
-    clickAndVerifyTransform(
-      translateX(0),
-      translateX(offsetOnRightSide),
-      ThumbRegex,
-      SwitchTrackRegex,
-    );
-  });
-});
+  describe('on test suite', () => {
+    before(() => {
+      visitComponentStoryIframe(
+        getStorybookUrl(),
+        `${switch1Path}/on`,
+        componentName,
+      );
+    });
+    specify('default view looks correct', () => {
+      verifyCssProperty(
+        CssProperty.BackgroundColor,
+        STYLES.color.primary,
+        switchTrackRegex,
+      );
+      cy.matchImageSnapshot();
+    });
 
-describe('Switch1/on test suite', () => {
-  before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Switch1', 'Switch1/on');
-  });
-  specify('default view looks correct', () => {
-    verifyBgColor(STYLES.color.primary, SwitchTrackRegex);
-  });
-
-  specify('looks good after click', () => {
-    clickAndVerifyTransform(
-      translateX(offsetOnRightSide),
-      translateX(0),
-      ThumbRegex,
-      SwitchTrackRegex,
-    );
+    specify('looks good after click', () => {
+      verifyCssPropertyAndClick(
+        CssProperty.Transform,
+        translateX(offsetOnRightSide),
+        translateX(0),
+        thumbRegex,
+        switchTrackRegex,
+      );
+      cy.matchImageSnapshot();
+    });
   });
 });
 

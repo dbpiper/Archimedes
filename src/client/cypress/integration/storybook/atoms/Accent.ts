@@ -1,17 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('Accent', () => {
-  specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Accent');
+const componentName = 'Accent';
+
+describe(`${componentName} test suite`, () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', componentName);
   });
 
-  describe('accent tests', () => {
-    specify('it looks correct', () => {
-      cy.matchImageSnapshot();
-    });
+  specify('it looks correct', () => {
+    cy.matchImageSnapshot();
   });
 });
 

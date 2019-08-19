@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import STYLE from '../STYLE';
+
+import STYLE from '@src/STYLE';
 import {
   AnimationDuration,
   animationDurationToString,
   parseAnimationDuration,
-} from '../util/animationDuration';
+} from '@util/animationDuration';
 import {
   createBinaryAnimation,
   currentBinaryAnimation,
-} from '../util/animationHelpers';
-import { createCubicBezier } from '../util/cubicBezier';
+} from '@util/animationHelpers';
+import { createCubicBezier } from '@util/cubicBezier';
 
 // tslint:disable-next-line: no-var-requires
-const Checkmark = require('../assets/Checkmark.svg') as string;
+const Checkmark = require('@src/assets/Checkmark.svg') as string;
 
 const Keyframes = Object.freeze({
   __proto__: null,

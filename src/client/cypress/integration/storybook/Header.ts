@@ -1,4 +1,4 @@
-import { findElementRegex } from '../../util/archimedes';
+import { findElementRegex } from '../../util/cypress';
 import {
   getStorybookUrl,
   visitComponentStoryIframe,
@@ -6,7 +6,11 @@ import {
 
 describe('Header', () => {
   before('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'Header');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'App/shared/components',
+      'Header',
+    );
   });
   specify('the title is correct', () => {
     findElementRegex(/Header.{2}Title.*/).contains('Archimedes');

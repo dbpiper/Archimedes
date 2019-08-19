@@ -1,0 +1,38 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-config-euclid",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "linterOptions": {
+    "exclude": [
+      "**/node_modules/**",
+      "src/config/@types/**",
+      "**/templates/**"
+    ]
+  },
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "no-angle-bracket-type-assertion": true,
+    "no-any": {
+      "severity": "warning"
+    },
+    "no-implicit-dependencies": [
+      true,
+      "dev",
+      [
+        "@src",
+        "@util"
+      ]
+    ],
+    "no-submodule-imports": [
+      false
+    ],
+    "no-unsafe-any": {
+      "severity": "error"
+    },
+    "only-arrow-functions": true,
+    "prefer-conditional-expression": false
+  }
+}

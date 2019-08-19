@@ -2,7 +2,8 @@ import { faPlus, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import STYLE from '../STYLE';
+
+import STYLE from '@src/STYLE';
 
 const S = Object.freeze({
   FAB: styled.button`

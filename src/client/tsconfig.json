@@ -9,12 +9,24 @@
         "screens/App/shared/*",
         "screens/App/screens/Home/shared/*"
       ],
+      "@util/*": [
+        "util/*"
+      ],
+      "@src/*": [
+        "./*"
+      ],
+      "@atoms/*": [
+        "./atoms/*"
+      ],
+      "@molecules/*": [
+        "./molecules/*"
+      ],
       "App": [
         "screens/App"
       ],
       "App/*": [
         "screens/App/*"
-      ]
+      ],
     }
   },
   "exclude": [
@@ -24,6 +36,6 @@
   "extends": "../../tsconfig-base",
   "include": [
     "src/**/*",
-    "config/**/*", "src/molecules/controls/.tsx"
+    "config/**/*"
   ]
 }

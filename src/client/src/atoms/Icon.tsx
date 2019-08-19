@@ -5,9 +5,11 @@ import styled from 'styled-components';
 
 const S = Object.freeze({
   IconContainer: styled.div`
-    display: block;
+    display: inline-flex;
     width: 16px;
     height: 16px;
+    padding: 0;
+    margin: 0;
   `,
 });
 

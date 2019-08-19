@@ -1,17 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('OrLine2', () => {
-  specify('successfully loads', () => {
-    visitComponentStoryIframe(getStorybookUrl(), 'OrLine2');
+const componentName = 'OrLine2';
+
+describe(`${componentName} test suite`, () => {
+  before(() => {
+    visitComponentStoryIframe(getStorybookUrl(), 'atoms', componentName);
   });
 
-  describe('OrLine2 tests', () => {
-    specify('it looks correct', () => {
-      cy.matchImageSnapshot();
-    });
+  specify('it looks correct', () => {
+    cy.matchImageSnapshot();
   });
 });
 

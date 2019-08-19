@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import STYLE from '../STYLE';
+
+import STYLE from '@src/STYLE';
 import {
   AnimationDuration,
   parseAnimationDuration,
-} from '../util/animationDuration';
+} from '@util/animationDuration';
 import {
   createBinaryAnimation,
   currentBinaryAnimation,
-} from '../util/animationHelpers';
-import { createCubicBezier } from '../util/cubicBezier';
+} from '@util/animationHelpers';
+import { createCubicBezier } from '@util/cubicBezier';
 
 const Keyframes = Object.freeze({
   __proto__: null,
@@ -186,7 +187,7 @@ interface Switch1Props {
   animationDuration?: AnimationDuration;
   on: boolean;
   className?: string;
-  onChange?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 /**
@@ -199,7 +200,7 @@ interface Switch1Props {
 export const Switch1 = ({
   on,
   animationDuration = parseAnimationDuration('180ms'),
-  onChange,
+  onClick,
   className,
 }: Switch1Props) => {
   const [onInternal, setOnInternal] = useState(on);
@@ -209,8 +210,8 @@ export const Switch1 = ({
   ) => {
     setOnInternal(!onInternal);
     setClickCount(clickCount + 1);
-    if (onChange) {
-      onChange(event);
+    if (onClick) {
+      onClick(event);
     }
   };
 

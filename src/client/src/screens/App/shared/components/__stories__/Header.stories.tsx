@@ -9,7 +9,7 @@ import Header from 'App/shared/components/Header';
 
 const store = createStore(rootReducer);
 
-storiesOf('App/shared/components/Header', module).addWithJSX('Header', () => (
+storiesOf('App/shared/components', module).addWithJSX(Header.name, () => (
   <MockedProvider>
     <Provider store={store}>
       <Header />

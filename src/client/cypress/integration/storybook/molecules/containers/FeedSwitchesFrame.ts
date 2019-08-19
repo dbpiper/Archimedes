@@ -1,11 +1,14 @@
-import {
-  getStorybookUrl,
-  visitComponentStoryIframe,
-} from '../../../../util/storybook';
+import { getStorybookUrl, visitComponentStoryIframe } from '@util/storybook';
 
-describe('FeedSwitchesFrame test suite', () => {
+const componentName = 'FeedSwitchesFrame';
+
+describe(`${componentName} test suite`, () => {
   before(() => {
-    visitComponentStoryIframe(getStorybookUrl(), 'FeedSwitchesFrame');
+    visitComponentStoryIframe(
+      getStorybookUrl(),
+      'molecules/containers',
+      componentName,
+    );
   });
 
   specify('default view looks correct', () => {

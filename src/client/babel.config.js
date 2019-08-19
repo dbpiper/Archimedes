@@ -30,6 +30,10 @@ module.exports = function babelConfig(api) {
           App: './src/screens/App',
           config: './src/config',
           util: './src/util',
+          '@src': './src',
+          '@util': './src/util',
+          '@atoms': './src/atoms',
+          '@molecules': './src/molecules',
         },
         root: [
           './src',

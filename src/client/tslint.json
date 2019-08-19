@@ -26,7 +26,11 @@
         "config",
         "src",
         "actions",
-        "util"
+        "util",
+        "@util",
+        "@src",
+        "@atoms",
+        "@molecules"
       ]
     ],
     "no-submodule-imports": [
