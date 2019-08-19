@@ -10,7 +10,7 @@
     "@types/dotenv": "^6.1.1",
     "@types/gulp": "^4.0.6",
     "@types/wait-on": "^3.2.0",
-    "acorn": "^6.3.0",
+    "acorn": "^7.0.0",
     "acorn-jsx": "^5.0.1",
     "dotenv": "^8.1.0",
     "gulp": "^4.0.2",
