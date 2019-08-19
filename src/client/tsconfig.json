@@ -21,6 +21,9 @@
       "@molecules/*": [
         "./molecules/*"
       ],
+      "@organisms/*": [
+        "./organisms/*"
+      ],
       "App": [
         "screens/App"
       ],
@@ -36,6 +39,6 @@
   "extends": "../../tsconfig-base",
   "include": [
     "src/**/*",
-    "config/**/*"
+    "config/**/*", "src/organisms/cards/ProjectCardContents.tsx"
   ]
 }

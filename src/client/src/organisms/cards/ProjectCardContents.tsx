@@ -1,0 +1,66 @@
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+
+import { SmallProjectImage } from '@atoms/SmallProjectImage';
+import { Subtitle1 } from '@atoms/text/Subtitle1';
+import { SmallProjectAdditionalInfo } from '@molecules/output/SmallProjectAdditionalInfo';
+import { SmallProjectDescription } from '@molecules/output/SmallProjectDescription';
+
+const S = Object.freeze({
+  __proto__: null,
+  ProjectCardContents: styled.div`
+    display: flex;
+    outline: none;
+    border: 0;
+
+    width: 444px;
+    height: 105px;
+  `,
+  ProjectTitle: styled.span`
+    display: inline-flex;
+  `,
+  ProjectName: styled.span`
+    display: inline;
+    font-weight: bold;
+  `,
+  TextContent: styled.span`
+    display: inline-flex;
+    height: 105px;
+    flex-direction: column;
+  `,
+});
+
+export const ProjectCardContents = ({
+  userName,
+  projectName,
+  stars,
+  language,
+  imageSrc,
+  children,
+  className,
+}: {
+  stars: number;
+  language: string;
+  imageSrc: string;
+  className?: string;
+  children: ReactNode;
+  userName: string;
+  projectName: string;
+}) => (
+  <S.ProjectCardContents className={className}>
+    <SmallProjectImage src={imageSrc} />
+
+    <S.TextContent>
+      <S.ProjectTitle>
+        <Subtitle1>
+          {userName}/<S.ProjectName>{projectName}</S.ProjectName>
+        </Subtitle1>
+      </S.ProjectTitle>
+
+      <br />
+
+      <SmallProjectAdditionalInfo stars={stars} language={language} />
+      <SmallProjectDescription>{children}</SmallProjectDescription>
+    </S.TextContent>
+  </S.ProjectCardContents>
+);

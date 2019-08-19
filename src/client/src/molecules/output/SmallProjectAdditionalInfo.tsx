@@ -7,14 +7,16 @@ import { Caption } from '@atoms/text/Caption';
 
 const S = Object.freeze({
   __proto__: null,
-  SmallProjectAdditionalInfo: styled.div`
+  SmallProjectAdditionalInfo: styled.span`
     width: 95px;
     height: 16px;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+
+    margin-bottom: 10px;
   `,
-  LanguageColorDot: styled.div<{ languageColor: string }>`
+  LanguageColorDot: styled.span<{ languageColor: string }>`
     background-color: ${props => props.languageColor};
     width: 10px;
     height: 10px;

@@ -30,7 +30,8 @@
         "@util",
         "@src",
         "@atoms",
-        "@molecules"
+        "@molecules",
+        "@organisms"
       ]
     ],
     "no-submodule-imports": [
