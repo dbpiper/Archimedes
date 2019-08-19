@@ -1,16 +1,11 @@
+import { Query } from '@apollo/react-components';
+import { ApolloError } from 'apollo-client';
 import _ from 'lodash';
 import marked from 'marked';
 import React from 'react';
-import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import getReleasesQuery from '../queries/getReleasesQuery';
-import {
-  Releases,
-  Releases_releases,
-  ReleasesVariables,
-} from '../queries/types/Releases';
-
-class ReleasesQuery extends Query<Releases, ReleasesVariables> {}
+import { Releases, Releases_releases } from '../queries/types/Releases';
 
 const ScrollableSection = styled.section`
   overflow-y: auto !important;
@@ -22,7 +17,7 @@ const ScrollableSection = styled.section`
 `;
 
 const ReleaseList = () => (
-  <ReleasesQuery
+  <Query
     query={getReleasesQuery}
     variables={{
       owner: 'facebook',
@@ -30,7 +25,7 @@ const ReleaseList = () => (
       last: 5,
     }}
   >
-    {({ error, data }) => {
+    {({ error, data }: { data: Releases; error?: ApolloError }) => {
       let releases: Releases_releases[] = [];
       if (data && data.releases) {
         const nonNullReleases = _.filter(data.releases, element => {
@@ -81,7 +76,7 @@ const ReleaseList = () => (
         </ScrollableSection>
       );
     }}
-  </ReleasesQuery>
+  </Query>
 );
 
 export default ReleaseList;
