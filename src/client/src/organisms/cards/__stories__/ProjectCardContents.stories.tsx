@@ -17,9 +17,8 @@ storiesOf('organisms/cards', module).addWithJSX(
       stars={14500}
       imageSrc={prismaLogo}
       language="Scala"
-    >
-      💾 Database Tools incl. ORM, Migrations and Admin UI (Postgres, MySQL &
-      MongoDB)
-    </ProjectCardContents>
+      description="💾 Database Tools incl. ORM, Migrations and
+      Admin UI (Postgres, MySQL & MongoDB)"
+    />
   ),
 );

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { SmallProjectImage } from '@atoms/SmallProjectImage';
@@ -8,8 +8,8 @@ import { SmallProjectDescription } from '@molecules/output/SmallProjectDescripti
 
 const S = Object.freeze({
   __proto__: null,
-  ProjectCardContents: styled.div`
-    display: flex;
+  ProjectCardContents: styled.span`
+    display: inline-flex;
     outline: none;
     border: 0;
 
@@ -36,14 +36,14 @@ export const ProjectCardContents = ({
   stars,
   language,
   imageSrc,
-  children,
+  description,
   className,
 }: {
   stars: number;
   language: string;
   imageSrc: string;
   className?: string;
-  children: ReactNode;
+  description: string;
   userName: string;
   projectName: string;
 }) => (
@@ -60,7 +60,7 @@ export const ProjectCardContents = ({
       <br />
 
       <SmallProjectAdditionalInfo stars={stars} language={language} />
-      <SmallProjectDescription>{children}</SmallProjectDescription>
+      <SmallProjectDescription>{description}</SmallProjectDescription>
     </S.TextContent>
   </S.ProjectCardContents>
 );

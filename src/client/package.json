@@ -57,6 +57,7 @@
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1",
     "gulp": "^4.0.2",
+    "hex-to-rgba": "^2.0.1",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "identity-obj-proxy": "^3.0.0",
     "iex-api": "^0.0.3",
