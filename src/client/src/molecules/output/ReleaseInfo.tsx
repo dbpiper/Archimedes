@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Caption } from '@atoms/text/Caption';
 import { Subtitle2 } from '@atoms/text/Subtitle2';
+import { SemVerCategory } from '@util/enums/SemVerCategory';
 
 const S = Object.freeze({
   __proto__: null,
@@ -21,7 +22,7 @@ export const ReleaseInfo = ({
   semVerCategory,
 }: {
   releaseDate: string;
-  semVerCategory: string;
+  semVerCategory: SemVerCategory;
 }) => (
   <S.ReleaseInfo>
     <Caption>
