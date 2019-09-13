@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown, {
   MarkdownAbstractSyntaxTree,
   NodeType,
 } from 'react-markdown';
+import ReactResizeDetector from 'react-resize-detector';
 import styled from 'styled-components';
 
+import { Body1 } from '@atoms/text/Body1';
 import { Body2 } from '@atoms/text/Body2';
 import { H6 } from '@atoms/text/H6';
+
+const containerHeight = 50;
 
 const S = Object.freeze({
   __proto__: null,
   SmallReleaseDescription: styled.div`
     width: 311px;
-    height: 46px;
-    display: block;
+    height: ${containerHeight}px;
+    display: inline-block;
     overflow-y: hidden;
   `,
   Markdown: styled(ReactMarkdown)`
@@ -25,6 +29,13 @@ const S = Object.freeze({
 
     ul {
       margin: 0;
+    }
+  `,
+  EllipsisContainer: styled.div`
+    line-height: 0.5;
+
+    p {
+      line-height: 0;
     }
   `,
 });
@@ -46,15 +57,52 @@ export const SmallReleaseDescription = ({
   releaseDescriptionMarkdown,
 }: {
   releaseDescriptionMarkdown: string;
-}) => (
-  <S.SmallReleaseDescription>
-    <S.Markdown
-      source={releaseDescriptionMarkdown}
-      renderers={{
-        text: Body2,
-        heading: H6,
-      }}
-      allowNode={allowNodesOtherThanTitle}
-    />
-  </S.SmallReleaseDescription>
-);
+}) => {
+  const [showEllipsis, setShowEllipsis] = useState(false);
+  const handleResize = (_width: number, height: number) => {
+    if (height > containerHeight) {
+      setShowEllipsis(true);
+    } else {
+      setShowEllipsis(false);
+    }
+
+    console.log(`
+
+
+
+
+
+
+    `);
+    console.log(height);
+    console.log(showEllipsis);
+  };
+
+  return (
+    <>
+      <S.SmallReleaseDescription>
+        <S.Markdown
+          source={releaseDescriptionMarkdown}
+          renderers={{
+            text: Body2,
+            heading: H6,
+          }}
+          allowNode={allowNodesOtherThanTitle}
+        />
+        <ReactResizeDetector
+          handleWidth={true}
+          handleHeight={true}
+          onResize={handleResize}
+          querySelector="[class^=SmallReleaseDescription__Markdown]"
+        />
+      </S.SmallReleaseDescription>
+      {showEllipsis ? (
+        <S.EllipsisContainer>
+          <Body1>…</Body1>
+        </S.EllipsisContainer>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+};
