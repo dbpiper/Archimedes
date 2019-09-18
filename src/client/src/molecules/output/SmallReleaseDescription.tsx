@@ -65,17 +65,6 @@ export const SmallReleaseDescription = ({
     } else {
       setShowEllipsis(false);
     }
-
-    console.log(`
-
-
-
-
-
-
-    `);
-    console.log(height);
-    console.log(showEllipsis);
   };
 
   return (

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { SmallProjectImage } from '@atoms/SmallProjectImage';
 import { Subtitle1 } from '@atoms/text/Subtitle1';
 import { ReleaseInfo } from '@molecules/output/ReleaseInfo';
-import { SmallProjectDescription } from '@molecules/output/SmallProjectDescription';
+import { SmallReleaseDescription } from '@molecules/output/SmallReleaseDescription';
 import { SemVerCategory } from '@util/enums/SemVerCategory';
 
 const S = Object.freeze({
@@ -34,7 +34,7 @@ const S = Object.freeze({
 export const ReleaseCardContents = ({
   projectName,
   imageSrc,
-  description,
+  releaseDescriptionMarkdown,
   className,
   releaseVersion,
   releaseDate,
@@ -42,7 +42,7 @@ export const ReleaseCardContents = ({
 }: {
   imageSrc: string;
   className?: string;
-  description: string;
+  releaseDescriptionMarkdown: string;
   projectName: string;
   releaseVersion: string;
   releaseDate: string;
@@ -60,7 +60,9 @@ export const ReleaseCardContents = ({
 
       <ReleaseInfo releaseDate={releaseDate} semVerCategory={semVerCategory} />
 
-      <SmallProjectDescription>{description}</SmallProjectDescription>
+      <SmallReleaseDescription
+        releaseDescriptionMarkdown={releaseDescriptionMarkdown}
+      />
     </S.TextContent>
   </S.ReleaseCardContents>
 );
