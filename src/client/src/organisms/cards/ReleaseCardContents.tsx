@@ -57,8 +57,6 @@ export const ReleaseCardContents = ({
         {_.capitalize(projectName)} v{releaseVersion}
       </Subtitle1>
 
-      <br />
-
       <ReleaseInfo releaseDate={releaseDate} semVerCategory={semVerCategory} />
 
       <SmallReleaseDescription
