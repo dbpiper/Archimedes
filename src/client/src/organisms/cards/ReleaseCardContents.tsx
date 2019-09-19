@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -53,7 +54,7 @@ export const ReleaseCardContents = ({
 
     <S.TextContent>
       <Subtitle1>
-        {projectName} v{releaseVersion}
+        {_.capitalize(projectName)} v{releaseVersion}
       </Subtitle1>
 
       <br />
