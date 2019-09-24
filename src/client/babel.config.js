@@ -34,6 +34,7 @@ module.exports = function babelConfig(api) {
           '@util': './src/util',
           '@atoms': './src/atoms',
           '@molecules': './src/molecules',
+          '@organisms': './src/organisms',
         },
         root: [
           './src',

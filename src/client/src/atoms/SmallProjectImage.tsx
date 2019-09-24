@@ -6,6 +6,9 @@ const S = Object.freeze({
   SmallProjectImage: styled.img`
     width: 118px;
     height: 105px;
+
+    margin-left: 15px;
+    margin-right: 15px;
   `,
 });
 

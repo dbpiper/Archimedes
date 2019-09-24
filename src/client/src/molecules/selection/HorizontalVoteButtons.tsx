@@ -6,11 +6,11 @@ import { VoteButton } from './VoteButton';
 
 const S = Object.freeze({
   __proto__: null,
-  HorizontalVoteButtons: styled.div`
-    display: grid;
-    gap: 10px;
-    grid: 33px / 25px 25px;
-    place-items: top;
+  HorizontalVoteButtons: styled.span`
+    display: inline-flex;
+  `,
+  Gap: styled.span`
+    margin-right: 10px;
   `,
   DownVoteWrapper: styled.div`
     padding-top: 8px;
@@ -28,7 +28,9 @@ export const HorizontalVoteButtons = ({ vote }: { vote: Vote }) => {
 
   return (
     <S.HorizontalVoteButtons>
-      <VoteButton onClick={handleUpClick} on={voteButtonsState.upOn} />
+      <S.Gap>
+        <VoteButton onClick={handleUpClick} on={voteButtonsState.upOn} />
+      </S.Gap>
       <S.DownVoteWrapper>
         <VoteButton
           onClick={handleDownClick}
