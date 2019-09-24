@@ -45,7 +45,7 @@ const allowNodesOtherThanTitle = (
   index: number,
   _parent: NodeType,
 ) => {
-  // remove the title as it is redundant with how we've designed the app return false;
+  // remove the title as it is redundant with how we've designed the app
   if (node.type === 'heading' && index === 0) {
     return false;
   }

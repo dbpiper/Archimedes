@@ -20,7 +20,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@svgr/webpack": "^4.3.2",
-    "@types/dompurify": "0.0.33",
     "@types/dotenv": "^6.1.1",
     "@types/marked": "^0.6.5",
     "@types/numeral": "0.0.26",
