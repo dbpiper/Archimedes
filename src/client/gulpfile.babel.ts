@@ -8,10 +8,10 @@ import ClientCommands from './config/client-commands';
 // Miscellaneous Helper Tasks
 
 const generateGraphQlTypes = () =>
-  terminalSpawn('npx babel-node scripts/generateGraphQLTypes.js').promise;
+  terminalSpawn('npx babel-node scripts/generate-graph-ql-types.js').promise;
 
 const schemaDownload = () =>
-  terminalSpawn('npx babel-node scripts/downloadSchema.js').promise;
+  terminalSpawn('npx babel-node scripts/download-schema.js').promise;
 
 // Static Checking
 

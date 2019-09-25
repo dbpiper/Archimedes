@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-console */
 
 // Do this as the first thing so that any code reading it knows the right env.
@@ -30,7 +31,7 @@ const {
 } = require('react-dev-utils/browsersHelper');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
+const createDevServerConfig = require('../config/webpack-dev-server.config');
 
 const isInteractive = process.stdout.isTTY;
 const errorExitCode = 1;

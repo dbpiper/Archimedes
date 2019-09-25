@@ -63,6 +63,8 @@
     "@types/ramda": "^0.26.19",
     "@types/request": "^2.48.2",
     "@types/ws": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.3.1",
     "apollo": "^2.18.0",
     "babel-register": "^6.26.0",
     "cheerio": "^1.0.0-rc.3",

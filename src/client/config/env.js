@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable unicorn/prevent-abbreviations */
 
 const fs = require('fs');

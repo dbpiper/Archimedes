@@ -39,6 +39,6 @@
   "extends": "../../tsconfig-base",
   "include": [
     "src/**/*",
-    "config/**/*", "src/organisms/cards/ProjectCardContents.tsx"
+    "config/**/*",
   ]
 }

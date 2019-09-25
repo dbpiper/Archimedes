@@ -4,7 +4,9 @@
     "tslint-config-euclid",
     "tslint-config-prettier"
   ],
-  "jsRules": {},
+  "jsRules": {
+    "no-empty": true
+  },
   "rules": {
     "no-angle-bracket-type-assertion": true,
     "no-unsafe-any": true,
