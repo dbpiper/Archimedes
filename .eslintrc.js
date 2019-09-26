@@ -115,10 +115,9 @@ module.exports = {
       'error',
       {
         rulesDirectory: [
-          '/home/david/usr/src/Archimedes/node_modules/tslint-react/rules',
-          '/home/david/usr/src/Archimedes/node_modules/tslint-eslint-rules/dist/rules',
-          '/home/david/usr/src/Archimedes/node_modules/tslint-consistent-codestyle/rules',
-          '/home/david/usr/src/Archimedes/node_modules/tslint-microsoft-contrib',
+          'tslint-react/rules',
+          'tslint-consistent-codestyle/rules',
+          'tslint-microsoft-contrib',
         ],
         rules: {
           ban: [
