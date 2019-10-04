@@ -16,7 +16,7 @@ function ensureSlash(inputPath, needsSlash) {
   const startChar = 0;
   const endChar = inputPath.length - diffFromLength;
   if (hasSlash && !needsSlash) {
-    return inputPath.substr(startChar, endChar);
+    return inputPath.slice(startChar, endChar);
   }
   if (!hasSlash && needsSlash) {
     return `${inputPath}/`;

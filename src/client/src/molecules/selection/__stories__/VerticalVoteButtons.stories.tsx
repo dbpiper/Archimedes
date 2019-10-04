@@ -1,9 +1,10 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { VerticalVoteButtons } from '../VerticalVoteButtons';
 
-storiesOf('molecules/selection', module).addWithJSX(
+addStoryWithJsx('molecules/selection', module)(
   getDisplayName(VerticalVoteButtons),
   () => <VerticalVoteButtons />,
 );

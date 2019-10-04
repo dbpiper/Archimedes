@@ -1,9 +1,10 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { SmallProjectDescription } from '../SmallProjectDescription';
 
-storiesOf('molecules/output', module).addWithJSX(
+addStoryWithJsx('molecules/output', module)(
   getDisplayName(SmallProjectDescription),
   () => (
     <SmallProjectDescription>

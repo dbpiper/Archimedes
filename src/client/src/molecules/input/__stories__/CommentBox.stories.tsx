@@ -1,9 +1,9 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { CommentBox } from '../CommentBox';
 
-storiesOf('molecules/input', module).addWithJSX(
-  getDisplayName(CommentBox),
-  () => <CommentBox />,
-);
+addStoryWithJsx('molecules/input', module)(getDisplayName(CommentBox), () => (
+  <CommentBox />
+));

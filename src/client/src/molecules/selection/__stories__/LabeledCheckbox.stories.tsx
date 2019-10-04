@@ -1,14 +1,15 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { LabeledCheckbox } from '../LabeledCheckbox';
 
-storiesOf('molecules/selection/LabeledCheckbox/unchecked', module).addWithJSX(
+addStoryWithJsx('molecules/selection/LabeledCheckbox/unchecked', module)(
   getDisplayName(LabeledCheckbox),
   () => <LabeledCheckbox label="Remember me?" />,
 );
 
-storiesOf('molecules/selection/LabeledCheckbox/checked', module).addWithJSX(
+addStoryWithJsx('molecules/selection/LabeledCheckbox/checked', module)(
   getDisplayName(LabeledCheckbox),
   () => <LabeledCheckbox label="Remember me?" checked={true} />,
 );

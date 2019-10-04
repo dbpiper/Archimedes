@@ -1,14 +1,15 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { Setting } from '../Setting';
 
-storiesOf('molecules/selection/Setting/off', module).addWithJSX(
+addStoryWithJsx('molecules/selection/Setting/off', module)(
   getDisplayName(Setting),
   () => <Setting label="Global community" />,
 );
 
-storiesOf('molecules/selection/Setting/on', module).addWithJSX(
+addStoryWithJsx('molecules/selection/Setting/on', module)(
   getDisplayName(Setting),
   () => <Setting label="Global community" on={true} />,
 );

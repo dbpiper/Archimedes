@@ -17,14 +17,9 @@ const schemaDownload = () =>
 
 const _checkTypes = () => terminalSpawn('npx tsc').promise;
 
-const _lintES = () => terminalSpawn('npx eslint .').promise;
+const _esLint = () => terminalSpawn('npx eslint .').promise;
 
-const _lintTS = () =>
-  terminalSpawn(
-    'npx tslint "./**/*.ts?(x)" "src/**/*.ts?(x)" --project tsconfig.json',
-  ).promise;
-
-const lint = series(_lintES, _lintTS, _checkTypes);
+const lint = series(_esLint, _checkTypes);
 
 const build = () => terminalSpawn('node scripts/build.js').promise;
 
