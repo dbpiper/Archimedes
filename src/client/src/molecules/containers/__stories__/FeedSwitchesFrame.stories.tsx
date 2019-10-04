@@ -1,9 +1,10 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { FeedSwitchesFrame } from '../FeedSwitchesFrame';
 
-storiesOf('molecules/containers', module).addWithJSX(
+addStoryWithJsx('molecules/containers', module)(
   getDisplayName(FeedSwitchesFrame),
   () => (
     <FeedSwitchesFrame

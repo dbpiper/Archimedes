@@ -1,10 +1,11 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { StorybookWrapper } from '../../../shared/helpers/StorybookWrapper';
 import { VoteButton } from '../VoteButton';
 
-storiesOf('molecules/selection/VoteButton/up/off', module).addWithJSX(
+addStoryWithJsx('molecules/selection/VoteButton/up/off', module)(
   getDisplayName(VoteButton),
   () => (
     <StorybookWrapper>
@@ -13,7 +14,7 @@ storiesOf('molecules/selection/VoteButton/up/off', module).addWithJSX(
   ),
 );
 
-storiesOf('molecules/selection/VoteButton/up/on', module).addWithJSX(
+addStoryWithJsx('molecules/selection/VoteButton/up/on', module)(
   getDisplayName(VoteButton),
   () => (
     <StorybookWrapper>
@@ -22,7 +23,7 @@ storiesOf('molecules/selection/VoteButton/up/on', module).addWithJSX(
   ),
 );
 
-storiesOf('molecules/selection/VoteButton/down/off', module).addWithJSX(
+addStoryWithJsx('molecules/selection/VoteButton/down/off', module)(
   getDisplayName(VoteButton),
   () => (
     <StorybookWrapper>
@@ -31,7 +32,7 @@ storiesOf('molecules/selection/VoteButton/down/off', module).addWithJSX(
   ),
 );
 
-storiesOf('molecules/selection/VoteButton/down/on', module).addWithJSX(
+addStoryWithJsx('molecules/selection/VoteButton/down/on', module)(
   getDisplayName(VoteButton),
   () => (
     <StorybookWrapper>

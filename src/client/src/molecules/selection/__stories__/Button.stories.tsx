@@ -1,25 +1,26 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { StorybookWrapper } from '../../../shared/helpers/StorybookWrapper';
 import { Button, ButtonStyle } from '../Button';
 
 const componentName = getDisplayName(Button);
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/contained/primary`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Contained}>sign in</Button>
   </StorybookWrapper>
 ));
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/contained/secondary`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Contained} secondary={true}>
       sign in
@@ -27,10 +28,10 @@ storiesOf(
   </StorybookWrapper>
 ));
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/contained/primary/icon`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Contained} icon={faGoogle}>
       sign in with Google
@@ -38,10 +39,10 @@ storiesOf(
   </StorybookWrapper>
 ));
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/contained/secondary/icon`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button
       buttonStyle={ButtonStyle.Contained}
@@ -53,19 +54,19 @@ storiesOf(
   </StorybookWrapper>
 ));
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/outlined/primary`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Outlined}>sign in</Button>
   </StorybookWrapper>
 ));
 
-storiesOf(
+addStoryWithJsx(
   `molecules/selection/${componentName}/outlined/secondary`,
   module,
-).addWithJSX(componentName, () => (
+)(componentName, () => (
   <StorybookWrapper>
     <Button buttonStyle={ButtonStyle.Outlined} secondary={true}>
       sign in
@@ -73,22 +74,22 @@ storiesOf(
   </StorybookWrapper>
 ));
 
-storiesOf(
-  `molecules/selection/${componentName}/text/primary`,
-  module,
-).addWithJSX(componentName, () => (
-  <StorybookWrapper>
-    <Button buttonStyle={ButtonStyle.Text}>sign in</Button>
-  </StorybookWrapper>
-));
+addStoryWithJsx(`molecules/selection/${componentName}/text/primary`, module)(
+  componentName,
+  () => (
+    <StorybookWrapper>
+      <Button buttonStyle={ButtonStyle.Text}>sign in</Button>
+    </StorybookWrapper>
+  ),
+);
 
-storiesOf(
-  `molecules/selection/${componentName}/text/secondary`,
-  module,
-).addWithJSX(componentName, () => (
-  <StorybookWrapper>
-    <Button buttonStyle={ButtonStyle.Text} secondary={true}>
-      sign in
-    </Button>
-  </StorybookWrapper>
-));
+addStoryWithJsx(`molecules/selection/${componentName}/text/secondary`, module)(
+  componentName,
+  () => (
+    <StorybookWrapper>
+      <Button buttonStyle={ButtonStyle.Text} secondary={true}>
+        sign in
+      </Button>
+    </StorybookWrapper>
+  ),
+);

@@ -1,9 +1,10 @@
 // tslint:disable: no-magic-numbers
 
 import { StorybookWrapper } from '@src/shared/helpers/StorybookWrapper';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { ProjectCard } from '../ProjectCard';
 
 // tslint:disable-next-line: no-var-requires
@@ -11,7 +12,7 @@ const prismaLogo = require('./mock-data/prisma-logo.png') as string;
 
 const componentName = getDisplayName(ProjectCard);
 
-storiesOf(`organisms/cards/${componentName}/voting`, module).addWithJSX(
+addStoryWithJsx(`organisms/cards/${componentName}/voting`, module)(
   componentName,
   () => (
     <StorybookWrapper>
@@ -28,7 +29,7 @@ storiesOf(`organisms/cards/${componentName}/voting`, module).addWithJSX(
   ),
 );
 
-storiesOf(`organisms/cards/${componentName}/switch`, module).addWithJSX(
+addStoryWithJsx(`organisms/cards/${componentName}/switch`, module)(
   componentName,
   () => (
     <StorybookWrapper>

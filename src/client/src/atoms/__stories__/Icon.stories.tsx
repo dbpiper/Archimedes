@@ -1,14 +1,15 @@
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { Icon } from '../Icon';
 
-storiesOf('atoms/Icon', module).addWithJSX('Search Icon', () => <Icon />);
+addStoryWithJsx('atoms/Icon', module)('Search Icon', () => <Icon />);
 
-storiesOf('atoms/Icon', module).addWithJSX('Facebook Icon', () => (
+addStoryWithJsx('atoms/Icon', module)('Facebook Icon', () => (
   <Icon icon={faFacebookF} />
 ));
 
-storiesOf('atoms/Icon', module).addWithJSX('Google Icon', () => (
+addStoryWithJsx('atoms/Icon', module)('Google Icon', () => (
   <Icon icon={faGoogle} />
 ));

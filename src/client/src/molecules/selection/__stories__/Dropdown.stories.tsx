@@ -1,6 +1,7 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { Dropdown } from '../Dropdown';
 
 const options = [
@@ -25,7 +26,6 @@ const options = [
 
 const componentName = getDisplayName(Dropdown);
 
-storiesOf(`molecules/selection`, module).addWithJSX(
-  componentName,
-  () => <Dropdown options={options} placeholder="Recent" />,
-);
+addStoryWithJsx(`molecules/selection`, module)(componentName, () => (
+  <Dropdown options={options} placeholder="Recent" />
+));

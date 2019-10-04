@@ -1,6 +1,7 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { SearchField } from '../SearchField';
 
 const options = [
@@ -25,12 +26,12 @@ const options = [
 
 const componentName = getDisplayName(SearchField);
 
-storiesOf(`molecules/input/${componentName}/large`, module).addWithJSX(
+addStoryWithJsx(`molecules/input/${componentName}/large`, module)(
   getDisplayName(SearchField),
   () => <SearchField options={options} placeholder="Prisma" />,
 );
 
-storiesOf(`molecules/input/${componentName}/small`, module).addWithJSX(
+addStoryWithJsx(`molecules/input/${componentName}/small`, module)(
   getDisplayName(SearchField),
   () => <SearchField options={options} placeholder="Search" small={true} />,
 );

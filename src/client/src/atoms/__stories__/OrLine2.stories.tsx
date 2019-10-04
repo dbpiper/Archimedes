@@ -1,8 +1,7 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { OrLine2 } from '../OrLine2';
 
-storiesOf('atoms', module).addWithJSX(getDisplayName(OrLine2), () => (
-  <OrLine2 />
-));
+addStoryWithJsx('atoms', module)(getDisplayName(OrLine2), () => <OrLine2 />);

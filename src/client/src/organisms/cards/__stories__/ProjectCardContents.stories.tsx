@@ -1,14 +1,15 @@
 // tslint:disable: no-magic-numbers
 
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import getDisplayName from 'react-display-name';
+
+import { addStoryWithJsx } from '@util/storybook/add-story';
 import { ProjectCardContents } from '../ProjectCardContents';
 
 // tslint:disable-next-line: no-var-requires
 const prismaLogo = require('./mock-data/prisma-logo.png') as string;
 
-storiesOf('organisms/cards', module).addWithJSX(
+addStoryWithJsx('organisms/cards', module)(
   getDisplayName(ProjectCardContents),
   () => (
     <ProjectCardContents

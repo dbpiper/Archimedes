@@ -11,19 +11,9 @@ const _githubGraphQlApiUrl = 'https://api.github.com/graphql';
 const checkTypes = async () =>
   terminalSpawn('npx tsc -p ./tsconfig.json').promise;
 
-const _lintES = async () => terminalSpawn('npx eslint .').promise;
+const _esLint = async () => terminalSpawn('npx eslint .').promise;
 
-const _lintTS = async () => {
-  const rootFiles = '"./*.ts?(x)"';
-  const srcFiles = '"./src/**/*.ts?(x)"';
-  const configFiles = '"./config/**/*.ts?(x)"';
-  const tsconfig = '--project tsconfig.json';
-  return terminalSpawn(
-    `npx tslint ${rootFiles} ${srcFiles} ${configFiles} ${tsconfig}`,
-  ).promise;
-};
-
-const lint = series(_lintES, _lintTS, checkTypes);
+const lint = series(_esLint, checkTypes);
 
 const test = async () => terminalSpawn('npx jest').promise;
 
