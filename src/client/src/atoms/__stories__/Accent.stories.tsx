@@ -6,5 +6,4 @@ import { Accent } from '../Accent';
 
 const addStory = addStoryWithJsx('atoms', module);
 
-console.log(typeof addStory);
 addStory(getDisplayName(Accent), () => <Accent />);
