@@ -11,7 +11,7 @@
     "@types/gulp": "^4.0.6",
     "@types/wait-on": "^3.2.0",
     "@typescript-eslint/parser": "^2.3.2",
-    "acorn": "^7.1.0",
+    "acorn": "^7.1.1",
     "acorn-jsx": "^5.0.2",
     "dotenv": "^8.1.0",
     "gulp": "^4.0.2",
