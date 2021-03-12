@@ -86,7 +86,7 @@
     "react": "^16.10.2",
     "react-apollo": "^3.1.2",
     "react-app-polyfill": "^1.0.4",
-    "react-dev-utils": "^9.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-display-name": "^0.2.4",
     "react-dom": "^16.10.2",
     "react-error-boundary": "^1.2.5",
